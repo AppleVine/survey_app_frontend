@@ -2,3 +2,8 @@ body, #root {
   margin: 0;
   padding: 0;
 }
+
+.btn-primary {
+  background-color: #5cab7d;
+  border-color: #5cab7d;
+}
