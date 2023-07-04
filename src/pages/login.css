@@ -1,26 +1,27 @@
 .login {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 100vh;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+}
   
-  .login form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-bottom: 15px;
-    padding-top: 100px;
-  }
+.login form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 15px;
+  padding-top: 100px;
+}
   
 .btn-primary {
-    background-color: #5cab7d;
-    border-color: #5cab7d;
-    font-size: 24px;
-    width: 170px;
-    height: 50px;
-  }
+  background-color: #5cab7d;
+  border-color: #5cab7d;
+  font-size: 24px;
+  width: 170px;
+  height: 50px;
+}
 
-  .account {
-    font-size: 18px;
-  }
+.account {
+  font-size: 18px;
+}
+
