@@ -3,6 +3,7 @@ import Header from "../components/header";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from 'react-bootstrap/Button';
 import "./Login.css"
+import { loginUser } from '../services/userServices';
 
 export default function LoginPage() {
   const [username, setUsername] = useState('');
@@ -16,17 +17,26 @@ const handlePasswordChange = (event) => {
   setPassword(event.target.value);
 };
 
-const handleSubmit = (event) => {
+const handleSubmit = async (event) => {
   event.preventDefault();
 
-
   const userData = {
-    "email": username,
-    "password": password,
+    username: username,
+    password: password,
   };
 
-  console.log(JSON.stringify(userData));
-  
+  console.log('Request payload:', JSON.stringify(userData));
+
+  try {
+    const response = await loginUser(userData);
+    console.log('Login successful:', response);
+  } catch (error) {
+    console.log('Login error:', error);
+  }
+
+  // Reset form values
+  setUsername('');
+  setPassword('');
 };
 
   return (
