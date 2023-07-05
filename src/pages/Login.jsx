@@ -2,47 +2,48 @@ import React, { useState } from 'react';
 import Header from "../components/header";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from 'react-bootstrap/Button';
-import "./Login.css"
+import "./Login.css";
 import { loginUser } from '../services/userServices';
 
 export default function LoginPage() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState(null);
 
-const handleUsernameChange = (event) => {
-  setUsername(event.target.value);
-};
-
-const handlePasswordChange = (event) => {
-  setPassword(event.target.value);
-};
-
-const handleSubmit = async (event) => {
-  event.preventDefault();
-
-  const userData = {
-    username: username,
-    password: password,
+  const handleUsernameChange = (event) => {
+    setUsername(event.target.value);
   };
 
-  console.log('Request payload:', JSON.stringify(userData));
+  const handlePasswordChange = (event) => {
+    setPassword(event.target.value);
+  };
 
-  try {
-    const response = await loginUser(userData);
-    console.log('Login successful:', response);
-  } catch (error) {
-    console.log('Login error:', error);
-  }
+  const handleSubmit = async (event) => {
+    event.preventDefault();
 
-  // Reset form values
-  setUsername('');
-  setPassword('');
-};
+    const userData = {
+      username: username,
+      password: password,
+    };
+
+    try {
+      const response = await loginUser(userData);
+      console.log('Login successful:', response);
+      // Reset form values
+      setUsername('');
+      setPassword('');
+    } catch (error) {
+      setError(error.message); // Set the error message state
+      // Reset form values
+      setUsername('');
+      setPassword('');
+    }
+  };
 
   return (
     <div>
       <Header />
-      <div className="login"> 
+      <div className="login">
         <form>
           <div className="mb-3">
             <label className="form-label">Username</label>
@@ -54,10 +55,12 @@ const handleSubmit = async (event) => {
           </div>
           <Button type="submit" variant="primary" onClick={handleSubmit}>Login</Button>
         </form>
-  
+
         <Button className="account" variant="primary">Account Creation</Button>
+
+        {error !== null && <p className="error-message">{error}</p>}
+
       </div>
     </div>
   );
-  
 }

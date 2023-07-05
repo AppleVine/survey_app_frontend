@@ -25,3 +25,9 @@
   font-size: 18px;
 }
 
+.error-message {
+  margin-top: 20px;
+  font-weight: 600;
+  color: #ff0000;
+}
+
