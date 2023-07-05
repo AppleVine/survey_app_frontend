@@ -19,11 +19,6 @@ const handlePasswordChange = (event) => {
 const handleSubmit = (event) => {
   event.preventDefault();
 
-  const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,20}$/;
-  if (!passwordRegex.test(password)) {
-    // Display an error message or take appropriate action for invalid password
-    return;
-  }
 
   const userData = {
     "email": username,
