@@ -1,10 +1,17 @@
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
-import Loginpage from './pages/login';
+import RegisterPage from './pages/TempRegister';
+import LoginPage from './pages/Login';
 
 function App() {
   return (
     <div className='app'>
-      <Loginpage />
+      <Router>
+        <Routes>
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+        </Routes>
+      </Router>
     </div>
   );
 }

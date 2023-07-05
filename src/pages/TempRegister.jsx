@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import Header from "../components/header";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from 'react-bootstrap/Button';
-import "./login.css"
+import "./TempRegister"
 
-export default function LoginPage() {
+export default function RegisterPage() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
