@@ -15,9 +15,9 @@ export async function createUser(data) {
     const json = await response.json();
   
     if (response.ok) {
-      return json; // Return the response JSON for successful registration
+      return json; 
     } else {
-      throw new Error(json.error); // Throw an error for failed registration
+      throw new Error(json.error); 
     }
   } catch (error) {
     console.log('Registration error:', error);
@@ -41,9 +41,9 @@ export async function loginUser(data) {
 
     if (response.ok) {
       setToken(json.token);
-      return json; // Return the response JSON for successful login
+      return json; 
     } else {
-      throw new Error(json.error); // Throw an error for failed login
+      throw new Error(json.error); 
     }
   } catch (error) {
     console.log('Login error:', error);

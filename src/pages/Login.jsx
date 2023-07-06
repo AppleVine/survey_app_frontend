@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from 'react-bootstrap/Button';
 import "./Login.css";
 import { loginUser } from '../services/userServices';
+import { setToken } from '../services/authServices';
 
 export default function LoginPage() {
   const [username, setUsername] = useState('');
@@ -31,6 +32,7 @@ export default function LoginPage() {
     try {
       const response = await loginUser(userData);
       console.log('Login successful:', response);
+      setToken(response.token);
       navigate('/staff');
     } catch (error) {
       setError(error.message);
@@ -38,6 +40,12 @@ export default function LoginPage() {
       setPassword('');
     }
   };
+
+  const handleBug = () => {
+    // const token = getCookie('authToken');
+    // console.log(token);
+  };
+  
 
   return (
     <div>
@@ -55,7 +63,7 @@ export default function LoginPage() {
           <Button type="submit" variant="primary" onClick={handleSubmit}>Login</Button>
         </form>
 
-        <Button className="account" variant="primary">Account Creation</Button>
+        <Button className="account" variant="primary" onClick={handleBug}>Account Creation // bug testing</Button>
 
         {error !== null && <p className="error-message">{error}</p>}
       </div>

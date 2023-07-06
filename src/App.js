@@ -3,7 +3,6 @@ import './App.css';
 import RegisterPage from './pages/TempRegister';
 import LoginPage from './pages/Login';
 import StaffPage from './pages/StaffPage';
-import StaffRoute from './components/StaffRoute';
 
 function App() {
   return (
