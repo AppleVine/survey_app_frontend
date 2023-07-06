@@ -2,6 +2,8 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
 import RegisterPage from './pages/TempRegister';
 import LoginPage from './pages/Login';
+import StaffPage from './pages/StaffPage';
+import StaffRoute from './components/StaffRoute';
 
 function App() {
   return (
@@ -10,6 +12,7 @@ function App() {
         <Routes>
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
+          <Route path="/staff" element={<StaffPage />} />
         </Routes>
       </Router>
     </div>

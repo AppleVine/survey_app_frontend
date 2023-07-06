@@ -6,4 +6,7 @@ body, #root {
 .btn-primary {
   background-color: #5cab7d;
   border-color: #5cab7d;
+  font-size: 24px;
+  width: 170px;
+  height: 50px;
 }

@@ -21,6 +21,11 @@
   height: 50px;
 }
 
+.btn-primary:hover {
+  background-color: #4b9769;
+  border-color: #3d8057;
+}
+
 .account {
   font-size: 18px;
 }

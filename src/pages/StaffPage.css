@@ -1,0 +1,19 @@
+.btn-primary {
+background-color: #5cab7d;
+border-color: #5cab7d;
+font-size: 24px;
+width: 200px;
+height: 80px;
+}
+
+.btn-primary:hover {
+    background-color: #4b9769;
+    border-color: #3d8057;
+}
+
+.button-group {
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 15%;
+}

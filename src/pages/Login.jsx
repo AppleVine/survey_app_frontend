@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Header from "../components/header";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from 'react-bootstrap/Button';
@@ -9,6 +10,7 @@ export default function LoginPage() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
@@ -29,12 +31,9 @@ export default function LoginPage() {
     try {
       const response = await loginUser(userData);
       console.log('Login successful:', response);
-      // Reset form values
-      setUsername('');
-      setPassword('');
+      navigate('/staff');
     } catch (error) {
-      setError(error.message); // Set the error message state
-      // Reset form values
+      setError(error.message);
       setUsername('');
       setPassword('');
     }
@@ -59,7 +58,6 @@ export default function LoginPage() {
         <Button className="account" variant="primary">Account Creation</Button>
 
         {error !== null && <p className="error-message">{error}</p>}
-
       </div>
     </div>
   );

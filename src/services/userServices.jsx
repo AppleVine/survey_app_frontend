@@ -1,3 +1,5 @@
+import { setToken } from "./authServices";
+
 const api = 'http://localhost:3000/admin';
 
 export async function createUser(data) {
@@ -38,6 +40,7 @@ export async function loginUser(data) {
     const json = await response.json();
 
     if (response.ok) {
+      setToken(json.token);
       return json; // Return the response JSON for successful login
     } else {
       throw new Error(json.error); // Throw an error for failed login
