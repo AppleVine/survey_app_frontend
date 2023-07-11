@@ -1,21 +1,16 @@
-import React, { useState } from 'react'
+import React from 'react'
 import EditFieldButton from './EditFieldButton'
 
-export default function SurveyCompletionMessage() {
-  const [editMode, setEditMode] = useState(false);
-
-  const handleClick = () => {
-    setEditMode(!editMode)
-  }
+export default function SurveyCompletionMessage({ state, dispatch }) {
   
   return (
     <div>
-      { editMode? 
+      { state.editMode.completionMessage ? 
         <textarea id='survey-completion-message' name='survey-completion-message' placeholder='Insert Survey Completion Message Here'></textarea>
         :
         <p>Insert Survey Completion Message Here</p> 
       }
-      <EditFieldButton handleClick={ handleClick } editMode={ editMode } />
+      <EditFieldButton state={ state } dispatch={ dispatch } parent={ "completionMessage" } />
     </div>
   )
 }

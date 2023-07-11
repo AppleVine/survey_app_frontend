@@ -1,21 +1,15 @@
-import React, { useState } from 'react'
 import EditFieldButton from './EditFieldButton'
 
-export default function SurveyIntroText() {
-  const [editMode, setEditMode] = useState(false);
-
-  const handleClick = () => {
-    setEditMode(!editMode)
-  }
+export default function SurveyIntroText({ state, dispatch }) {
 
   return (
     <div>
-      { editMode? 
+      { state.editMode.introduction ? 
         <textarea id='survey-intro-text' name='survey-intro-text' placeholder='Insert Survey Introduction Here'></textarea>
         :
-        <p>Insert Survey Introduction Here</p> 
+        <p>{ state.introduction }</p> 
       }
-      <EditFieldButton handleClick={ handleClick } editMode={ editMode } />
+      <EditFieldButton state={ state } dispatch={ dispatch } parent={ "introduction" } />
     </div>
   )
 }
