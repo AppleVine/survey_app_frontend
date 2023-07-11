@@ -5,6 +5,7 @@ import SurveyIntroText from '../components/createSurvey/SurveyIntroText';
 import SurveyQuestionsContainer from '../components/createSurvey/SurveyQuestionsContainer';
 import SurveyCompletionMessage from '../components/createSurvey/SurveyCompletionMessage';
 import SaveChangesButton from '../components/createSurvey/SaveChangesButton';
+import SurveyDescription from '../components/createSurvey/SurveyDescription';
 
 export default function CreateSurvey() {
   const [state, dispatch] = useReducer(surveyReducer, initialSurvey);
@@ -12,6 +13,7 @@ export default function CreateSurvey() {
   return (
     <div>
       <SurveyTitle state={ state } dispatch={ dispatch } />
+      <SurveyDescription state={ state } dispatch={ dispatch } />
       <SurveyIntroText state={ state } dispatch={ dispatch } />
       <SurveyQuestionsContainer state={ state } dispatch={ dispatch } />
       <SurveyCompletionMessage state={ state } dispatch={ dispatch } />

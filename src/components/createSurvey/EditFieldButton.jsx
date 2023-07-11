@@ -1,12 +1,12 @@
 import React from 'react'
 
-export default function EditFieldButton({ state, dispatch, parent, inputData }) {
+export default function EditFieldButton({ state, dispatch, parent }) {
   const buttonText = state.editMode[parent] ? "Save" : "Edit";
 
-  // IN PROGRESS - Trying to make this save the text entered in parent container using reducer
+  // Toggle edit mode for parent component when clicked
   const handleClick = () => {
     if (state.editMode[parent]) {
-      dispatch({type: "save", [parent]: inputData })
+      dispatch({type: "edit", editMode: { [parent]: false }})
     } else {
       dispatch({type: "edit", editMode: { [parent]: true }})
     }
