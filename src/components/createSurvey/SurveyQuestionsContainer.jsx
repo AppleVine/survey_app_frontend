@@ -13,7 +13,7 @@ export default function SurveyQuestionsContainer({ state, dispatch }) {
             // Assign key based on question order in array
             return(
               <li key={ state.data.questions.indexOf(question) }>
-                <QuestionContainer question={question} />
+                <QuestionContainer question={question} state={ state } dispatch={ dispatch } />
               </li>
             )
         }) }

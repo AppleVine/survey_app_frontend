@@ -1,15 +1,13 @@
 import EditFieldButton from './EditFieldButton'
+import { saveField } from './surveyFunctions'
 
 export default function SurveyIntroText({ state, dispatch }) {
-
-  const handleChange = (value) => {
-    dispatch({type: "save", data: {introduction: value}})
-  }
 
   return (
     <div>
       { state.editMode.introduction ? 
-        <textarea id='survey-intro-text' name='survey-intro-text' placeholder={state.data.introduction} onChange={ () => handleChange() }></textarea>
+        <textarea id='survey-intro-text' name='survey-intro-text' placeholder={state.data.introduction} 
+        onChange={ (event) => saveField("introduction", event.target.value, dispatch) }></textarea>
         :
         <p>{ state.data.introduction }</p> 
       }

@@ -1,17 +1,17 @@
-import React, {useReducer} from 'react';
+import React from 'react';
 import QuestionText from './question/QuestionText';
 import QuestionDetails from './question/QuestionDetails';
 import QuestionResponse from './question/QuestionResponse';
-import { initialQuestion, questionReducer } from './question/questionReducer';
 
-export default function QuestionContainer({ question }) {
-  const [questionState, questionDispatch] = useReducer(questionReducer, initialQuestion);
+export default function QuestionContainer({ question, state, dispatch }) {
+
+  let questionId = state.data.questions.indexOf(question);
 
   return (
     <div>
-      <QuestionText text={ question.data.questionText } questionState={ questionState } questionDispatch={ questionDispatch } />
-      <QuestionDetails details={ question.data.questionDetails } questionState={ questionState } questionDispatch={ questionDispatch } />
-      <QuestionResponse questionState={ questionState } questionDispatch={ questionDispatch } />
+      <QuestionText text={ question.data.questionText } id={ questionId } state={ state } dispatch={ dispatch } />
+      <QuestionDetails details={ question.data.questionDetails } state={ state } dispatch={ dispatch } />
+      <QuestionResponse id={ questionId } state={ state } dispatch={ dispatch } />
     </div>
   )
 }

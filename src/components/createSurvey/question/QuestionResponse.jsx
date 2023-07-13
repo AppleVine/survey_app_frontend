@@ -4,12 +4,12 @@ import MultipleChoiceCheckbox from './MultipleChoiceCheckbox';
 import ShortTextResponse from './ShortText';
 import LongTextResponse from './LongText';
 
-export default function QuestionResponse({ questionState, questionDispatch }) {
-    switch (questionState.data.questionType) {
+export default function QuestionResponse({ id, state, dispatch }) {
+    switch (state.data.questions[id].questionType) {
         case "multipleChoiceRadio":
-            return <MultipleChoiceRadio questionState={ questionState } questionDispatch={ questionDispatch } />
+            return <MultipleChoiceRadio state={ state } dispatch={ dispatch } />
         case "multipleChoiceCheckBox":
-            return <MultipleChoiceCheckbox questionState={ questionState } questionDispatch={ questionDispatch } />
+            return <MultipleChoiceCheckbox state={ state } dispatch={ dispatch } />
         case "shortText":
             return <ShortTextResponse />
         case "longText":

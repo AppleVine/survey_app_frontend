@@ -1,4 +1,3 @@
-// For some reason React freaks out if I try to import this from questionReducer
 const initialQuestion = {
     data: {
         questionText: "Insert question text here",
@@ -34,10 +33,12 @@ const surveyReducer = (previousState, instructions) => {
 
     // stateEditable will be used in all cases
     let stateEditable = null;
+    // Index in case of editing a question (React gets mad if I try and initialize this within individual cases)
+    let index = null;
 
     switch (instructions.type) {
 
-        case "save":
+        case "update":
             // TODO Perform data validation
             if ( instructions.data.title.length < 1 ) {
                 console.log("Error: Title must contain at least one character");
@@ -56,14 +57,63 @@ const surveyReducer = (previousState, instructions) => {
             // Return new state
             return stateEditable;
 
-        case "add":
-            // Keep questions array updated with created questions
-            // Push new data to state
+        case "editQuestion":
+            // Toggle edit mode on question fields (questionText, questionDetails, questionOptions)
+            // Copy current state
             stateEditable = {...previousState};
+            // Get index of question to be edited
+            index = instructions.data.index;
+            // Copy current editMode state of question
+            let newEditMode = {...previousState.data.questions[index].editMode};
+            // Get the name of the field being edited
+            let fieldToEdit = Object.keys(instructions.editMode)[0];
+            // Update that field
+            newEditMode[fieldToEdit] = instructions.editMode[fieldToEdit];
+            // Update state with new data
+            stateEditable.data.questions[index].editMode = newEditMode;
+            // Return new state
+            return stateEditable;
 
+        case "add":
+            // Add new question to questions array
+            stateEditable = {...previousState};
             stateEditable.data.questions.push(initialQuestion)
 
             // Return new state
+            return stateEditable;
+
+        case "addOption":
+            // Add new option to multiple choice question
+            // Copy current state
+            stateEditable = {...previousState};
+            // Get index of question to be edited
+            index = instructions.data.index;
+            // Push new option to options array for that question
+            stateEditable.data.questions[index].questionOptions.push("Enter an option");
+            // Add new editMode status
+            stateEditable.data.questions[index].editMode.questionOptions.push(false);
+
+            return stateEditable;
+
+        case "delete":
+            // Delete a question
+            // Copy current state
+            stateEditable = {...previousState};
+            // Remove question from array
+            stateEditable.data.questions = stateEditable.data.questions.filter((question, index) => index !== instructions.data.index);
+
+            return stateEditable;
+
+        case "deleteOption":
+            // Delete an answer option
+            // Copy current state
+            stateEditable = {...previousState};
+            // Get question index from instructions
+            let questionIndex = instructions.data.questionIndex;
+            // Remove answer from option array
+            stateEditable.data.questions[questionIndex].questionOptions = 
+            stateEditable.data.questions[questionIndex].questionOptions.filter((option, index) => index !== instructions.data.optionIndex);
+
             return stateEditable;
 
         default:
