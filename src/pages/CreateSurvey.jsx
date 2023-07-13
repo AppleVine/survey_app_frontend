@@ -10,6 +10,8 @@ import SurveyDescription from '../components/createSurvey/SurveyDescription';
 export default function CreateSurvey() {
   const [state, dispatch] = useReducer(surveyReducer, initialSurvey);
 
+// TODO Add button to toggle makePublic
+
   return (
     <div>
       <SurveyTitle state={ state } dispatch={ dispatch } />

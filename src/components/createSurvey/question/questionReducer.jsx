@@ -1,4 +1,3 @@
-// For some reason React freaks out if I try to import this from questionReducer
 const initialQuestion = {
     data: {
         questionText: "Insert question text here",
@@ -13,24 +12,7 @@ const initialQuestion = {
     }
 }
 
-const initialSurvey = {
-    data: {
-        title: "Insert Survey Title Here",
-        description: "Insert survey description here.",
-        introduction: "Insert survey intro here.",
-        completionMessage: "Insert survey completion message here.",
-        makePublic: false,
-        questions: [initialQuestion],
-    },
-    editMode: {
-        title: false,
-        description: false,
-        introduction: false,
-        completionMessage: false
-    }
-}
-
-const surveyReducer = (previousState, instructions) => {
+const questionReducer = (previousState, instructions) => {
 
     // stateEditable will be used in all cases
     let stateEditable = null;
@@ -39,8 +21,8 @@ const surveyReducer = (previousState, instructions) => {
 
         case "save":
             // TODO Perform data validation
-            if ( instructions.data.title.length < 1 ) {
-                console.log("Error: Title must contain at least one character");
+            if ( instructions.data.questionText.length < 1 ) {
+                console.log("Error: Question must contain at least one character");
                 return previousState
             }
 
@@ -50,21 +32,30 @@ const surveyReducer = (previousState, instructions) => {
             return stateEditable;
 
         case "edit":
-            // Toggle edit mode on fields (title, desc, intro, message)
+            // Toggle edit mode on fields (questionText, questionOptions)
             // Push new data to state
             stateEditable = {...previousState, editMode: instructions.editMode};
             // Return new state
             return stateEditable;
 
         case "add":
-            // Keep questions array updated with created questions
+            // Add new option
             // Push new data to state
-            stateEditable = {...previousState};
-
-            stateEditable.data.questions.push(initialQuestion)
+            stateEditable = {...previousState, data: instructions.data, editMode: instructions.editMode}; // add edit toggle for new option
 
             // Return new state
             return stateEditable;
+
+        case "delete":
+            // Delete an option
+            // Copy previous state
+            stateEditable = {...previousState}
+
+            // Filter to remove option
+            stateEditable.data.questionOptions = stateEditable.data.questionOptions.filter((option, index) => index !== instructions.data.index);
+            stateEditable.editMode = stateEditable.editMode.filter((option, index) => index !== instructions.data.index);
+
+            return stateEditable
 
         default:
             // invalid instructions provided!
@@ -73,5 +64,5 @@ const surveyReducer = (previousState, instructions) => {
 }
 
 module.exports = {
-    surveyReducer, initialSurvey
+    questionReducer, initialQuestion
 }

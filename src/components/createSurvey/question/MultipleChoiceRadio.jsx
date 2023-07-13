@@ -1,14 +1,20 @@
 import React from 'react'
 
-export default function MultipleChoiceRadio() {
+export default function MultipleChoiceRadio({ questionState, questionDispatch }) {
   return (
     <div>
-        <input type="radio" id="html" name="fav_language" value="HTML" />
-        <label for="html">HTML</label><br />
-        <input type="radio" id="css" name="fav_language" value="CSS" />
-        <label for="css">CSS</label><br />
-        <input type="radio" id="javascript" name="fav_language" value="JavaScript" />
-        <label for="javascript">JavaScript</label> 
+      <ul className='question-options-radio'>
+        {
+          questionState.data.questionOptions.map((option, index) => {
+            return(
+              <li className="question-option-radio" key={ index }>
+                <input type="radio" name={ option } id={ option } />
+                <label htmlFor={ option }>{ option }</label>
+              </li>
+            )
+          })
+        }
+      </ul>
     </div>
   )
 }

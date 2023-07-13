@@ -1,11 +1,10 @@
 import React from 'react'
 import EditFieldButton from '../EditFieldButton'
 
-export default function QuestionDetails() {
+export default function QuestionDetails({ details, questionState, questionDispatch }) {
   return (
     <div>
-      Insert question details here
-      <EditFieldButton />
+      { details }
     </div>
   )
 }

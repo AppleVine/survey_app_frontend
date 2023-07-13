@@ -1,14 +1,20 @@
 import React from 'react'
 
-export default function MultipleChoiceCheckbox() {
+export default function MultipleChoiceCheckbox({ questionState, questionDispatch }) {
   return (
     <div>
-        <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike" />
-        <label for="vehicle1"> I have a bike</label>
-        <input type="checkbox" id="vehicle2" name="vehicle2" value="Car" />
-        <label for="vehicle2"> I have a car</label>
-        <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat" />
-        <label for="vehicle3"> I have a boat</label>
+      <ul className='question-options-checkbox'>
+        {
+          questionState.data.questionOptions.map((option, index) => {
+            return(
+              <li className="question-option-checkbox" key={ index }>
+                <input type="checkbox" name={option} id={option} />
+                <label htmlFor={ option }>{ option }</label>
+              </li>
+            )
+          })
+        }
+      </ul>
     </div>
   )
 }

@@ -1,9 +1,14 @@
 import React from 'react'
 
-export default function AddQuestionButton() {
+export default function AddQuestionButton({ state, dispatch }) {
+
+  const handleClick = () => {
+    dispatch({ type: "add" })
+  }
+
   return (
     <div>
-      <button>Add Question</button>
+      <button onClick={ () => handleClick() }>Add Question</button>
     </div>
   )
 }
