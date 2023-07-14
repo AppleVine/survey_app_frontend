@@ -1,3 +1,5 @@
+const { updateSurvey, createSurvey } = require("../../services/surveyServices");
+
 const initialQuestion = {
     data: {
         questionText: "Insert question text here",
@@ -14,6 +16,7 @@ const initialQuestion = {
 
 const initialSurvey = {
     data: {
+        _id: null,
         title: "Insert Survey Title Here",
         description: "Insert survey description here.",
         introduction: "Insert survey intro here.",
@@ -131,6 +134,18 @@ const surveyReducer = (previousState, instructions) => {
             stateEditable.data.questions[questionIndex].questionOptions.filter((option, index) => index !== instructions.data.optionIndex);
 
             return stateEditable;
+
+        case "saveToDatabase":
+            // Check if we are saving a new survey or updating one that exists in the database already
+            if (previousState.data._id) {
+                // Find the survey with that id in the database and update
+                updateSurvey(previousState.data._id, previousState)
+            }
+            // Perform update
+            createSurvey(previousState)
+            // Close connection to database
+
+            return previousState;
 
         default:
             // invalid instructions provided!

@@ -14,9 +14,14 @@ const saveField = (target, value, dispatch) => {
     dispatch({type: "update", data: {target: [target], value: [value]}})
 }
 
+const saveToDatabase = (dispatch) => {
+    dispatch({type: "saveToDatabase"})
+}
+
 module.exports = {
     activateEditMode,
     activateEditQuestionMode,
     deactivateEditQuestionMode,
-    saveField
+    saveField,
+    saveToDatabase
 }
