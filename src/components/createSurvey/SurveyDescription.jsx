@@ -10,7 +10,7 @@ export default function SurveyDescription() {
     <div>
       { state.editMode.description ? 
         <textarea id='survey-description' name='survey-description' placeholder={state.data.description} 
-        onChange={ (event) => saveField("introduction", event.target.value, dispatch) }></textarea>
+        onChange={ (event) => saveField("description", event.target.value, dispatch) }></textarea>
         :
         <p>{ state.data.description }</p> 
       }

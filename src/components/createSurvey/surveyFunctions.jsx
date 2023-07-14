@@ -11,7 +11,7 @@ const deactivateEditQuestionMode = (index, target, dispatch) => {
 }
 
 const saveField = (target, value, dispatch) => {
-    dispatch({type: "update", data: {[target]: [value]}})
+    dispatch({type: "update", data: {target: [target], value: [value]}})
 }
 
 module.exports = {

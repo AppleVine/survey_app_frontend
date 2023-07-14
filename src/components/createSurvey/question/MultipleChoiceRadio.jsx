@@ -1,6 +1,6 @@
 import React from 'react'
 import {useSurveyContext, useSurveyDispatchContext} from '../surveyContext'
-import { activateOptionEditMode } from './questionFunctions'
+import { activateOptionEditMode, deactivateOptionEditMode, updateOption } from './questionFunctions'
 
 export default function MultipleChoiceRadio({ id }) {
   const state = useSurveyContext();
@@ -17,9 +17,12 @@ export default function MultipleChoiceRadio({ id }) {
                 {
                   state.data.questions[id].editMode.questionOptions[index]
                   ? 
-                  <input type='text' placeholder={ option } ></input>
+                  <input type='text' placeholder={ option }
+                  onChange={ (event) => updateOption(id, index, event.target.value, dispatch) } 
+                  onKeyDown={ (event) => event.key === "Enter" ? deactivateOptionEditMode(id, index, state, dispatch): null} 
+                  onBlur={ () => deactivateOptionEditMode(id, index, state, dispatch) } ></input>
                   :
-                  <label htmlFor={ option } onClick={ () => activateOptionEditMode(id, index, state, dispatch) }>{ option }</label>
+                  <label htmlFor={ option } onClick={ () => activateOptionEditMode(id, index, state, dispatch) } >{ option }</label>
                 }
               </li>
             )
