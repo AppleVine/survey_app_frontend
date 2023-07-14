@@ -1,7 +1,10 @@
+import {useSurveyContext, useSurveyDispatchContext} from './surveyContext'
 import EditFieldButton from './EditFieldButton'
 import { saveField } from './surveyFunctions'
 
-export default function SurveyDescription({ state, dispatch }) {
+export default function SurveyDescription() {
+  const state = useSurveyContext();
+  const dispatch = useSurveyDispatchContext();
 
   return (
     <div>

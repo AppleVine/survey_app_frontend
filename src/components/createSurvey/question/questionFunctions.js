@@ -2,11 +2,11 @@ const activateEditMode = (target, dispatch) => {
     dispatch({type: "edit", editMode: {[target]: true}})
 }
 
-const activateOptionEditMode = (index, state, dispatch) => {
+const activateOptionEditMode = (questionId, optionId, state, dispatch) => {
     // Get questionOptions array
-    let optionsArray = state.editMode.questionOptions;
+    let optionsArray = state.data.questions[questionId].editMode.questionOptions;
     // Update array
-    optionsArray[index] = true;
+    optionsArray[optionId] = true;
     dispatch({type: "edit", editMode: {questionOptions: optionsArray}})
 }
 

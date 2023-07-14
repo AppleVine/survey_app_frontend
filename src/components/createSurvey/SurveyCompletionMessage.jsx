@@ -1,8 +1,11 @@
 import React from 'react'
+import {useSurveyContext, useSurveyDispatchContext} from './surveyContext'
 import EditFieldButton from './EditFieldButton'
 import { saveField } from './surveyFunctions'
 
-export default function SurveyCompletionMessage({ state, dispatch }) {
+export default function SurveyCompletionMessage() {
+  const state = useSurveyContext();
+  const dispatch = useSurveyDispatchContext();
 
   return (
     <div>

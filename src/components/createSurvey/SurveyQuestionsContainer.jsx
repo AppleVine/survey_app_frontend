@@ -1,8 +1,11 @@
 import React from 'react';
+import {useSurveyContext, useSurveyDispatchContext} from './surveyContext'
 import AddQuestionButton from './AddQuestionButton';
 import QuestionContainer from './QuestionContainer';
 
-export default function SurveyQuestionsContainer({ state, dispatch }) {
+export default function SurveyQuestionsContainer() {
+  const state = useSurveyContext();
+  const dispatch = useSurveyDispatchContext();
 
   return (
     <div>

@@ -1,6 +1,8 @@
 import React from 'react'
+import {useSurveyDispatchContext} from './surveyContext'
 
-export default function AddQuestionButton({ state, dispatch }) {
+export default function AddQuestionButton() {
+const dispatch = useSurveyDispatchContext();
 
   const handleClick = () => {
     dispatch({ type: "add" })

@@ -1,6 +1,10 @@
 import React from 'react'
+import {useSurveyContext, useSurveyDispatchContext} from './surveyContext'
 
-export default function EditFieldButton({ state, dispatch, parent }) {
+export default function EditFieldButton({ parent }) {
+  const state = useSurveyContext();
+  const dispatch = useSurveyDispatchContext();
+
   const buttonText = state.editMode[parent] ? "Save" : "Edit";
 
   // Toggle edit mode for parent component when clicked
