@@ -19,10 +19,10 @@ export default function MultipleChoiceRadio({ id }) {
                   ? 
                   <input type='text' placeholder={ option }
                   onChange={ (event) => updateOption(id, index, event.target.value, dispatch) } 
-                  onKeyDown={ (event) => event.key === "Enter" ? deactivateOptionEditMode(id, index, state, dispatch): null} 
-                  onBlur={ () => deactivateOptionEditMode(id, index, state, dispatch) } ></input>
+                  onKeyDown={ (event) => event.key === "Enter" ? deactivateOptionEditMode(id, index, state.data.questions[id].editMode.questionOptions, dispatch): null} 
+                  onBlur={ () => deactivateOptionEditMode(id, index, state.data.questions[id].editMode.questionOptions, dispatch) } ></input>
                   :
-                  <label htmlFor={ option } onClick={ () => activateOptionEditMode(id, index, state, dispatch) } >{ option }</label>
+                  <label htmlFor={ option } onClick={ () => activateOptionEditMode(id, index, state.data.questions[id].editMode.questionOptions, dispatch) } >{ option }</label>
                 }
               </li>
             )

@@ -5,6 +5,7 @@ import LoginPage from './pages/Login';
 import StaffPage from './pages/StaffPage';
 import SurveyPage from './pages/SurveyPage';
 import CreateSurvey from './pages/CreateSurvey';
+import ViewSurvey from './pages/ViewSurvey';
 
 function App() {
   return (
@@ -17,6 +18,8 @@ function App() {
           <Route path="/surveys" element={<Outlet />}>
             <Route index element={<SurveyPage />} />
             <Route path='/surveys/create' element={<CreateSurvey />} />
+            <Route path='/surveys/:id' element={<ViewSurvey />} />
+            {/* <Route path='/surveys/:id/edit' element={<EditSurvey />} /> */}
           </Route>
         </Routes>
       </Router>

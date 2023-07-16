@@ -1,11 +1,10 @@
 import React from 'react';
-import {useSurveyContext, useSurveyDispatchContext} from './surveyContext'
+import {useSurveyContext} from './surveyContext'
 import AddQuestionButton from './AddQuestionButton';
 import QuestionContainer from './QuestionContainer';
 
 export default function SurveyQuestionsContainer() {
   const state = useSurveyContext();
-  const dispatch = useSurveyDispatchContext();
 
   return (
     <div>
@@ -16,12 +15,12 @@ export default function SurveyQuestionsContainer() {
             // Assign key based on question order in array
             return(
               <li key={ index }>
-                <QuestionContainer question={question} index={index} state={ state } dispatch={ dispatch } />
+                <QuestionContainer question={question} index={index} />
               </li>
             )
         }) }
       </ul>
-      <AddQuestionButton state={ state } dispatch={ dispatch } />
+      <AddQuestionButton />
     </div>
   )
 }

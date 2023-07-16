@@ -1,5 +1,6 @@
 import React from 'react'
 import {useSurveyContext, useSurveyDispatchContext} from './surveyContext'
+import { activateEditMode, deactivateEditMode } from './surveyFunctions';
 
 export default function EditFieldButton({ parent }) {
   const state = useSurveyContext();
@@ -10,9 +11,9 @@ export default function EditFieldButton({ parent }) {
   // Toggle edit mode for parent component when clicked
   const handleClick = () => {
     if (state.editMode[parent]) {
-      dispatch({type: "edit", editMode: { [parent]: false }})
+      deactivateEditMode(parent, dispatch);
     } else {
-      dispatch({type: "edit", editMode: { [parent]: true }})
+      activateEditMode(parent, dispatch);
     }
   }
 

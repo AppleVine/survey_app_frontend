@@ -2,23 +2,19 @@
 //     dispatch({type: "edit", editMode: {[target]: true}})
 // }
 
-const activateOptionEditMode = (questionId, optionId, state, dispatch) => {
-    // Get questionOptions array
-    let optionsArray = state.data.questions[questionId].editMode.questionOptions;
+const activateOptionEditMode = (questionId, optionId, options, dispatch) => {
     // Update array
-    for (let option of optionsArray) {
-        optionsArray[option] = false;
+    for (let option of options) {
+        options[option] = false;
     }
-    optionsArray[optionId] = true;
-    dispatch({type: "edit", editMode: {questionOptions: optionsArray}})
+    options[optionId] = true;
+    dispatch({type: "edit", data: {questionId: questionId, options: options}})
 }
 
-const deactivateOptionEditMode = (questionId, optionId, state, dispatch) => {
-        // Get questionOptions array
-        let optionsArray = state.data.questions[questionId].editMode.questionOptions;
+const deactivateOptionEditMode = (questionId, optionId, options, dispatch) => {
         // Update array
-        optionsArray[optionId] = false;
-        dispatch({type: "edit", editMode: {questionOptions: optionsArray}})
+        options[optionId] = false;
+        dispatch({type: "edit", data: {questionId: questionId, options: options}})
 }
 
 const updateOption = (questionId, optionId, value, dispatch) => {

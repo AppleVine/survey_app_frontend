@@ -43,6 +43,10 @@ const surveyReducer = (previousState, instructions) => {
 
     switch (instructions.type) {
 
+        case "loadSurvey":
+            // Load survey from data
+            return instructions.data;
+
         case "update":
             // TODO Perform data validation
             if ( instructions.data.title && instructions.data.title.length < 1 ) {
@@ -56,7 +60,6 @@ const surveyReducer = (previousState, instructions) => {
             // If we are editing question details, get the question by index and update its state
             if (instructions.data.questionId) {
                 index = instructions.data.questionId;
-                console.log(index);
                 stateEditable.data.questions[index].data[fieldToEdit] = instructions.data.value;
             }
             // otherwise just update the field to be edited
@@ -81,7 +84,16 @@ const surveyReducer = (previousState, instructions) => {
         case "edit":
             // Toggle edit mode on fields (title, desc, intro, message)
             // Push new data to state
-            stateEditable = {...previousState, editMode: instructions.editMode};
+            stateEditable = {...previousState};
+            // If editing question options, get the question by id and change the editMode options
+            if (instructions.data.questionId) {
+                index = instructions.data.questionId;
+                stateEditable.data.questions[index].editMode.questionOptions = instructions.data.options;
+            }
+            // Otherwise change the editMode options for the main survey fields
+            else {
+                stateEditable.editMode[instructions.data.target] = instructions.data.editMode;
+            }
             // Return new state
             return stateEditable;
 
@@ -102,7 +114,7 @@ const surveyReducer = (previousState, instructions) => {
             // Get the name of the field being edited
             fieldToEdit = instructions.data.target;
             // Update that field
-            newEditMode[fieldToEdit] = instructions.editMode;
+            newEditMode[fieldToEdit] = instructions.data.editMode;
             // Update state with new data
             stateEditable.data.questions[index].editMode = newEditMode;
             // Return new state
@@ -111,7 +123,7 @@ const surveyReducer = (previousState, instructions) => {
         case "add":
             // Add new question to questions array
             stateEditable = {...previousState};
-            stateEditable.data.questions.push(initialQuestion)
+            stateEditable.data.questions.push({...initialQuestion})
 
             // Return new state
             return stateEditable;
