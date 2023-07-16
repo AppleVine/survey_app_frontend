@@ -4,7 +4,6 @@ import { createSurvey } from '../../services/surveyServices';
 
 export default function SaveChangesButton() {
   const surveyData = useSurveyContext();
-  console.log(surveyData)
 
   const handleSaveChanges = async () => {
     try {

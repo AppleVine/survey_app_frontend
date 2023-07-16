@@ -53,7 +53,16 @@ const surveyReducer = (previousState, instructions) => {
             // Create an editable version of previous state, update with new data
             stateEditable = {...previousState};
             fieldToEdit = instructions.data.target;
-            stateEditable.data[fieldToEdit] = instructions.data.value;
+            // If we are editing question details, get the question by index and update its state
+            if (instructions.data.questionId) {
+                index = instructions.data.questionId;
+                console.log(index);
+                stateEditable.data.questions[index].data[fieldToEdit] = instructions.data.value;
+            }
+            // otherwise just update the field to be edited
+            else {
+                stateEditable.data[fieldToEdit] = instructions.data.value;
+            }
             // Return new state
             return stateEditable;
 
@@ -83,11 +92,17 @@ const surveyReducer = (previousState, instructions) => {
             // Get index of question to be edited
             index = instructions.data.index;
             // Copy current editMode state of question
-            let newEditMode = {...previousState.data.questions[index].editMode};
+            let newEditMode = stateEditable.data.questions[index].editMode;
+            // Set all to false
+            for (let field in newEditMode) {
+                if (typeof field === Boolean) {
+                    newEditMode[field] = false;
+                }
+            }
             // Get the name of the field being edited
-            fieldToEdit = Object.keys(instructions.editMode)[0];
+            fieldToEdit = instructions.data.target;
             // Update that field
-            newEditMode[fieldToEdit] = instructions.editMode[fieldToEdit];
+            newEditMode[fieldToEdit] = instructions.editMode;
             // Update state with new data
             stateEditable.data.questions[index].editMode = newEditMode;
             // Return new state

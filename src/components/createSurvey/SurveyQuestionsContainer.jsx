@@ -12,11 +12,11 @@ export default function SurveyQuestionsContainer() {
       <ul>
         { 
         // Loop through question array and generate a question container for each existing question
-          state.data.questions.map( question => {
+          state.data.questions.map( (question, index) => {
             // Assign key based on question order in array
             return(
-              <li key={ state.data.questions.indexOf(question) }>
-                <QuestionContainer question={question} state={ state } dispatch={ dispatch } />
+              <li key={ index }>
+                <QuestionContainer question={question} index={index} state={ state } dispatch={ dispatch } />
               </li>
             )
         }) }

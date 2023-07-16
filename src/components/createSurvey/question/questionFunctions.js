@@ -1,6 +1,6 @@
-const activateEditMode = (target, dispatch) => {
-    dispatch({type: "edit", editMode: {[target]: true}})
-}
+// const activateEditMode = (target, dispatch) => {
+//     dispatch({type: "edit", editMode: {[target]: true}})
+// }
 
 const activateOptionEditMode = (questionId, optionId, state, dispatch) => {
     // Get questionOptions array
@@ -22,11 +22,11 @@ const deactivateOptionEditMode = (questionId, optionId, state, dispatch) => {
 }
 
 const updateOption = (questionId, optionId, value, dispatch) => {
-    dispatch({type: "updateOption", data: {questionId: [questionId], optionId: [optionId], text: [value]}})
+    dispatch({type: "updateOption", data: {questionId: questionId, optionId: optionId, text: value}})
 }
 
 module.exports = {
-    activateEditMode,
+    // activateEditMode,
     activateOptionEditMode,
     deactivateOptionEditMode,
     updateOption

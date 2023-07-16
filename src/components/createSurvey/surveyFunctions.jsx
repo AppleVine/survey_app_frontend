@@ -3,15 +3,19 @@ const activateEditMode = (target, dispatch) => {
 }
 
 const activateEditQuestionMode = (index, target, dispatch) => {
-    dispatch({type: "editQuestion", data: {index: index}, editMode: {[target]: true}})
+    dispatch({type: "editQuestion", data: {index: index, target: target}, editMode: true})
 }
 
 const deactivateEditQuestionMode = (index, target, dispatch) => {
-    dispatch({type: "editQuestion", data: {index: index}, editMode: {[target]: false}})
+    dispatch({type: "editQuestion", data: {index: index, target: target}, editMode: false})
 }
 
 const saveField = (target, value, dispatch) => {
-    dispatch({type: "update", data: {target: [target], value: [value]}})
+    dispatch({type: "update", data: {target: target, value: value}})
+}
+
+const saveQuestionField = (id, target, value, dispatch) => {
+    dispatch({type: "update", data: {questionId: id, target: target, value: value}})
 }
 
 const saveToDatabase = (dispatch) => {
@@ -23,5 +27,6 @@ module.exports = {
     activateEditQuestionMode,
     deactivateEditQuestionMode,
     saveField,
+    saveQuestionField,
     saveToDatabase
 }
