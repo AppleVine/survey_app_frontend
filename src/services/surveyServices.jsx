@@ -1,32 +1,39 @@
 import { getCookie } from "./authServices";
+import { verifyToken } from "./authServices";
 
-const api = process.env.API || "http://localhost:5000"
+const api = process.env.API || "http://localhost:3000"
 
 export async function createSurvey(data) {
-    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3RpbmcwMDIiLCJpYXQiOjE2ODkzNDU2MDksImV4cCI6MTY4OTM0OTIwOX0.NaOu9RzkD8Kv1uYjlne8QVGimBL9Kxz2DjY-fy3lbmc" //getCookie('authToken');
+    const token = getCookie('authToken');
+  
     try {
-        console.log("sending to db: " + data)
-        const response = await fetch(`${api}/surveys/create`, {
-            method: "POST",
-            headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
-                },
-            body: JSON.stringify(data)
-        });
-
-        const json = await response.json();
-        if (response.ok) {
-            return json; 
-          } else {
-            throw new Error(json.error); 
-          }
+      // Verify the token before making the API call
+      await verifyToken(token);
+    
+      console.log("Sending to db:", data);
+      const response = await fetch(`${api}/surveys/create`, {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify(data)
+      });
+  
+      const json = await response.json();
+      if (response.ok) {
+        return json;
+      } else {
+        throw new Error(json.error);
+      }
+    } catch (error) {
+      console.log('Error saving to database:', error);
+      throw error;
     }
-    catch(error) {
-            console.log('Error saving to database:', error);
-            throw error;
-    }
-}
+  }
+  
+  
+  
 
 export async function updateSurvey(id, data) {
     const token = getCookie('authToken');

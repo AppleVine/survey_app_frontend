@@ -1,6 +1,8 @@
 import { createContext, useContext, useReducer } from "react";
 import { surveyReducer, initialSurvey } from "./surveyReducer";
 
+
+
 // export const defaultSurveyContextData = {
 //     data: {
 //         title: "",
@@ -17,6 +19,8 @@ import { surveyReducer, initialSurvey } from "./surveyReducer";
 //         completionMessage: false
 //     }
 // }
+
+
 
 export const SurveyContext = createContext(null);
 export const SurveyDispatchContext = createContext(null);
