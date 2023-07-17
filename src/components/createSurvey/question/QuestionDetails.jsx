@@ -1,19 +1,23 @@
-import React from 'react';
-import { useSurveyContext, useSurveyDispatchContext } from '../surveyContext';
-import { activateEditQuestionMode, deactivateEditQuestionMode, saveQuestionField } from '../surveyFunctions';
+import React, { useEffect, useState } from 'react'
 
-export default function QuestionDetails({ id }) {
-  const state = useSurveyContext();
-  const dispatch = useSurveyDispatchContext();
+export default function QuestionDetails({ id, questionState, setQuestionState}) {
+  const [questionDetails, setQuestionDetails] = useState(questionState.data.questionDetails);
+  const [editMode, setEditMode] = useState(false);
+
+  useEffect(() => {
+    let newQuestionState = {...questionState}
+    newQuestionState.data.questionDetails = questionDetails;
+    setQuestionState(newQuestionState);
+  },[questionDetails])
 
   return (
-    <div onClick={() => activateEditQuestionMode(id, "questionDetails", dispatch)}
-    onBlur={() => deactivateEditQuestionMode(id, "questionDetails", dispatch)}>
-      { state.data.questions[id].editMode.questionDetails ? 
-      <input type='text' placeholder={ state.data.questions[id].data.questionDetails }
-      onChange={(event) => saveQuestionField(id, "questionDetails", event.target.value, dispatch)} ></input> 
+    <div onClick={() => setEditMode(true)}
+    onBlur={() => setEditMode(false)}>
+      { editMode ? 
+      <input type='text' placeholder={ questionDetails }
+      onChange={(event) => setQuestionDetails(event.target.value)} ></input> 
       : 
-      <span>{state.data.questions[id].data.questionDetails}</span> }
+      <span>{questionDetails}</span> }
     </div>
   )
 }

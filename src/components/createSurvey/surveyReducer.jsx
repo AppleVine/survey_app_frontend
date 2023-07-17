@@ -59,8 +59,9 @@ const surveyReducer = (previousState, instructions) => {
             fieldToEdit = instructions.data.target;
             // If we are editing question details, get the question by index and update its state
             if (instructions.data.questionId) {
+                console.log(instructions.data.questionState)
                 index = instructions.data.questionId;
-                stateEditable.data.questions[index].data[fieldToEdit] = instructions.data.value;
+                stateEditable.data.questions[index] = instructions.data.questionState;
             }
             // otherwise just update the field to be edited
             else {
