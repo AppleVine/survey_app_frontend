@@ -19,8 +19,8 @@ function App() {
             <Route path="/surveys" element={<Outlet />}>
               <Route index element={<SurveyPage />} />
               <Route path='/surveys/create' element={<CreateSurvey />} />
-              <Route path='/surveys/:id' element={<ViewSurvey />} />
-              <Route path='/surveys/:id/edit' element={<EditSurvey />} />
+              <Route path='/surveys/:surveyId' element={<ViewSurvey />} />
+              <Route path='/surveys/:surveyId/edit' element={<EditSurvey />} />
             </Route>
           </Routes>
         </Router>

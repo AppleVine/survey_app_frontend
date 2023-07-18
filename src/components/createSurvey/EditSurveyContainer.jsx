@@ -7,9 +7,8 @@ import SurveyQuestionsContainer from './SurveyQuestionsContainer'
 import SurveyCompletionMessage from './SurveyCompletionMessage'
 import SaveChangesButton from './SaveChangesButton'
 
-export default function SurveyContainer() {
-
-// TODO Add button to toggle makePublic
+export default function EditSurveyContainer({setEdit}) {
+  setEdit(true);
 
   return (
     <div>
