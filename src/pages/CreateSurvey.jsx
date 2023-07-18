@@ -11,7 +11,7 @@ export default function CreateSurvey() {
     <div>
       <SurveyProvider>
         <EditContext.Provider value={{edit, setEdit}} >
-          <EditSurveyContainer setEdit={setEdit} />
+          <EditSurveyContainer />
         </EditContext.Provider>
       </SurveyProvider>
     </div>
