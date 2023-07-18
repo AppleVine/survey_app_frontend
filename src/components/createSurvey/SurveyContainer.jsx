@@ -1,4 +1,5 @@
 import React from 'react'
+import MakePublicToggle from './MakePublicToggle'
 import SurveyTitle from './SurveyTitle'
 import SurveyDescription from './SurveyDescription'
 import SurveyIntroText from './SurveyIntroText'
@@ -12,6 +13,7 @@ export default function SurveyContainer() {
 
   return (
     <div>
+        <MakePublicToggle />
         <SurveyTitle />
         <SurveyDescription />
         <SurveyIntroText />
