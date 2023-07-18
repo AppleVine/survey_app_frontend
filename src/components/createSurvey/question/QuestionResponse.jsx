@@ -8,12 +8,12 @@ export default function QuestionResponse({ id, type, questionState, setQuestionS
     switch (type) {
         case "multipleChoiceRadio":
             return <MultipleChoiceRadio id={ id } questionState={questionState} setQuestionState={setQuestionState} />
-        case "multipleChoiceCheckBox":
+        case "multipleChoiceCheckbox":
             return <MultipleChoiceCheckbox id={ id } questionState={questionState} setQuestionState={setQuestionState} />
         case "shortText":
             return <ShortTextResponse />
         case "longText":
-            return <LongTextResponse />
+            return <LongTextResponse id={ id } />
         default:
             return <p>Select a question type.</p>
     }

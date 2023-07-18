@@ -1,8 +1,10 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import {useSurveyDispatchContext} from './surveyContext'
+import EditContext from '../../contexts/editContext';
 
 export default function AddQuestionButton() {
-const dispatch = useSurveyDispatchContext();
+  const {edit, setEdit} = useContext(EditContext);
+  const dispatch = useSurveyDispatchContext();
 
   const handleClick = () => {
     dispatch({ type: "add" })
@@ -10,7 +12,9 @@ const dispatch = useSurveyDispatchContext();
 
   return (
     <div>
-      <button onClick={ () => handleClick() }>Add Question</button>
+      {
+        edit ? <button onClick={ () => handleClick() }>Add Question</button> : null
+      }
     </div>
   )
 }

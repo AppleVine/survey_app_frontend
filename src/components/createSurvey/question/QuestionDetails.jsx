@@ -15,7 +15,9 @@ export default function QuestionDetails({ id, questionState, setQuestionState}) 
     onBlur={() => setEditMode(false)}>
       { editMode ? 
       <input type='text' placeholder={ questionDetails }
-      onChange={(event) => setQuestionDetails(event.target.value)} ></input> 
+      onChange={(event) => setQuestionDetails(event.target.value)}
+      onKeyDown={ (event) => event.key === "Enter" ? setEditMode(false): null } 
+      ></input> 
       : 
       <span>{questionDetails}</span> }
     </div>

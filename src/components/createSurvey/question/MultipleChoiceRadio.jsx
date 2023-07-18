@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
+import EditContext from '../../../contexts/editContext';
 
 export default function MultipleChoiceRadio({ id, questionState, setQuestionState }) {
   const [optionArray, setOptionArray] = useState(questionState.data.questionOptions);
   const [editModeArray, setEditModeArray] = useState(false);
+  const {edit, setEdit} = useContext(EditContext);
 
   const handleOptionChange = (index, value) => {
     let newOptionArray = [...optionArray];
@@ -37,7 +39,7 @@ export default function MultipleChoiceRadio({ id, questionState, setQuestionStat
               <li className="question-option-radio" key={ index }>
                 <input type="radio" name={ option } id={ option } />
                 {
-                  editModeArray[index]
+                  edit && editModeArray[index]
                   ? 
                   <input type='text' placeholder={ option }
                   onChange={ (event) => handleOptionChange(index, event.target.value) } 

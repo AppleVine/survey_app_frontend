@@ -32,6 +32,8 @@ const initialSurvey = {
     }
 }
 
+//TODO Refactor to remove question functionality
+
 const surveyReducer = (previousState, instructions) => {
 
     // stateEditable will be used in all cases

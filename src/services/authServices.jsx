@@ -24,7 +24,7 @@ export async function verifyToken(token) {
 
     if (response.ok) {
       // Token is valid
-      return;
+      return true;
     } else {
       // Token is invalid
       throw new Error('Token verification failed');
@@ -35,3 +35,8 @@ export async function verifyToken(token) {
   }
 }
 
+export function checkForUser() {
+  let token = getCookie(TOKEN_COOKIE_NAME);
+  let isUser = verifyToken(token);
+  return isUser;
+}
