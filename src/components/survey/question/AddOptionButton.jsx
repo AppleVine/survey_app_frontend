@@ -5,15 +5,17 @@ export default function AddOptionButton({ id }) {
   const editState = useEditContext();
   const dispatch = useSurveyDispatchContext();
 
+  if (!editState) {
+    return null
+  }
+
   const handleClick = () => {
     dispatch({ type: "addOption", data: {index: id} })
   }
 
   return (
     <div>
-      {
-        editState ? <button onClick={ () => handleClick() }>Add Option</button> : null
-      }
+      <button onClick={ () => handleClick() }>Add Option</button>
     </div>
   )
 }

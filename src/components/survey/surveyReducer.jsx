@@ -1,5 +1,3 @@
-const { updateSurvey, createSurvey } = require("../../services/surveyServices");
-
 const initialQuestion = {
     data: {
         questionText: "Insert question text here",
@@ -39,7 +37,7 @@ const surveyReducer = (previousState, instructions) => {
     // stateEditable will be used in all cases
     let stateEditable = null;
     // Index in case of editing a question (React gets mad if I try and initialize this within individual cases)
-    let index = null;
+    let questionId = null;
     // Ditto
     let fieldToEdit = null;
 
@@ -75,10 +73,10 @@ const surveyReducer = (previousState, instructions) => {
 
         case "updateQuestion":
             //TODO Data validation
-            index = instructions.data.questionId;
+            questionId = instructions.data.questionId;
             fieldToEdit = instructions.data.field;
             stateEditable = {...previousState};
-            stateEditable.data.questions[index].data[fieldToEdit] = instructions.data.value;
+            stateEditable.data.questions[questionId].data[fieldToEdit] = instructions.data.value;
 
             return stateEditable
 
@@ -87,14 +85,12 @@ const surveyReducer = (previousState, instructions) => {
             // Push new data to state
             stateEditable = {...previousState};
             // If editing question options, get the question by id and change the editMode options
-            if (instructions.data.questionId) {
-                index = instructions.data.questionId;
-                stateEditable.data.questions[index].editMode.questionOptions = instructions.data.options;
-            }
+            // if (instructions.data.questionId) {
+            //     index = instructions.data.questionId;
+            //     stateEditable.data.questions[index].editMode.questionOptions = instructions.data.options;
+            // }
             // Otherwise change the editMode options for the main survey fields
-            else {
-                stateEditable.editMode[instructions.data.target] = instructions.data.editMode;
-            }
+            stateEditable.editMode[instructions.data.target] = instructions.data.editMode;
             // Return new state
             return stateEditable;
 
@@ -103,9 +99,9 @@ const surveyReducer = (previousState, instructions) => {
             // Copy current state
             stateEditable = {...previousState};
             // Get index of question to be edited
-            index = instructions.data.index;
+            questionId = instructions.data.index;
             // Copy current editMode state of question
-            let newEditMode = stateEditable.data.questions[index].editMode;
+            let newEditMode = stateEditable.data.questions[questionId].editMode;
             // Set all to false
             for (let field in newEditMode) {
                 if (typeof field === Boolean) {
@@ -117,7 +113,7 @@ const surveyReducer = (previousState, instructions) => {
             // Update that field
             newEditMode[fieldToEdit] = instructions.data.editMode;
             // Update state with new data
-            stateEditable.data.questions[index].editMode = newEditMode;
+            stateEditable.data.questions[questionId].editMode = newEditMode;
             // Return new state
             return stateEditable;
 
@@ -135,11 +131,11 @@ const surveyReducer = (previousState, instructions) => {
             // Copy current state
             stateEditable = {...previousState};
             // Get index of question to be edited
-            index = instructions.data.index;
+            questionId = instructions.data.index;
             // Push new option to options array for that question
-            stateEditable.data.questions[index].data.questionOptions.push("Enter an option");
+            stateEditable.data.questions[questionId].data.questionOptions.push("Enter an option");
             // Add new editMode status
-            stateEditable.data.questions[index].editMode.questionOptions.push(false);
+            stateEditable.data.questions[questionId].editMode.questionOptions.push(false);
 
             return stateEditable;
 
@@ -147,8 +143,9 @@ const surveyReducer = (previousState, instructions) => {
             // Delete a question
             // Copy current state
             stateEditable = {...previousState};
+            questionId = instructions.data.index
             // Remove question from array
-            stateEditable.data.questions = stateEditable.data.questions.filter((question, index) => index !== instructions.data.index);
+            stateEditable.data.questions = stateEditable.data.questions.filter((question, index) => index !== questionId);
 
             return stateEditable;
 
@@ -157,24 +154,25 @@ const surveyReducer = (previousState, instructions) => {
             // Copy current state
             stateEditable = {...previousState};
             // Get question index from instructions
-            let questionIndex = instructions.data.questionIndex;
+            questionId = instructions.data.questionId;
+            let optionId = instructions.data.optionId;
             // Remove answer from option array
-            stateEditable.data.questions[questionIndex].questionOptions = 
-            stateEditable.data.questions[questionIndex].questionOptions.filter((option, index) => index !== instructions.data.optionIndex);
+            stateEditable.data.questions[questionId].questionOptions = 
+            stateEditable.data.questions[questionId].questionOptions.filter((option, index) => index !== optionId);
 
             return stateEditable;
 
-        case "saveToDatabase":
-            // Check if we are saving a new survey or updating one that exists in the database already
-            if (previousState.data._id) {
-                // Find the survey with that id in the database and update
-                updateSurvey(previousState.data._id, previousState)
-            }
-            // Perform update
-            createSurvey(previousState)
-            // Close connection to database
+        // case "saveToDatabase":
+        //     // Check if we are saving a new survey or updating one that exists in the database already
+        //     if (previousState.data._id) {
+        //         // Find the survey with that id in the database and update
+        //         updateSurvey(previousState.data._id, previousState)
+        //     }
+        //     // Perform update
+        //     createSurvey(previousState)
+        //     // Close connection to database
 
-            return previousState;
+        //     return previousState;
 
         default:
             // invalid instructions provided!

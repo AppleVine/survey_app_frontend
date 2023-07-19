@@ -1,10 +1,10 @@
 import React, {useEffect} from 'react';
 import { useParams } from 'react-router-dom';
-import { useSurveyDispatchContext } from '../components/createSurvey/surveyContext';
+import { useSurveyDispatchContext } from '../components/survey/surveyContext';
 import { getSurvey } from '../services/surveyServices';
 import { checkLoginAndRedirect } from '../services/authServices';
-import EditSurveyContainer from '../components/createSurvey/EditSurveyContainer';
-import SaveEditedSurveyButton from '../components/createSurvey/SaveEditedSurveyButton';
+import EditSurveyContainer from '../components/survey/EditSurveyContainer';
+import SaveEditedSurveyButton from '../components/survey/SaveEditedSurveyButton';
 
 export default function EditSurvey() {
   // Redirect to login page if not logged in

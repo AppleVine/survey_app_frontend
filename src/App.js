@@ -7,7 +7,7 @@ import SurveyPage from './pages/SurveyPage';
 import CreateSurvey from './pages/CreateSurvey';
 import ViewSurvey from './pages/ViewSurvey';
 import EditSurvey from './pages/EditSurvey';
-import { SurveyProvider } from './components/createSurvey/surveyContext';
+import { SurveyProvider } from './components/survey/surveyContext';
 import { EditContextProvider } from './contexts/editContext';
 
 function App() {

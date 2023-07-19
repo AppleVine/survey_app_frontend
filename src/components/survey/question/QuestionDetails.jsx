@@ -7,7 +7,6 @@ export default function QuestionDetails({ id }) {
   const state = useSurveyContext();
   const dispatch = useSurveyDispatchContext();
   const editState = useEditContext();
-  const [enteredText, setEnteredText] = useState("");
   const [questionDetails, setQuestionDetails] = useState("");
   const [editMode, setEditMode] = useState(false);
 

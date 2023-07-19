@@ -1,13 +1,13 @@
-import React, {useState, useEffect, useCallback} from 'react';
-import {useSurveyContext, useSurveyDispatchContext} from './surveyContext';
+import React from 'react';
+// import {useSurveyContext, useSurveyDispatchContext} from './surveyContext';
 import QuestionText from './question/QuestionText';
 import QuestionDetails from './question/QuestionDetails';
 import QuestionResponse from './question/QuestionResponse';
 import QuestionType from './question/QuestionType';
 
 export default function QuestionContainer({ index }) {
-  const state = useSurveyContext();
-  const dispatch = useSurveyDispatchContext();
+  // const state = useSurveyContext();
+  // const dispatch = useSurveyDispatchContext();
 
   // question.index = index;
   // const [questionState, setQuestionState] = useState(question);

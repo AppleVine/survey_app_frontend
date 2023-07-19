@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
-import EditSurveyContainer from '../components/createSurvey/EditSurveyContainer';
+import EditSurveyContainer from '../components/survey/EditSurveyContainer';
 import { checkLoginAndRedirect } from '../services/authServices';
-import SaveNewSurveyButton from '../components/createSurvey/SaveNewSurveyButton';
+import SaveNewSurveyButton from '../components/survey/SaveNewSurveyButton';
 
 export default function CreateSurvey() {
 

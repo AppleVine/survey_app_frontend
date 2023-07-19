@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import {useSurveyDispatchContext} from '../components/createSurvey/surveyContext';
+import {useSurveyDispatchContext} from '../components/survey/surveyContext';
 import { getSurvey } from '../services/surveyServices';
 import { checkForUser } from '../services/authServices';
-import ViewSurveyContainer from '../components/createSurvey/ViewSurveyContainer';
+import ViewSurveyContainer from '../components/survey/ViewSurveyContainer';
 
 export default function ViewSurvey() {
     // Get survey id from url
