@@ -62,9 +62,8 @@ const surveyReducer = (previousState, instructions) => {
             fieldToEdit = instructions.data.target;
             // If we are editing question details, get the question by index and update its state
             if (instructions.data.questionId) {
-                console.log(instructions.data.questionState)
                 index = instructions.data.questionId;
-                stateEditable.data.questions[index] = instructions.data.questionState;
+                stateEditable.data.questions[index].data = instructions.data.questionState;
             }
             // otherwise just update the field to be edited
             else {
@@ -72,6 +71,15 @@ const surveyReducer = (previousState, instructions) => {
             }
             // Return new state
             return stateEditable;
+
+        case "updateQuestion":
+            //TODO Data validation
+            index = instructions.data.questionId;
+            fieldToEdit = instructions.data.field;
+            stateEditable = {...previousState};
+            stateEditable.data.questions[index][fieldToEdit] = instructions.data.value;
+
+            return stateEditable
 
         case "updateOption":
             //TODO Data validation
@@ -185,5 +193,5 @@ const surveyReducer = (previousState, instructions) => {
 }
 
 module.exports = {
-    surveyReducer, initialSurvey
+    surveyReducer, initialSurvey, initialQuestion
 }

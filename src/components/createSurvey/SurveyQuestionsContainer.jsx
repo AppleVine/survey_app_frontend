@@ -15,7 +15,7 @@ export default function SurveyQuestionsContainer() {
             // Assign key based on question order in array
             return(
               <li key={ index }>
-                <QuestionContainer question={question} index={index} />
+                <QuestionContainer index={index} />
               </li>
             )
         }) }

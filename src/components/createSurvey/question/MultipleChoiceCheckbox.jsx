@@ -1,8 +1,11 @@
 import React, { useEffect, useState, useContext } from 'react'
+import { useSurveyContext, useSurveyDispatchContext } from '../surveyContext';
 import EditContext from '../../../contexts/editContext';
 
-export default function MultipleChoiceCheckbox({ id, questionState, setQuestionState }) {
-  const [optionArray, setOptionArray] = useState(questionState.data.questionOptions);
+export default function MultipleChoiceCheckbox({ id }) {
+  const state = useSurveyContext();
+  const dispatch = useSurveyDispatchContext();
+  const [optionArray, setOptionArray] = useState(state.data.questions[id].data.questionOptions);
   const [editModeArray, setEditModeArray] = useState(false);
   const {edit, setEdit} = useContext(EditContext);
 
@@ -24,11 +27,11 @@ export default function MultipleChoiceCheckbox({ id, questionState, setQuestionS
     setEditModeArray(newEditModeArray);
   }
 
-  useEffect(() => {
-    let newQuestionState = {...questionState}
-    newQuestionState.data.questionOptions = optionArray;
-    setQuestionState(newQuestionState);
-  },[optionArray])
+  // useEffect(() => {
+  //   let newQuestionState = {...questionState}
+  //   newQuestionState.data.questionOptions = optionArray;
+  //   setQuestionState(newQuestionState);
+  // },[optionArray])
 
   return (
     <div>

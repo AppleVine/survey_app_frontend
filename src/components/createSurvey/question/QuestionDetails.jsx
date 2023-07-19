@@ -1,13 +1,38 @@
 import React, { useEffect, useState } from 'react'
+import { useSurveyContext, useSurveyDispatchContext } from '../surveyContext';
+import { initialQuestion } from '../surveyReducer';
 
-export default function QuestionDetails({ id, questionState, setQuestionState}) {
-  const [questionDetails, setQuestionDetails] = useState(questionState.data.questionDetails);
+export default function QuestionDetails({ id }) {
+  const state = useSurveyContext();
+  const dispatch = useSurveyDispatchContext();
+  const [enteredText, setEnteredText] = useState("");
+  const [questionDetails, setQuestionDetails] = useState(state.data.questions[id].data.questionDetails);
   const [editMode, setEditMode] = useState(false);
 
+  // Trigger rerender on state change
+  useEffect(() => {},[state])
+
+  // Set question details on re-render (Do not combine with above function- triggers infinite-rerender!)
   useEffect(() => {
-    let newQuestionState = {...questionState}
-    newQuestionState.data.questionDetails = questionDetails;
-    setQuestionState(newQuestionState);
+    setQuestionDetails(state.data.questions[id].data.questionDetails)
+    // eslint-disable-next-line
+  },[])
+
+  useEffect(() => {
+    // If entered text is not empty string
+    if (enteredText) {
+      setQuestionDetails(enteredText);
+    };
+    // eslint-disable-next-line
+  },[enteredText])
+
+  // Update global state when question edited
+  useEffect(() => {
+    // Check that question text is not empty string or default data
+    if (questionDetails && questionDetails !== initialQuestion.data.questionDetails) {
+      dispatch({type: "updateQuestion", data: {questionId: id, field: "questionDetails", value: questionDetails}});
+    }
+    // eslint-disable-next-line
   },[questionDetails])
 
   return (
@@ -15,7 +40,7 @@ export default function QuestionDetails({ id, questionState, setQuestionState}) 
     onBlur={() => setEditMode(false)}>
       { editMode ? 
       <input type='text' placeholder={ questionDetails }
-      onChange={(event) => setQuestionDetails(event.target.value)}
+      onChange={(event) => setEnteredText(event.target.value)}
       onKeyDown={ (event) => event.key === "Enter" ? setEditMode(false): null } 
       ></input> 
       : 

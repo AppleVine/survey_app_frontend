@@ -27,6 +27,14 @@ export default function ViewSurvey() {
       // Get survey data and dispatch it into the state
       const fetchSurvey = async () => {
         const surveyData = await getSurvey(surveyId);
+        // Reformat question array
+        let questionData = surveyData.survey.questions;
+        let questionArray = [];
+        for (let question of questionData) {
+          question = {data: question};
+          questionArray.push(question);
+        }
+        surveyData.survey.questions = questionArray;
         dispatch({type: "loadSurvey", data: surveyData.survey});
       }
   
