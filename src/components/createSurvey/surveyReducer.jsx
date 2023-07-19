@@ -46,8 +46,10 @@ const surveyReducer = (previousState, instructions) => {
     switch (instructions.type) {
 
         case "loadSurvey":
-            // Load survey from data
-            return instructions.data;
+            // Load survey from db
+            stateEditable = {...previousState, data: instructions.data}
+            console.log(stateEditable)
+            return stateEditable;
 
         case "update":
             // TODO Perform data validation

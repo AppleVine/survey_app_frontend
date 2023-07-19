@@ -7,6 +7,7 @@ import SurveyPage from './pages/SurveyPage';
 import CreateSurvey from './pages/CreateSurvey';
 import ViewSurvey from './pages/ViewSurvey';
 import EditSurvey from './pages/EditSurvey';
+import { SurveyProvider } from './components/createSurvey/surveyContext';
 
 function App() {
   return (
@@ -19,7 +20,7 @@ function App() {
             <Route path="/surveys" element={<Outlet />}>
               <Route index element={<SurveyPage />} />
               <Route path='/surveys/create' element={<CreateSurvey />} />
-              <Route path='/surveys/:surveyId' element={<ViewSurvey />} />
+              <Route path='/surveys/:surveyId' element={ <SurveyProvider><ViewSurvey /></SurveyProvider> } />
               <Route path='/surveys/:surveyId/edit' element={<EditSurvey />} />
             </Route>
           </Routes>

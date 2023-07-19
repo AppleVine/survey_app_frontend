@@ -10,6 +10,7 @@ export default function ViewSurveyContainer() {
 
   useEffect(() => {
     editContext.setEdit(false)
+    // eslint-disable-next-line
   }, []);
 
   return (
