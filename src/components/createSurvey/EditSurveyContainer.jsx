@@ -6,7 +6,6 @@ import SurveyDescription from './SurveyDescription'
 import SurveyIntroText from './SurveyIntroText'
 import SurveyQuestionsContainer from './SurveyQuestionsContainer'
 import SurveyCompletionMessage from './SurveyCompletionMessage'
-import SaveChangesButton from './SaveChangesButton'
 
 export default function EditSurveyContainer() {
   const editDispatch = useEditDispatchContext();
@@ -24,7 +23,6 @@ export default function EditSurveyContainer() {
         <SurveyIntroText />
         <SurveyQuestionsContainer />
         <SurveyCompletionMessage />
-        <SaveChangesButton />
     </div>
   )
 }

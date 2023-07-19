@@ -1,18 +1,20 @@
 import React from 'react';
 import { useSurveyContext } from './surveyContext';
 import {useEditContext} from '../../contexts/editContext';
-import { createSurvey } from '../../services/surveyServices';
+import { updateSurvey } from '../../services/surveyServices';
+import { useParams } from 'react-router-dom';
 
-export default function SaveChangesButton() {
+export default function SaveEditedSurveyButton() {
+  const {surveyId} = useParams();
   const surveyData = useSurveyContext();
   const editState = useEditContext();
 
   const handleSaveChanges = async () => {
     try {
-      await createSurvey(surveyData);
+      await updateSurvey(surveyId, surveyData);
     } catch (error) {
       console.error("Error saving survey to the database:", error);
-      // Handle the error if needed
+      // TODO Handle the error if needed
     }
   };
 
