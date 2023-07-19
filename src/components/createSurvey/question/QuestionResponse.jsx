@@ -1,13 +1,11 @@
 import React, { useEffect } from 'react';
-import { useSurveyContext, useSurveyDispatchContext } from '../surveyContext';
-import MultipleChoiceRadio from './MultipleChoiceRadio';
-import MultipleChoiceCheckbox from './MultipleChoiceCheckbox';
+import { useSurveyContext } from '../surveyContext';
+import MultipleChoice from './MultipleChoice';
 import ShortTextResponse from './ShortText';
 import LongTextResponse from './LongText';
 
 export default function QuestionResponse({ id }) {
     const state = useSurveyContext();
-    const dispatch = useSurveyDispatchContext();
 
     // Trigger rerender on state change
     useEffect(() => {},[state])
@@ -15,9 +13,9 @@ export default function QuestionResponse({ id }) {
     const type = state.data.questions[id].data.questionType
     switch (type) {
         case "multipleChoiceRadio":
-            return <MultipleChoiceRadio id={ id } />
+            return <MultipleChoice id={ id } type={"radio"} />
         case "multipleChoiceCheckbox":
-            return <MultipleChoiceCheckbox id={ id } />
+            return <MultipleChoice id={ id } type={"checkbox"} />
         case "shortText":
             return <ShortTextResponse />
         case "longText":

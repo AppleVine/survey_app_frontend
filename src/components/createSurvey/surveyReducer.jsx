@@ -139,7 +139,7 @@ const surveyReducer = (previousState, instructions) => {
             // Get index of question to be edited
             index = instructions.data.index;
             // Push new option to options array for that question
-            stateEditable.data.questions[index].questionOptions.push("Enter an option");
+            stateEditable.data.questions[index].data.questionOptions.push("Enter an option");
             // Add new editMode status
             stateEditable.data.questions[index].editMode.questionOptions.push(false);
 

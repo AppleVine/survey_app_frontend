@@ -1,11 +1,12 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSurveyContext, useSurveyDispatchContext } from '../surveyContext';
 import {useEditContext} from '../../../contexts/editContext';
+import AddOptionButton from './AddOptionButton';
 
-export default function MultipleChoiceCheckbox({ id }) {
+export default function MultipleChoice({ id, type }) {
   const state = useSurveyContext();
   const dispatch = useSurveyDispatchContext();
-  const [optionArray, setOptionArray] = useState(state.data.questions[id].data.questionOptions);
+  const [optionArray, setOptionArray] = useState([]);
   const [editModeArray, setEditModeArray] = useState(false);
   const editState = useEditContext();
 
@@ -27,20 +28,33 @@ export default function MultipleChoiceCheckbox({ id }) {
     setEditModeArray(newEditModeArray);
   }
 
-  // useEffect(() => {
-  //   let newQuestionState = {...questionState}
-  //   newQuestionState.data.questionOptions = optionArray;
-  //   setQuestionState(newQuestionState);
-  // },[optionArray])
+  // Trigger rerender on state change
+  useEffect(() => {},[state])
+
+  // Set question options on re-render (Do not combine with above function- triggers infinite-rerender!)
+  useEffect(() => {
+    setOptionArray(state.data.questions[id].data.questionOptions)
+    // eslint-disable-next-line
+  },[])
+
+  // Update global state when question edited
+  useEffect(() => {
+    // Check that question text is not empty string or default data
+    if (optionArray != []) {  // Must be loose equality!
+      dispatch({type: "updateQuestion", data: {questionId: id, field: "questionOptions", value: optionArray}});
+    }
+    // eslint-disable-next-line
+  },[optionArray])
+
 
   return (
     <div>
-      <ul className='question-options-checkbox'>
+      <ul className={`question-options-${type}`}>
         {
-          optionArray.map((option, index) => {
+          state.data.questions[id].data.questionOptions.map((option, index) => {
             return(
-              <li className="question-option-checkbox" key={ index }>
-                <input type="checkbox" name={ option } id={ option } />
+              <li className={`question-option-${type}`} key={ index }>
+                <input type={type} name={ option } id={ option } />
                 {
                   editState && editModeArray[index]
                   ? 
@@ -56,6 +70,7 @@ export default function MultipleChoiceCheckbox({ id }) {
           })
         }
       </ul>
+      <AddOptionButton id={ id } />
     </div>
   )
 }

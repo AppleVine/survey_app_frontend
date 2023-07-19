@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useSurveyContext, useSurveyDispatchContext } from '../surveyContext';
 import {useEditContext} from '../../../contexts/editContext';
-import { initialQuestion } from '../surveyReducer';
 
 export default function QuestionType({id}) {
   const state = useSurveyContext();
