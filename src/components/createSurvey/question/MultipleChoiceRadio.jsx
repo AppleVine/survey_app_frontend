@@ -36,18 +36,21 @@ export default function MultipleChoiceRadio({ id }) {
     // eslint-disable-next-line
   },[])
 
-  // useEffect(() => {
-  //   let newQuestionState = {...questionState}
-  //   newQuestionState.data.questionOptions = optionArray;
-  //   setQuestionState(newQuestionState);
-  // },[optionArray])
+  // Update global state when question edited
+  useEffect(() => {
+    // Check that question text is not empty string or default data
+    if (optionArray != []) {  // Must be loose equality!
+      dispatch({type: "updateQuestion", data: {questionId: id, field: "questionOptions", value: optionArray}});
+    }
+    // eslint-disable-next-line
+  },[optionArray])
 
 
   return (
     <div>
       <ul className='question-options-radio'>
         {
-          optionArray.map((option, index) => {
+          state.data.questions[id].data.questionOptions.map((option, index) => {
             return(
               <li className="question-option-radio" key={ index }>
                 <input type="radio" name={ option } id={ option } />

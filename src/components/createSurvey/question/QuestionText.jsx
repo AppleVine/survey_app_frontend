@@ -7,26 +7,11 @@ export default function QuestionText({ id }) {
   const state = useSurveyContext();
   const dispatch = useSurveyDispatchContext();
   const editState = useEditContext();
-  const [enteredText, setEnteredText] = useState("");
   const [questionText, setQuestionText] = useState("");
   const [editMode, setEditMode] = useState(false);
 
   // Trigger rerender on state change
   useEffect(() => {},[state])
-
-  // Set question text on re-render (Do not combine with above function- triggers infinite-rerender!)
-  useEffect(() => {
-    setQuestionText(state.data.questions[id].data.questionText)
-    // eslint-disable-next-line
-  },[])
-
-  // Set question text when entered text changes
-  useEffect(() => {
-    // If entered text is not empty string
-    if (enteredText) {
-      setQuestionText(enteredText);
-    };
-  },[enteredText])
 
   // Update global state when question edited
   useEffect(() => {
@@ -46,12 +31,12 @@ export default function QuestionText({ id }) {
     }}
     onBlur={() => setEditMode(false)}>
       { editMode ?
-      <input type='text' placeholder={ questionText } 
-      onChange={ (event) => setEnteredText(event.target.value) }
+      <input type='text' placeholder={ state.data.questions[id].data.questionText } 
+      onChange={ (event) => setQuestionText(event.target.value) }
       onKeyDown={ (event) => event.key === "Enter" ? setEditMode(false): null }
       ></input> 
       : 
-      <span>{ questionText }</span> }
+      <span>{ state.data.questions[id].data.questionText }</span> }
     </div>
   )
 }

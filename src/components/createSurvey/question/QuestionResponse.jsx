@@ -9,6 +9,9 @@ export default function QuestionResponse({ id }) {
     const state = useSurveyContext();
     const dispatch = useSurveyDispatchContext();
 
+    // Trigger rerender on state change
+    useEffect(() => {},[state])
+
     const type = state.data.questions[id].data.questionType
     switch (type) {
         case "multipleChoiceRadio":

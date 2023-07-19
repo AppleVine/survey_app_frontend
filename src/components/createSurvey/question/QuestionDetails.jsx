@@ -14,19 +14,6 @@ export default function QuestionDetails({ id }) {
   // Trigger rerender on state change
   useEffect(() => {},[state])
 
-  // Set question details on re-render (Do not combine with above function- triggers infinite-rerender!)
-  useEffect(() => {
-    setQuestionDetails(state.data.questions[id].data.questionDetails)
-    // eslint-disable-next-line
-  },[])
-
-  useEffect(() => {
-    // If entered text is not empty string
-    if (enteredText) {
-      setQuestionDetails(enteredText);
-    };
-  },[enteredText])
-
   // Update global state when question edited
   useEffect(() => {
     // Check that question text is not empty string or default data
@@ -45,12 +32,12 @@ export default function QuestionDetails({ id }) {
     }}
     onBlur={() => setEditMode(false)}>
       { editMode ? 
-      <input type='text' placeholder={ questionDetails }
-      onChange={(event) => setEnteredText(event.target.value)}
+      <input type='text' placeholder={ state.data.questions[id].data.questionDetails }
+      onChange={(event) => setQuestionDetails(event.target.value)}
       onKeyDown={ (event) => event.key === "Enter" ? setEditMode(false): null } 
       ></input> 
       : 
-      <span>{questionDetails}</span> }
+      <span>{state.data.questions[id].data.questionDetails}</span> }
     </div>
   )
 }

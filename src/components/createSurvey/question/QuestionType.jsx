@@ -19,14 +19,6 @@ export default function QuestionType({id}) {
     // eslint-disable-next-line
   },[])
 
-  useEffect(() => {
-    // If input is not empty string
-    if (userInput) {
-      setQuestionType(userInput);
-    };
-    // eslint-disable-next-line
-  },[userInput])
-
   // Update global state when question edited
   useEffect(() => {
     // Check that question text is not empty string or default data
@@ -35,6 +27,14 @@ export default function QuestionType({id}) {
     }
     // eslint-disable-next-line
   },[questionType])
+
+  useEffect(() => {
+    // If input is not empty string
+    if (userInput) {
+      setQuestionType(userInput);
+    };
+    // eslint-disable-next-line
+  },[userInput])
 
   return (
     <div>

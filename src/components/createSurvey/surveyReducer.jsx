@@ -69,7 +69,7 @@ const surveyReducer = (previousState, instructions) => {
             index = instructions.data.questionId;
             fieldToEdit = instructions.data.field;
             stateEditable = {...previousState};
-            stateEditable.data.questions[index][fieldToEdit] = instructions.data.value;
+            stateEditable.data.questions[index].data[fieldToEdit] = instructions.data.value;
 
             return stateEditable
 
