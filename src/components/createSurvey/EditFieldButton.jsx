@@ -1,10 +1,12 @@
 import React from 'react'
 import {useSurveyContext, useSurveyDispatchContext} from './surveyContext'
 import { activateEditMode, deactivateEditMode } from './surveyFunctions';
+import { useEditContext } from '../../contexts/editContext';
 
 export default function EditFieldButton({ parent }) {
   const state = useSurveyContext();
   const dispatch = useSurveyDispatchContext();
+  const editState = useEditContext();
 
   const buttonText = state.editMode[parent] ? "Save" : "Edit";
 
@@ -19,7 +21,7 @@ export default function EditFieldButton({ parent }) {
 
   return (
     <div>
-      <button onClick={ () => handleClick() }>{ buttonText }</button>
+      { editState ? <button onClick={ () => handleClick() }>{ buttonText }</button>: null}
     </div>
   )
 }

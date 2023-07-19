@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { useSurveyContext, useSurveyDispatchContext } from '../surveyContext';
 import { initialQuestion } from '../surveyReducer';
+import { useEditContext } from '../../../contexts/editContext';
 
 export default function QuestionDetails({ id }) {
   const state = useSurveyContext();
   const dispatch = useSurveyDispatchContext();
+  const editState = useEditContext();
   const [enteredText, setEnteredText] = useState("");
   const [questionDetails, setQuestionDetails] = useState("");
   const [editMode, setEditMode] = useState(false);
@@ -28,14 +30,19 @@ export default function QuestionDetails({ id }) {
   // Update global state when question edited
   useEffect(() => {
     // Check that question text is not empty string or default data
-    if (questionDetails && questionDetails !== initialQuestion.data.questionDetails) {
+    if (questionDetails && questionDetails != initialQuestion.data.questionDetails) {  // Must be loose equality!
       dispatch({type: "updateQuestion", data: {questionId: id, field: "questionDetails", value: questionDetails}});
     }
     // eslint-disable-next-line
   },[questionDetails])
 
   return (
-    <div onClick={() => setEditMode(true)}
+    <div onClick={() => {
+      // Only allow editing if in an editable survey
+      if (editState) {
+        setEditMode(true)
+      }
+    }}
     onBlur={() => setEditMode(false)}>
       { editMode ? 
       <input type='text' placeholder={ questionDetails }
