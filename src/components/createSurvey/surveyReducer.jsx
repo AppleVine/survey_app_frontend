@@ -48,7 +48,6 @@ const surveyReducer = (previousState, instructions) => {
         case "loadSurvey":
             // Load survey from db
             stateEditable = {...previousState, data: instructions.data}
-            console.log(stateEditable)
             return stateEditable;
 
         case "update":

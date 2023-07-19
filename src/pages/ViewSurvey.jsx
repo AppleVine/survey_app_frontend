@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { SurveyProvider } from '../components/createSurvey/surveyContext';
+import { useSurveyContext } from '../components/createSurvey/surveyContext';
 import {useSurveyDispatchContext} from '../components/createSurvey/surveyContext';
 import { getSurvey } from '../services/surveyServices';
 import { checkForUser } from '../services/authServices';
@@ -37,20 +37,18 @@ export default function ViewSurvey() {
 
   return (
     <div>
-        <SurveyProvider>
-          <EditContext.Provider value={{edit, setEdit}} >
-            <ViewSurveyContainer />
-            <div>
-              {
-                // Display edit button for logged in users
-                isUser ?
-                <Link to={`/surveys/${surveyId}/edit`}>Edit Survey</Link>
-                :
-                null
-              }
-            </div>
-          </EditContext.Provider>
-        </SurveyProvider>
+      <EditContext.Provider value={{edit, setEdit}} >
+        <ViewSurveyContainer />
+        <div>
+          {
+            // Display edit button for logged in users
+            isUser ?
+            <Link to={`/surveys/${surveyId}/edit`}>Edit Survey</Link>
+            :
+            null
+          }
+        </div>
+      </EditContext.Provider>
     </div>
   )
 }
