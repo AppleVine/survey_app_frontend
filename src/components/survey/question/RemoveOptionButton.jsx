@@ -1,4 +1,6 @@
-import React from 'react'
+import React from 'react';
+import { useEditContext } from '../../../contexts/editContext';
+import { useSurveyDispatchContext } from '../surveyContext';
 
 export default function RemoveOptionButton({ questionId, optionId }) {
     const editState = useEditContext();

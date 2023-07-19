@@ -1,4 +1,6 @@
-import React from 'react'
+import React from 'react';
+import { useSurveyDispatchContext } from './surveyContext';
+import { useEditContext } from '../../contexts/editContext';
 
 export default function RemoveQuestionButton({ questionId }) {
     const editState = useEditContext();
@@ -13,7 +15,7 @@ export default function RemoveQuestionButton({ questionId }) {
       }
 
   return (
-    <div onClick={handleClick}>
+    <div onClick={() => handleClick()}>
       X
     </div>
   )

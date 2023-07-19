@@ -143,7 +143,7 @@ const surveyReducer = (previousState, instructions) => {
             // Delete a question
             // Copy current state
             stateEditable = {...previousState};
-            questionId = instructions.data.index
+            questionId = instructions.data.questionId
             // Remove question from array
             stateEditable.data.questions = stateEditable.data.questions.filter((question, index) => index !== questionId);
 
@@ -157,8 +157,8 @@ const surveyReducer = (previousState, instructions) => {
             questionId = instructions.data.questionId;
             let optionId = instructions.data.optionId;
             // Remove answer from option array
-            stateEditable.data.questions[questionId].questionOptions = 
-            stateEditable.data.questions[questionId].questionOptions.filter((option, index) => index !== optionId);
+            stateEditable.data.questions[questionId].data.questionOptions = 
+            stateEditable.data.questions[questionId].data.questionOptions.filter((option, index) => index !== optionId);
 
             return stateEditable;
 

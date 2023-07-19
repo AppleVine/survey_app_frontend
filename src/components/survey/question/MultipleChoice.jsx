@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useSurveyContext, useSurveyDispatchContext } from '../surveyContext';
 import {useEditContext} from '../../../contexts/editContext';
 import AddOptionButton from './AddOptionButton';
+import RemoveOptionButton from './RemoveOptionButton';
 
 export default function MultipleChoice({ id, type }) {
   const state = useSurveyContext();
@@ -65,6 +66,7 @@ export default function MultipleChoice({ id, type }) {
                   :
                   <label htmlFor={ option } onClick={ () => handleActivateEdit(index) } >{ option }</label>
                 }
+                <RemoveOptionButton questionId={id} optionId={index} />
               </li>
             )
           })
