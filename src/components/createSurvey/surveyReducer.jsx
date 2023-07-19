@@ -48,6 +48,15 @@ const surveyReducer = (previousState, instructions) => {
         case "loadSurvey":
             // Load survey from db
             stateEditable = {...previousState, data: instructions.data}
+            // Add edit mode for all fields
+            stateEditable.editMode = initialSurvey.editMode;
+            for (let question of stateEditable.data.questions) {
+                question.editMode = initialQuestion.editMode;
+                // Make sure that each option has an editMode toggle
+                for (let i = 0; i < question.data.questionOptions.length; i++) {
+                    question.editMode.questionOptions[i] = false;
+                }
+            }
             return stateEditable;
 
         case "update":
@@ -72,18 +81,6 @@ const surveyReducer = (previousState, instructions) => {
             stateEditable.data.questions[index].data[fieldToEdit] = instructions.data.value;
 
             return stateEditable
-
-        // case "updateOption":
-        //     //TODO Data validation
-
-        //     // Create an editable version of previous state, update with new data
-        //     stateEditable = {...previousState}
-        //     let newOption = instructions.data.value;
-        //     let questionId = instructions.data.questionId;
-        //     let optionId = instructions.data.optionId;
-        //     stateEditable.data.questions[questionId].data.questionOptions[optionId] = newOption;
-        //     // Return new state
-        //     return stateEditable;
 
         case "edit":
             // Toggle edit mode on fields (title, desc, intro, message)
@@ -127,7 +124,8 @@ const surveyReducer = (previousState, instructions) => {
         case "add":
             // Add new question to questions array
             stateEditable = {...previousState};
-            stateEditable.data.questions.push({...initialQuestion})
+            let newQuestion = structuredClone(initialQuestion)
+            stateEditable.data.questions.push(newQuestion)
 
             // Return new state
             return stateEditable;
