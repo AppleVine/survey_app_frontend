@@ -60,15 +60,7 @@ const surveyReducer = (previousState, instructions) => {
             // Create an editable version of previous state, update with new data
             stateEditable = {...previousState};
             fieldToEdit = instructions.data.target;
-            // If we are editing question details, get the question by index and update its state
-            if (instructions.data.questionId) {
-                index = instructions.data.questionId;
-                stateEditable.data.questions[index].data = instructions.data.questionState;
-            }
-            // otherwise just update the field to be edited
-            else {
-                stateEditable.data[fieldToEdit] = instructions.data.value;
-            }
+            stateEditable.data[fieldToEdit] = instructions.data.value;
             // Return new state
             return stateEditable;
 
@@ -81,17 +73,17 @@ const surveyReducer = (previousState, instructions) => {
 
             return stateEditable
 
-        case "updateOption":
-            //TODO Data validation
+        // case "updateOption":
+        //     //TODO Data validation
 
-            // Create an editable version of previous state, update with new data
-            stateEditable = {...previousState}
-            let newOption = instructions.data.text;
-            let questionId = instructions.data.questionId;
-            let optionId = instructions.data.optionId;
-            stateEditable.data.questions[questionId].data.questionOptions[optionId] = newOption;
-            // Return new state
-            return stateEditable;
+        //     // Create an editable version of previous state, update with new data
+        //     stateEditable = {...previousState}
+        //     let newOption = instructions.data.value;
+        //     let questionId = instructions.data.questionId;
+        //     let optionId = instructions.data.optionId;
+        //     stateEditable.data.questions[questionId].data.questionOptions[optionId] = newOption;
+        //     // Return new state
+        //     return stateEditable;
 
         case "edit":
             // Toggle edit mode on fields (title, desc, intro, message)

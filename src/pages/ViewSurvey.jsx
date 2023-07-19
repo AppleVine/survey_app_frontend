@@ -1,19 +1,15 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { useSurveyContext } from '../components/createSurvey/surveyContext';
 import {useSurveyDispatchContext} from '../components/createSurvey/surveyContext';
 import { getSurvey } from '../services/surveyServices';
 import { checkForUser } from '../services/authServices';
 import ViewSurveyContainer from '../components/createSurvey/ViewSurveyContainer';
-import EditContext, { defaultEditContextData } from '../contexts/editContext';
 
 export default function ViewSurvey() {
     // Get survey id from url
     let { surveyId } = useParams();
     // Set up dispatch so we can load the survey data into state
     const dispatch = useSurveyDispatchContext();
-    // Set edit context to pass down
-    const [edit, setEdit] = useState(defaultEditContextData);
     // Track whether or not there is a logged in user
     let isUser = false;
 
@@ -45,18 +41,16 @@ export default function ViewSurvey() {
 
   return (
     <div>
-      <EditContext.Provider value={{edit, setEdit}} >
-        <ViewSurveyContainer />
-        <div>
-          {
-            // Display edit button for logged in users
-            isUser ?
-            <Link to={`/surveys/${surveyId}/edit`}>Edit Survey</Link>
-            :
-            null
-          }
-        </div>
-      </EditContext.Provider>
+      <ViewSurveyContainer />
+      <div>
+        {
+          // Display edit button for logged in users
+          isUser ?
+          <Link to={`/surveys/${surveyId}/edit`}>Edit Survey</Link>
+          :
+          null
+        }
+      </div>
     </div>
   )
 }

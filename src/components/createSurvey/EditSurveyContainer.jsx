@@ -1,5 +1,5 @@
-import React, {useContext, useEffect} from 'react'
-import EditContext from '../../contexts/editContext'
+import React, {useEffect} from 'react'
+import {useEditDispatchContext} from '../../contexts/editContext'
 import MakePublicToggle from './MakePublicToggle'
 import SurveyTitle from './SurveyTitle'
 import SurveyDescription from './SurveyDescription'
@@ -9,10 +9,11 @@ import SurveyCompletionMessage from './SurveyCompletionMessage'
 import SaveChangesButton from './SaveChangesButton'
 
 export default function EditSurveyContainer() {
-  let editContext = useContext(EditContext);
+  const editDispatch = useEditDispatchContext();
 
   useEffect(() => {
-    editContext.setEdit(true)
+    editDispatch({data: true})
+    // eslint-disable-next-line
   }, []);
 
   return (

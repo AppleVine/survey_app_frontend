@@ -1,11 +1,11 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import { useSurveyContext } from './surveyContext';
-import EditContext from '../../contexts/editContext';
+import {useEditContext} from '../../contexts/editContext';
 import { createSurvey } from '../../services/surveyServices';
 
 export default function SaveChangesButton() {
   const surveyData = useSurveyContext();
-  const {edit, setEdit} = useContext(EditContext);
+  const editState = useEditContext();
 
   const handleSaveChanges = async () => {
     try {
@@ -18,7 +18,7 @@ export default function SaveChangesButton() {
 
   return (
     <div>
-      {edit ? <button onClick={handleSaveChanges}>Save Changes</button> : null}
+      {editState ? <button onClick={handleSaveChanges}>Save Changes</button> : null}
     </div>
   );
 }

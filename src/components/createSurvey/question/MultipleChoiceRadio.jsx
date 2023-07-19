@@ -1,13 +1,13 @@
-import React, { useEffect, useState, useContext } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSurveyContext, useSurveyDispatchContext } from '../surveyContext';
-import EditContext from '../../../contexts/editContext';
+import {useEditContext} from '../../../contexts/editContext';
 
 export default function MultipleChoiceRadio({ id }) {
   const state = useSurveyContext();
   const dispatch = useSurveyDispatchContext();
-  const [optionArray, setOptionArray] = useState(state.data.questions[id].data.questionOptions);
+  const [optionArray, setOptionArray] = useState([]);
   const [editModeArray, setEditModeArray] = useState(false);
-  const {edit, setEdit} = useContext(EditContext);
+  const editState = useEditContext();
 
   const handleOptionChange = (index, value) => {
     let newOptionArray = [...optionArray];
@@ -27,11 +27,21 @@ export default function MultipleChoiceRadio({ id }) {
     setEditModeArray(newEditModeArray);
   }
 
+  // Trigger rerender on state change
+  useEffect(() => {},[state])
+
+  // Set question options on re-render (Do not combine with above function- triggers infinite-rerender!)
+  useEffect(() => {
+    setOptionArray(state.data.questions[id].data.questionOptions)
+    // eslint-disable-next-line
+  },[])
+
   // useEffect(() => {
   //   let newQuestionState = {...questionState}
   //   newQuestionState.data.questionOptions = optionArray;
   //   setQuestionState(newQuestionState);
   // },[optionArray])
+
 
   return (
     <div>
@@ -42,7 +52,7 @@ export default function MultipleChoiceRadio({ id }) {
               <li className="question-option-radio" key={ index }>
                 <input type="radio" name={ option } id={ option } />
                 {
-                  edit && editModeArray[index]
+                  editState && editModeArray[index]
                   ? 
                   <input type='text' placeholder={ option }
                   onChange={ (event) => handleOptionChange(index, event.target.value) } 

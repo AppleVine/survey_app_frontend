@@ -1,13 +1,13 @@
-import React, { useEffect, useState, useContext } from 'react'
+import React, { useState } from 'react'
 import { useSurveyContext, useSurveyDispatchContext } from '../surveyContext';
-import EditContext from '../../../contexts/editContext';
+import {useEditContext} from '../../../contexts/editContext';
 
 export default function MultipleChoiceCheckbox({ id }) {
   const state = useSurveyContext();
   const dispatch = useSurveyDispatchContext();
   const [optionArray, setOptionArray] = useState(state.data.questions[id].data.questionOptions);
   const [editModeArray, setEditModeArray] = useState(false);
-  const {edit, setEdit} = useContext(EditContext);
+  const editState = useEditContext();
 
   const handleOptionChange = (index, value) => {
     let newOptionArray = [...optionArray];
@@ -42,7 +42,7 @@ export default function MultipleChoiceCheckbox({ id }) {
               <li className="question-option-checkbox" key={ index }>
                 <input type="checkbox" name={ option } id={ option } />
                 {
-                  edit && editModeArray[index]
+                  editState && editModeArray[index]
                   ? 
                   <input type='text' placeholder={ option }
                   onChange={ (event) => handleOptionChange(index, event.target.value) } 

@@ -1,14 +1,14 @@
-import React, {useContext, useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import { useSurveyContext, useSurveyDispatchContext } from '../surveyContext';
-import EditContext from '../../../contexts/editContext';
+import {useEditContext} from '../../../contexts/editContext';
 import { initialQuestion } from '../surveyReducer';
 
 export default function QuestionType({id}) {
   const state = useSurveyContext();
   const dispatch = useSurveyDispatchContext();
   const [userInput, setUserInput] = useState("");
-  const {edit, setEdit} = useContext(EditContext);
-  const [questionType, setQuestionType] = useState(state.data.questions[id].data.questionType);
+  const editState = useEditContext();
+  const [questionType, setQuestionType] = useState("");
 
   // Trigger rerender on state change
   useEffect(() => {},[state])
@@ -39,7 +39,7 @@ export default function QuestionType({id}) {
   return (
     <div>
       { 
-        edit ? 
+        editState ? 
         <select name="questionType" id={`question-type-selector${id}`} onChange={(event) => setUserInput(event.target.value)} >
             <option value="multipleChoiceRadio">Multiple Choice (Radio)</option>
             <option value="multipleChoiceCheckbox">Multiple Choice (Checkbox)</option>

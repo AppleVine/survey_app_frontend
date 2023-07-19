@@ -6,7 +6,7 @@ export default function QuestionText({ id }) {
   const state = useSurveyContext();
   const dispatch = useSurveyDispatchContext();
   const [enteredText, setEnteredText] = useState("");
-  const [questionText, setQuestionText] = useState(state.data.questions[id].data.questionText);
+  const [questionText, setQuestionText] = useState("");
   const [editMode, setEditMode] = useState(false);
   console.log(state.data.questions[id].data.questionText)
   console.log(questionText);
@@ -26,7 +26,6 @@ export default function QuestionText({ id }) {
     if (enteredText) {
       setQuestionText(enteredText);
     };
-    // eslint-disable-next-line
   },[enteredText])
 
   // Update global state when question edited

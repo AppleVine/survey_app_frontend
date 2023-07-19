@@ -8,6 +8,7 @@ import CreateSurvey from './pages/CreateSurvey';
 import ViewSurvey from './pages/ViewSurvey';
 import EditSurvey from './pages/EditSurvey';
 import { SurveyProvider } from './components/createSurvey/surveyContext';
+import { EditContextProvider } from './contexts/editContext';
 
 function App() {
   return (
@@ -19,9 +20,9 @@ function App() {
             <Route path="/staff" element={<StaffPage />} />
             <Route path="/surveys" element={<Outlet />}>
               <Route index element={<SurveyPage />} />
-              <Route path='/surveys/create' element={<CreateSurvey />} />
-              <Route path='/surveys/:surveyId' element={ <SurveyProvider><ViewSurvey /></SurveyProvider> } />
-              <Route path='/surveys/:surveyId/edit' element={<EditSurvey />} />
+              <Route path='/surveys/create' element={<EditContextProvider><SurveyProvider><CreateSurvey /></SurveyProvider></EditContextProvider>} />
+              <Route path='/surveys/:surveyId' element={ <EditContextProvider><SurveyProvider><ViewSurvey /></SurveyProvider></EditContextProvider> } />
+              <Route path='/surveys/:surveyId/edit' element={<EditContextProvider><SurveyProvider><EditSurvey /></SurveyProvider></EditContextProvider>} />
             </Route>
           </Routes>
         </Router>

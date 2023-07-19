@@ -1,8 +1,7 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import { useParams } from 'react-router-dom';
-import { SurveyProvider, useSurveyDispatchContext } from '../components/createSurvey/surveyContext';
+import { useSurveyDispatchContext } from '../components/createSurvey/surveyContext';
 import EditSurveyContainer from '../components/createSurvey/EditSurveyContainer';
-import EditContext from '../contexts/editContext';
 import { getSurvey } from '../services/surveyServices';
 
 export default function EditSurvey() {
@@ -15,15 +14,9 @@ export default function EditSurvey() {
 
   dispatch({data: surveyData});
 
-  const {edit, setEdit} = useContext(EditContext);
-
   return (
     <div>
-      <SurveyProvider>
-        <EditContext.Provider value={{edit, setEdit}} >
-          <EditSurveyContainer  />
-        </EditContext.Provider>
-      </SurveyProvider>
+        <EditSurveyContainer  />
     </div>
   )
 }

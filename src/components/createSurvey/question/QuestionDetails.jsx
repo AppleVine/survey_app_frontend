@@ -6,7 +6,7 @@ export default function QuestionDetails({ id }) {
   const state = useSurveyContext();
   const dispatch = useSurveyDispatchContext();
   const [enteredText, setEnteredText] = useState("");
-  const [questionDetails, setQuestionDetails] = useState(state.data.questions[id].data.questionDetails);
+  const [questionDetails, setQuestionDetails] = useState("");
   const [editMode, setEditMode] = useState(false);
 
   // Trigger rerender on state change
@@ -23,7 +23,6 @@ export default function QuestionDetails({ id }) {
     if (enteredText) {
       setQuestionDetails(enteredText);
     };
-    // eslint-disable-next-line
   },[enteredText])
 
   // Update global state when question edited
