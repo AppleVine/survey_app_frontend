@@ -1,8 +1,10 @@
 import React from 'react'
-import UserContext from '../services/userContext';
+import { Link } from 'react-router-dom';
+import { checkForUser } from '../../services/authServices'
 
 export default function EditSurveyButton() {
-  const {isUser, setIsUser} = useContext(UserContext);
+ const isUser = checkForUser();
+
   return (
     <div>
       {

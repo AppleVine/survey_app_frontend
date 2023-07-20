@@ -4,6 +4,7 @@ import SurveyTitle from './SurveyTitle'
 import SurveyDescription from './SurveyDescription'
 import SurveyIntroText from './SurveyIntroText'
 import SurveyQuestionsContainer from './SurveyQuestionsContainer'
+import EditSurveyButton from './EditSurveyButton'
 
 export default function ViewSurveyContainer() {
   const editDispatch = useEditDispatchContext();
@@ -19,6 +20,7 @@ export default function ViewSurveyContainer() {
         <SurveyDescription />
         <SurveyIntroText />
         <SurveyQuestionsContainer />
+        <EditSurveyButton />
     </div>
   )
 }
