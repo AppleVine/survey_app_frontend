@@ -78,9 +78,9 @@ const surveyReducer = (previousState, instructions) => {
 
         case "updateQuestion":
             //TODO Data validation
+            stateEditable = structuredClone(previousState);
             questionId = instructions.data.questionId;
             fieldToEdit = instructions.data.field;
-            stateEditable = {...previousState};
             stateEditable.data.questions[questionId].data[fieldToEdit] = instructions.data.value;
 
             return stateEditable
@@ -88,7 +88,7 @@ const surveyReducer = (previousState, instructions) => {
         case "edit":
             // Toggle edit mode on fields (title, desc, intro, message)
             // Push new data to state
-            stateEditable = {...previousState};
+            stateEditable = structuredClone(previousState);
             // Change the editMode options for the target field
             stateEditable.editMode[instructions.data.target] = instructions.data.editMode;
             // Return new state
@@ -97,7 +97,7 @@ const surveyReducer = (previousState, instructions) => {
         case "editQuestion":
             // Toggle edit mode on question fields (questionText, questionDetails, questionOptions)
             // Copy current state
-            stateEditable = {...previousState};
+            stateEditable = structuredClone(previousState);
             // Get index of question to be edited
             questionId = instructions.data.index;
             // Copy current editMode state of question
@@ -119,9 +119,11 @@ const surveyReducer = (previousState, instructions) => {
 
         case "add":
             // Add new question to questions array
-            stateEditable = {...previousState};
-            let newQuestion = structuredClone(initialQuestion)
-            stateEditable.data.questions.push(newQuestion)
+            stateEditable = structuredClone(previousState);
+            let newQuestion = structuredClone(initialQuestion);
+            let questionArray = stateEditable.data.questions.slice();
+            questionArray.push(newQuestion);
+            stateEditable = {...previousState, data: {...previousState.data, questions: questionArray}};
 
             // Return new state
             return stateEditable;
@@ -129,20 +131,25 @@ const surveyReducer = (previousState, instructions) => {
         case "addOption":
             // Add new option to multiple choice question
             // Copy current state
-            stateEditable = {...previousState};
+            stateEditable = structuredClone(previousState);
             // Get index of question to be edited
             questionId = instructions.data.index;
-            // Push new option to options array for that question
-            stateEditable.data.questions[questionId].data.questionOptions.push("Enter an option");
-            // Add new editMode status
-            stateEditable.data.questions[questionId].editMode.questionOptions.push(false);
+            // Copy current options array + editMode array
+            let optionsArray = stateEditable.data.questions[questionId].data.questionOptions.slice();
+            let editModeArray = stateEditable.data.questions[questionId].editMode.questionOptions.slice();
+            // Push new option to options array
+            optionsArray.push("Enter an option");
+            editModeArray.push(false)
+            // Add arrays to stateEditable
+            stateEditable.data.questions[questionId].data.questionOptions = optionsArray;
+            stateEditable.data.questions[questionId].editMode.questionOptions = editModeArray;
 
             return stateEditable;
 
         case "delete":
             // Delete a question
             // Copy current state
-            stateEditable = {...previousState};
+            stateEditable = structuredClone(previousState);
             questionId = instructions.data.questionId
             // Remove question from array
             stateEditable.data.questions = stateEditable.data.questions.filter((question, index) => index !== questionId);
@@ -152,14 +159,18 @@ const surveyReducer = (previousState, instructions) => {
         case "deleteOption":
             // Delete an answer option
             // Copy current state
-            stateEditable = {...previousState};
+            stateEditable = structuredClone(previousState);
             // Get question index from instructions
             questionId = instructions.data.questionId;
+            // Get option index from instructions
             let optionId = instructions.data.optionId;
             console.log(`Deleting option ${optionId} from ${questionId}`);
-            // Remove answer from option array
-            stateEditable.data.questions[questionId].data.questionOptions = 
-            stateEditable.data.questions[questionId].data.questionOptions.filter((option, index) => index !== optionId);
+            // Copy options array
+            let editableOptionsArray = stateEditable.data.questions[questionId].data.questionOptions.slice();
+            // Filter array
+            editableOptionsArray = editableOptionsArray.filter((option, index) => index !== optionId);
+            // Store new array in stateEditable
+            stateEditable.data.questions[questionId].data.questionOptions = structuredClone(editableOptionsArray);
 
             return stateEditable;
 

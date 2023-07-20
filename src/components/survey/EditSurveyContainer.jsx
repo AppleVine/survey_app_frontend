@@ -34,6 +34,7 @@ export default function EditSurveyContainer() {
         setSurveyDraft("");
       }
     }
+    // eslint-disable-next-line
   }, []);
 
   // Store current state in local storage
@@ -43,6 +44,7 @@ export default function EditSurveyContainer() {
       setSurveyDraft(JSON.stringify(state));
     }, 10000)
     return () => clearTimeout(saveToLocal)
+    // eslint-disable-next-line
   }, [state])
 
   return (

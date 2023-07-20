@@ -22,8 +22,14 @@ const saveQuestionField = (id, target, value, dispatch) => {
     dispatch({type: "update", data: {questionId: id, target: target, value: value}})
 }
 
-const saveToDatabase = (dispatch) => {
-    dispatch({type: "saveToDatabase"})
+const stripEditMode = (state) => {
+    // Clone state data, without including editMode
+    let surveyData = structuredClone(state.data);
+    // Strip editMode info from questions
+    for (let i = 0; i < surveyData.questions.length; i++) {
+    surveyData.questions[i] = structuredClone(surveyData.questions[i].data);
+    }
+    return surveyData
 }
 
 module.exports = {
@@ -33,5 +39,5 @@ module.exports = {
     deactivateEditQuestionMode,
     saveField,
     saveQuestionField,
-    saveToDatabase
+    stripEditMode
 }
