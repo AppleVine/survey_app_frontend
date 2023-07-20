@@ -22,7 +22,7 @@ export default function SaveEditedSurveyButton() {
 
   return (
     <div>
-      {editState ? <button onClick={handleSaveChanges}>Save Changes</button> : null}
+      {editState ? <button onClick={() => handleSaveChanges()}>Save Changes</button> : null}
     </div>
   );
 }
