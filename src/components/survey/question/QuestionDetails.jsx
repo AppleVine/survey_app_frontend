@@ -28,6 +28,11 @@ export default function QuestionDetails({ id }) {
     // eslint-disable-next-line
   },[questionDetails])
 
+  // If viewing a survey and there are no details, don't display at all
+    if (!editState && !questionDetails) {
+      return(null)
+    }
+
   return (
     <div onClick={() => {
       // Only allow editing if in an editable survey
