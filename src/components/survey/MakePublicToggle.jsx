@@ -9,7 +9,6 @@ export default function MakePublicToggle() {
 
   const handleCheckboxChange = () => {
     setIsChecked(!isChecked);
-    console.log(isChecked)
     saveField("makePublic", isChecked, dispatch);
   }
 

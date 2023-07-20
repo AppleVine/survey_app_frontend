@@ -3,42 +3,6 @@ import { verifyToken } from "./authServices";
 
 const api = process.env.API || "http://localhost:3000"
 
-// export async function viewSurvey(id) {
-//   const token = getCookie('authToken');
-
-//   try {
-//     // Determine if there is a logged in user
-//     let headerData = null;
-//     if (token) {
-//       await verifyToken(token);
-//       headerData = {
-//         'Content-Type': 'application/json',
-//         'Authorization': `Bearer ${token}`
-//       }
-//     }
-//     else {
-//       headerData = {
-//         'Content-Type': 'application/json'
-//       }
-//     }
-
-    // const response = await fetch(`${api}/surveys/${id}`, {
-    //   method: "GET",
-    //   headers: 'Content-Type': 'application/json'
-    // });
-
-//     const json = await response.json();
-//     if (response.ok) {
-//       return json;
-//     } else {
-//       throw new Error(json.error);
-//     }
-//   } catch (error) {
-//     console.log('Error loading survey:', error);
-//     throw error;
-//   }
-// }
-
 export async function getSurvey(surveyID) {
   try {
     const token = getCookie('authToken');

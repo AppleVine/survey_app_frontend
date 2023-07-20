@@ -162,7 +162,6 @@ const surveyReducer = (previousState, instructions) => {
             questionId = instructions.data.questionId;
             // Get option index from instructions
             let optionId = instructions.data.optionId;
-            console.log(`Deleting option ${optionId} from ${questionId}`);
             // Copy options array
             let editableOptionsArray = stateEditable.data.questions[questionId].data.questionOptions.slice();
             // Filter array
