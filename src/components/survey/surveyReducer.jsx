@@ -57,6 +57,11 @@ const surveyReducer = (previousState, instructions) => {
             }
             return stateEditable;
 
+        case "loadDraft":
+            // Load from local storage
+            stateEditable = instructions.data;
+            return stateEditable;
+
         case "update":
             // TODO Perform data validation
             if ( instructions.data.title && instructions.data.title.length < 1 ) {
@@ -84,12 +89,7 @@ const surveyReducer = (previousState, instructions) => {
             // Toggle edit mode on fields (title, desc, intro, message)
             // Push new data to state
             stateEditable = {...previousState};
-            // If editing question options, get the question by id and change the editMode options
-            // if (instructions.data.questionId) {
-            //     index = instructions.data.questionId;
-            //     stateEditable.data.questions[index].editMode.questionOptions = instructions.data.options;
-            // }
-            // Otherwise change the editMode options for the main survey fields
+            // Change the editMode options for the target field
             stateEditable.editMode[instructions.data.target] = instructions.data.editMode;
             // Return new state
             return stateEditable;
@@ -156,23 +156,12 @@ const surveyReducer = (previousState, instructions) => {
             // Get question index from instructions
             questionId = instructions.data.questionId;
             let optionId = instructions.data.optionId;
+            console.log(`Deleting option ${optionId} from ${questionId}`);
             // Remove answer from option array
             stateEditable.data.questions[questionId].data.questionOptions = 
             stateEditable.data.questions[questionId].data.questionOptions.filter((option, index) => index !== optionId);
 
             return stateEditable;
-
-        // case "saveToDatabase":
-        //     // Check if we are saving a new survey or updating one that exists in the database already
-        //     if (previousState.data._id) {
-        //         // Find the survey with that id in the database and update
-        //         updateSurvey(previousState.data._id, previousState)
-        //     }
-        //     // Perform update
-        //     createSurvey(previousState)
-        //     // Close connection to database
-
-        //     return previousState;
 
         default:
             // invalid instructions provided!
