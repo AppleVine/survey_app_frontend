@@ -1,7 +1,3 @@
-// const activateEditMode = (target, dispatch) => {
-//     dispatch({type: "edit", editMode: {[target]: true}})
-// }
-
 const activateOptionEditMode = (questionId, optionId, options, dispatch) => {
     // Update array
     for (let option of options) {
@@ -22,7 +18,6 @@ const updateOption = (questionId, optionId, value, dispatch) => {
 }
 
 module.exports = {
-    // activateEditMode,
     activateOptionEditMode,
     deactivateOptionEditMode,
     updateOption

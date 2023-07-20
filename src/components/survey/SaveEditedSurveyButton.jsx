@@ -16,8 +16,7 @@ export default function SaveEditedSurveyButton() {
       const surveyData = stripEditMode(state);
       await updateSurvey(surveyId, surveyData);
     } catch (error) {
-      console.error("Error saving survey to the database:", error);
-      // TODO Handle the error if needed
+      console.error("Error saving survey to the database:", error); // TODO further error handling?
     }
   };
 

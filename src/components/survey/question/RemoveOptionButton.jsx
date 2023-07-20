@@ -6,6 +6,7 @@ export default function RemoveOptionButton({ questionId, optionId }) {
     const editState = useEditContext();
     const dispatch = useSurveyDispatchContext();
 
+    // Do not display if viewing survey
     if (!editState) {
         return null
     }

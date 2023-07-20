@@ -15,7 +15,6 @@ export default function SaveNewSurveyButton() {
       await createSurvey(surveyData);
     } catch (error) {
       console.error("Error saving survey to the database:", error);
-      // Handle the error if needed
     }
   };
 
