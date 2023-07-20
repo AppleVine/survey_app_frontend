@@ -49,7 +49,8 @@ export default function QuestionDetails({ id }) {
         <div>{state.data.questions[id].data.questionDetails}
         <button onClick={() => setQuestionDetails(null)}>Remove Question Details</button></div>
         :
-        <button onClick={() => setEditMode(true)}>Add Question Details</button>}
+        <button onClick={() => setEditMode(true)}>Add Question Details</button>
+        }
       </div> }
     </div>
   )
