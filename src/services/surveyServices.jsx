@@ -82,3 +82,20 @@ export async function deleteSurvey(token) {
             throw error;
     }
 }
+
+// get all surveys
+export async function getSurveys(){
+  try {
+      const response = await fetch(`${api}/surveys`)
+      const data = await response.json()
+
+      if(response.ok){
+          return data.surveys;
+      } else {
+          throw new Error(data.message)
+      }
+  } catch (error) {
+      console.error(error);
+      throw new Error('Failed to fetch surveys')
+  }
+}
