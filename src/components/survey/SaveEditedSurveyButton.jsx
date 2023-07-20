@@ -1,5 +1,5 @@
 import React from 'react';
-import { useSurveyContext } from './surveyContext';
+import { useSurveyContext } from '../../contexts/surveyContext';
 import {useEditContext} from '../../contexts/editContext';
 import { updateSurvey } from '../../services/surveyServices';
 import { useParams } from 'react-router-dom';

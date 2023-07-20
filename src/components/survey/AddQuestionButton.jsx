@@ -1,5 +1,5 @@
 import React from 'react'
-import {useSurveyDispatchContext} from './surveyContext'
+import {useSurveyDispatchContext} from '../../contexts/surveyContext';
 import {useEditContext} from '../../contexts/editContext';
 
 export default function AddQuestionButton() {

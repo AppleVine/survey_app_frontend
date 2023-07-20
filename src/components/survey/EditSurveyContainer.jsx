@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react'
 import { useLocalStorage } from 'react-use'
-import { useSurveyContext, useSurveyDispatchContext } from './surveyContext'
+import { useSurveyContext, useSurveyDispatchContext } from '../../contexts/surveyContext'
 import {useEditDispatchContext} from '../../contexts/editContext'
 import MakePublicToggle from './MakePublicToggle'
 import SurveyTitle from './SurveyTitle'

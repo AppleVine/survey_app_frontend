@@ -1,5 +1,5 @@
 import React from 'react';
-import {useSurveyContext} from './surveyContext'
+import {useSurveyContext} from '../../contexts/surveyContext';
 import AddQuestionButton from './AddQuestionButton';
 import QuestionContainer from './QuestionContainer';
 

@@ -1,6 +1,6 @@
-import React, {useState} from 'react'
-import {useSurveyDispatchContext} from './surveyContext'
-import { saveField } from './surveyFunctions'
+import React, {useState} from 'react';
+import {useSurveyDispatchContext} from '../../contexts/surveyContext';
+import { saveField } from './surveyFunctions';
 
 export default function MakePublicToggle() {
   const dispatch = useSurveyDispatchContext();

@@ -1,4 +1,4 @@
-import {useSurveyContext, useSurveyDispatchContext} from './surveyContext'
+import {useSurveyContext, useSurveyDispatchContext} from '../../contexts/surveyContext'
 import EditFieldButton from './EditFieldButton'
 import { saveField } from './surveyFunctions'
 

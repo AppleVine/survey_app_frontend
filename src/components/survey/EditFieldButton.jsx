@@ -1,5 +1,5 @@
 import React from 'react'
-import {useSurveyContext, useSurveyDispatchContext} from './surveyContext'
+import {useSurveyContext, useSurveyDispatchContext} from '../../contexts/surveyContext';
 import { activateEditMode, deactivateEditMode } from './surveyFunctions';
 import { useEditContext } from '../../contexts/editContext';
 

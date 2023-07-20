@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import { useParams } from 'react-router-dom';
-import { useSurveyDispatchContext } from '../components/survey/surveyContext';
+import { useSurveyDispatchContext } from '../contexts/surveyContext';
 import { getSurvey } from '../services/surveyServices';
 import { checkLoginAndRedirect } from '../services/authServices';
 import EditSurveyContainer from '../components/survey/EditSurveyContainer';
@@ -22,13 +22,13 @@ export default function EditSurvey() {
     const fetchSurvey = async () => {
       const surveyData = await getSurvey(surveyId);
       // Reformat question array
-      let questionData = surveyData.survey.questions;
+      let questionData = structuredClone(surveyData.survey.questions);
       let questionArray = [];
       for (let question of questionData) {
         question = {data: question};
         questionArray.push(question);
       }
-      surveyData.survey.questions = questionArray;
+      surveyData.survey.questions = structuredClone(questionArray);
       dispatch({type: "loadSurvey", data: surveyData.survey});
     }
 

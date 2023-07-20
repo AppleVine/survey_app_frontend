@@ -1,15 +1,16 @@
 import { BrowserRouter as Router, Route, Routes, Outlet } from 'react-router-dom';
+import { SurveyProvider } from './contexts/surveyContext';
+import { EditContextProvider } from './contexts/editContext';
 import './App.css';
 import RegisterPage from './pages/TempRegister';
 import LoginPage from './pages/Login';
 import StaffPage from './pages/StaffPage';
+import SurveyPage from './pages/SurveyPage';
 import CreateSurvey from './pages/CreateSurvey';
 import ViewSurvey from './pages/ViewSurvey';
 import EditSurvey from './pages/EditSurvey';
-import { SurveyProvider } from './components/survey/surveyContext';
-import { EditContextProvider } from './contexts/editContext';
 import SurveyResponses from './pages/SurveyResponses';
-import ViewSurvey from "./pages/ViewSurveys"
+import ViewSurveys from "./pages/ViewSurveys"
 
 function App() {
   return (

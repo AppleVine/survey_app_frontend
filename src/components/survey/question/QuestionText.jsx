@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useSurveyContext, useSurveyDispatchContext } from '../surveyContext';
+import { useSurveyContext, useSurveyDispatchContext } from '../../../contexts/surveyContext';
 import { initialQuestion } from '../surveyReducer';
 import { useEditContext } from '../../../contexts/editContext';
 

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useSurveyContext } from '../surveyContext';
+import { useSurveyContext } from '../../../contexts/surveyContext';
 import MultipleChoice from './MultipleChoice';
 import ShortTextResponse from './ShortText';
 import LongTextResponse from './LongText';
