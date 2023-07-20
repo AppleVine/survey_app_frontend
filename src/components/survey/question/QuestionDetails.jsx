@@ -16,8 +16,14 @@ export default function QuestionDetails({ id }) {
   // Update global state when question edited
   useEffect(() => {
     // Check that question text is not empty string or default data
-    if (questionDetails && questionDetails != initialQuestion.data.questionDetails) {  // Must be loose equality!
+    // Use of loose equality is intentional!
+    if (questionDetails && questionDetails != initialQuestion.data.questionDetails) {
       dispatch({type: "updateQuestion", data: {questionId: id, field: "questionDetails", value: questionDetails}});
+    }
+    // If removing question details entirely:
+    else if (questionDetails === null) {
+      dispatch({type: "updateQuestion", data: {questionId: id, field: "questionDetails", value: questionDetails}});
+      setEditMode(false);
     }
     // eslint-disable-next-line
   },[questionDetails])
@@ -36,7 +42,15 @@ export default function QuestionDetails({ id }) {
       onKeyDown={ (event) => event.key === "Enter" ? setEditMode(false): null } 
       ></input> 
       : 
-      <span>{state.data.questions[id].data.questionDetails}</span> }
+      <div>
+        {
+        state.data.questions[id].data.questionDetails
+        ? 
+        <div>{state.data.questions[id].data.questionDetails}
+        <button onClick={() => setQuestionDetails(null)}>Remove Question Details</button></div>
+        :
+        <button onClick={() => setEditMode(true)}>Add Question Details</button>}
+      </div> }
     </div>
   )
 }
