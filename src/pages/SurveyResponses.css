@@ -1,0 +1,26 @@
+.response-container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+.response-tile {
+  border: 5px solid #4c9f6e;
+  background-color: #5cab7d;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 10px;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px
+}
+
+.container h3 {
+  text-align: center;
+}
+
+
+  
