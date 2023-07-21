@@ -12,6 +12,10 @@ export function getCookie(cookieName) {
   return Cookies.get(cookieName);
 }
 
+export function deleteCookie(name) {
+  document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+}
+
 export async function verifyToken(token) {
   try {
     const response = await fetch(`${api}/verify-token`, {
@@ -25,9 +29,11 @@ export async function verifyToken(token) {
     if (response.ok) {
       // Token is valid
       return;
-    } else {
-      // Token is invalid
+    } else if (response.status === 404 || response.status === 401) {
+      deleteCookie('authToken');
       throw new Error('Token verification failed');
+    } else {
+      throw new Error('Token verification error');
     }
   } catch (error) {
     console.log('Token verification error:', error);

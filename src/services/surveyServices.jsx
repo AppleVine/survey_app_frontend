@@ -84,18 +84,24 @@ export async function deleteSurvey(token) {
 }
 
 // get all surveys
-export async function getSurveys(){
+export async function getSurveys() {
   try {
-      const response = await fetch(`${api}/surveys`)
-      const data = await response.json()
+    const token = getCookie('authToken');
 
-      if(response.ok){
-          return data.surveys;
-      } else {
-          throw new Error(data.message)
-      }
+    const response = await fetch(`${api}/surveys`, {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+      },
+    });
+    const data = await response.json();
+
+    if (response.ok) {
+      return data.surveys;
+    } else {
+      throw new Error(data.message);
+    }
   } catch (error) {
-      console.error(error);
-      throw new Error('Failed to fetch surveys')
+    console.error(error);
+    throw new Error('Failed to fetch surveys');
   }
 }
