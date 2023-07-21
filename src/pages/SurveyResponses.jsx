@@ -48,12 +48,12 @@ export default function SurveyResponses() {
         {responses.map((response) => (
           <div key={response._id} className="response-tile">
             <ul>
-              {response.answers.map((answer, index) => (
+              {survey.questions && Array.isArray(survey.questions) && survey.questions.map((question, index) => (
                 <li key={index}>
                   <strong>Question {index + 1}: </strong>
-                  {survey.questions[index].questionText}
+                  {question.questionText}
                   <br />
-                  {answer}
+                  {response.answers[index]}
                 </li>
               ))}
             </ul>
