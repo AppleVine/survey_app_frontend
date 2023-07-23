@@ -41,3 +41,25 @@ export async function verifyToken(token) {
   }
 }
 
+export function checkForUser() {
+  let token = getCookie(TOKEN_COOKIE_NAME);
+  return token ? true : false;
+}
+
+export function checkLoginAndRedirect() {
+  const token = getCookie('authToken');
+  if (!token) {
+    window.location.href = '/login';
+    console.log("TODO")
+  } else {
+    verifyToken(token)
+      .then(() => {
+        console.log('Token verified successfully');
+      })
+      .catch((error) => {
+        console.log('Token verification error:', error);
+        window.location.href = '/login';
+        console.log("TODO")
+      });
+  }
+}

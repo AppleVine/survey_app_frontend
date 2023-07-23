@@ -3,6 +3,36 @@ import { verifyToken } from "./authServices";
 
 const api = process.env.API || "http://localhost:3000"
 
+export async function getSurvey(surveyID) {
+  try {
+    const token = getCookie('authToken');
+    let headerData = null;
+
+    if (token) {
+      await verifyToken(token);
+      headerData = {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      }
+    }
+    else {
+      headerData = {
+        'Content-Type': 'application/json'
+      }
+    }
+
+    const response = await fetch(`${api}/surveys/${surveyID}`, {
+      method: "GET",
+      headers: headerData
+    });
+    const data = await response.json();
+    return data
+  } catch (error) {
+    console.error(error);
+    throw new Error('Failed to fetch survey');
+  }
+}
+
 export async function createSurvey(data) {
     const token = getCookie('authToken');
   

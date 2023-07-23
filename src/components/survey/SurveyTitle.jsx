@@ -1,7 +1,7 @@
 import React from 'react'
 import {useSurveyContext, useSurveyDispatchContext} from './surveyContext'
 import EditFieldButton from './EditFieldButton'
-import { saveField } from './surveyFunctions'
+import { deactivateEditMode, saveField } from './surveyFunctions'
 
 export default function SurveyTitle() {
   const state = useSurveyContext();
@@ -11,7 +11,9 @@ export default function SurveyTitle() {
     <div>
       { state.editMode.title ? 
         <input type='text' id='survey-title' name='survey-title' placeholder='Insert Survey Title Here' 
-        onChange={ (event) => saveField("title", event.target.value, dispatch) }></input>
+        onChange={ (event) => saveField("title", event.target.value, dispatch) }
+        onKeyDown={ (event) => event.key === "Enter" ? deactivateEditMode("title", dispatch) : null}
+        ></input>
         :
         <h1>{state.data.title}</h1> 
       }
