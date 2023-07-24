@@ -1,4 +1,4 @@
-import {useSurveyDispatchContext} from '../surveyContext';
+import {useSurveyDispatchContext} from '../../../contexts/surveyContext';
 import {useEditContext} from '../../../contexts/editContext';
 
 export default function AddOptionButton({ id }) {

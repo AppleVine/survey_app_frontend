@@ -67,6 +67,8 @@ export async function createSurvey(data) {
 
 export async function updateSurvey(id, data) {
     const token = getCookie('authToken');
+    const surveyData = JSON.stringify(data);
+
     try {
         const response = await fetch(`${api}/surveys/${id}/edit`, {
             method: "POST",
@@ -74,7 +76,7 @@ export async function updateSurvey(id, data) {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`
                 },
-            body: JSON.stringify(data)
+            body: surveyData
         });
 
         const json = await response.json();

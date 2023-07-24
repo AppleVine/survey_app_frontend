@@ -1,5 +1,5 @@
 import React from 'react';
-import { useSurveyContext } from './surveyContext';
+import { useSurveyContext } from '../../contexts/surveyContext';
 import {useEditContext} from '../../contexts/editContext';
 import { updateSurvey } from '../../services/surveyServices';
 import { useParams } from 'react-router-dom';
@@ -22,7 +22,7 @@ export default function SaveEditedSurveyButton() {
 
   return (
     <div>
-      {editState ? <button onClick={handleSaveChanges}>Save Changes</button> : null}
+      {editState ? <button onClick={() => handleSaveChanges()}>Save Changes</button> : null}
     </div>
   );
 }
