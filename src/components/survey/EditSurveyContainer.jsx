@@ -34,20 +34,23 @@ export default function EditSurveyContainer() {
 
   // On page load- check if there is saved data and if the user wants to restore it
   useEffect(() => {
-    if (didDraftLoad.current === false) { // Check that this is the first time
-      didDraftLoad.current = true;
-      if (surveyDraft) { // Check if saved draft exists
-        const surveyData = JSON.parse(surveyDraft);
-        if (surveyData.data._id == surveyId) {// Either these things need to match, or they both need to be undefined/null
-          if (window.confirm("Restore saved draft?")) {
-            dispatch({type: "loadDraft", data: surveyData})
-          } else {
-            // Erase stored data
-            setSurveyDraft("");
+    const loadFromLocal = setTimeout(() => {
+      if (didDraftLoad.current === false) { // Check that this is the first time
+        didDraftLoad.current = true;
+        if (surveyDraft) { // Check if saved draft exists
+          const surveyData = JSON.parse(surveyDraft);
+          if (surveyData.data._id == surveyId) {// Either these things need to match, or they both need to be undefined/null
+            if (window.confirm("Restore saved draft?")) {
+              dispatch({type: "loadDraft", data: surveyData})
+            } else {
+              // Erase stored data
+              setSurveyDraft("");
+            }
           }
         }
       }
-    }
+    }, 0);
+    return () => clearTimeout(loadFromLocal)
     // eslint-disable-next-line
   }, []);
 
