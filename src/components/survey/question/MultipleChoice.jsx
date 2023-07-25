@@ -42,6 +42,7 @@ export default function MultipleChoice({ id, type }) {
   useEffect(() => {
     // Check that question text is not empty string or default data
     if (optionArray != []) {  // Must be loose equality!
+      console.log("dispatch from multiple choice component");
       dispatch({type: "updateQuestion", data: {questionId: id, field: "questionOptions", value: optionArray}});
     }
     // eslint-disable-next-line
