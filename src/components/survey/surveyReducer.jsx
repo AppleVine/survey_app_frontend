@@ -58,7 +58,6 @@ const surveyReducer = (previousState, instructions) => {
         case "loadDraft":
             // Load from local storage
             stateEditable = structuredClone(instructions.data);
-            console.log(stateEditable);
             return stateEditable;
 
         case "update":
@@ -77,7 +76,6 @@ const surveyReducer = (previousState, instructions) => {
 
         case "updateQuestion":
             //TODO Data validation
-            console.log("Updating question");
             stateEditable = structuredClone(previousState);
             questionId = instructions.data.questionId;
             fieldToEdit = instructions.data.field;
