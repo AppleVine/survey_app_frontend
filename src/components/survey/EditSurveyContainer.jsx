@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useRef} from 'react'
 import { useLocalStorage } from 'react-use'
 import { useSurveyContext, useSurveyDispatchContext } from '../../contexts/surveyContext'
 import {useEditDispatchContext} from '../../contexts/editContext'
@@ -29,30 +29,41 @@ export default function EditSurveyContainer() {
   // Create keys for storing data in local storage
   const [surveyDraft, setSurveyDraft] = useLocalStorage("new-survey-draft", "");
 
+  // Ensure restore from draft only happens once under strict mode
+  const didDraftLoad = useRef(false);
+
   // On page load- check if there is saved data and if the user wants to restore it
   useEffect(() => {
-    if (surveyDraft) {
-      const surveyData = JSON.parse(surveyDraft);
-      if (surveyData.data._id === surveyId) {// Either these things need to match, or they both need to be undefined
-        if (window.confirm("Restore saved draft?")) {
-          dispatch({type: "loadDraft", data: surveyData})
-        } else {
-          // Erase stored data
-          setSurveyDraft("");
+    const loadFromLocal = setTimeout(() => {
+      if (didDraftLoad.current === false) { // Check that this is the first time
+        didDraftLoad.current = true;
+        if (surveyDraft) { // Check if saved draft exists
+          const surveyData = JSON.parse(surveyDraft);
+          if (surveyData.data._id == surveyId) {// Either these things need to match, or they both need to be undefined/null
+            if (window.confirm("Restore saved draft?")) {
+              dispatch({type: "loadDraft", data: surveyData})
+            } else {
+              // Erase stored data
+              setSurveyDraft("");
+            }
+          }
         }
       }
-    }
+    }, 0);
+    return () => clearTimeout(loadFromLocal)
     // eslint-disable-next-line
   }, []);
 
   // Store current state in local storage
   useEffect(() => {
-    // Save the current state once every ten seconds
-    const saveToLocal = setTimeout(() => {
-      setSurveyDraft(JSON.stringify(state));
-    }, 10000)
-    return () => clearTimeout(saveToLocal)
-    // eslint-disable-next-line
+    if (didDraftLoad.current === true) { // Make sure this hook doesn't run until any saved drafts have been restored
+      // Save the current state once every ten seconds
+      const saveToLocal = setTimeout(() => {
+        setSurveyDraft(JSON.stringify(state));
+      }, 10000)
+      return () => clearTimeout(saveToLocal)
+    }
+  // eslint-disable-next-line
   }, [state])
 
   return (

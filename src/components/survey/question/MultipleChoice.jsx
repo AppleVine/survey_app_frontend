@@ -40,8 +40,8 @@ export default function MultipleChoice({ id, type }) {
 
   // Update global state when question edited
   useEffect(() => {
-    // Check that question text is not empty string or default data
-    if (optionArray != []) {  // Must be loose equality!
+    // Check that question options are not empty or default data
+    if (optionArray != [] && optionArray != ["Enter an option", "Enter an option", "Enter an option"]) {  // Must be loose equality!
       dispatch({type: "updateQuestion", data: {questionId: id, field: "questionOptions", value: optionArray}});
     }
     // eslint-disable-next-line

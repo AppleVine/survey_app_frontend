@@ -2,7 +2,7 @@ const initialQuestion = {
     data: {
         questionText: "Insert question text here",
         questionDetails: "Insert question details here",
-        questionType: "multipleChoiceRadio",
+        questionType: "",
         questionOptions: ["Enter an option", "Enter an option", "Enter an option"]
     },
     editMode: {
@@ -57,7 +57,7 @@ const surveyReducer = (previousState, instructions) => {
 
         case "loadDraft":
             // Load from local storage
-            stateEditable = instructions.data;
+            stateEditable = structuredClone(instructions.data);
             return stateEditable;
 
         case "update":
