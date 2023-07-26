@@ -10,6 +10,12 @@ import SurveyQuestionsContainer from './SurveyQuestionsContainer'
 import SurveyCompletionMessage from './SurveyCompletionMessage'
 import { useParams } from 'react-router-dom'
 
+// CSS imports
+import './EditViewSurveyContainer.css'
+import Stack from 'react-bootstrap/Stack'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
+
 export default function EditSurveyContainer() {
   // If there is an id in the url, get it
   const {surveyId} = useParams();
@@ -67,13 +73,21 @@ export default function EditSurveyContainer() {
   }, [state])
 
   return (
-    <div>
-        <MakePublicToggle />
-        <SurveyTitle />
-        <SurveyDescription />
-        <SurveyIntroText />
-        <SurveyQuestionsContainer />
-        <SurveyCompletionMessage />
-    </div>
+    <Row className='justify-content-center'>
+      <Col md={10}>
+        <Stack gap={3}>
+          <SurveyTitle />
+          <SurveyDescription />
+          <SurveyIntroText />
+          <SurveyQuestionsContainer />
+          <SurveyCompletionMessage />
+          <Row>
+            <Col>
+              <MakePublicToggle />
+            </Col>
+          </Row>
+        </Stack>
+      </Col>
+    </Row>
   )
 }

@@ -36,7 +36,7 @@ export default function QuestionText({ id }) {
       onKeyDown={ (event) => event.key === "Enter" ? setEditMode(false): null }
       ></input> 
       : 
-      <span>{ state.data.questions[id].data.questionText }</span> }
+      <h3>{ state.data.questions[id].data.questionText }</h3> }
     </div>
   )
 }

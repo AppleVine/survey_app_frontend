@@ -6,6 +6,12 @@ import { checkLoginAndRedirect } from '../services/authServices';
 import EditSurveyContainer from '../components/survey/EditSurveyContainer';
 import SaveEditedSurveyButton from '../components/survey/SaveEditedSurveyButton';
 
+// Style import
+import './CreateEditSurvey.css';
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
+
 export default function EditSurvey() {
   // Redirect to login page if not logged in
   useEffect(() => {
@@ -38,9 +44,9 @@ export default function EditSurvey() {
   },[])
 
   return (
-    <div>
-        <EditSurveyContainer  />
-        <SaveEditedSurveyButton />
-    </div>
+    <Container fluid>
+      <EditSurveyContainer  />
+      <SaveEditedSurveyButton />
+    </Container>
   )
 }

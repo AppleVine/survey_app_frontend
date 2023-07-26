@@ -36,7 +36,7 @@ export default function QuestionType({id}) {
   },[userInput])
 
   return (
-    <div>
+    <div>Question Type: 
       { 
         editState ? 
         <select name="questionType" id={`question-type-selector${id}`} 

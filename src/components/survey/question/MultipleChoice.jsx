@@ -4,6 +4,11 @@ import {useEditContext} from '../../../contexts/editContext';
 import AddOptionButton from './AddOptionButton';
 import RemoveOptionButton from './RemoveOptionButton';
 
+// CSS imports
+import Stack from 'react-bootstrap/Stack';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+
 export default function MultipleChoice({ id, type }) {
   const state = useSurveyContext();
   const dispatch = useSurveyDispatchContext();
@@ -49,30 +54,32 @@ export default function MultipleChoice({ id, type }) {
 
 
   return (
-    <div>
-      <ul className={`question-options-${type}`}>
-        {
-          state.data.questions[id].data.questionOptions.map((option, index) => {
-            return(
-              <li className={`question-option-${type}`} key={ index }>
-                <input type={type} name={ option } id={ option } />
-                {
-                  editState && editModeArray[index]
-                  ? 
-                  <input type='text' placeholder={ option }
-                  onChange={ (event) => handleOptionChange(index, event.target.value) } 
-                  onKeyDown={ (event) => event.key === "Enter" ? handleDeactivateEdit(index): null} 
-                  onBlur={ () => handleDeactivateEdit(index) } ></input>
-                  :
-                  <label htmlFor={ option } onClick={ () => handleActivateEdit(index) } >{ option }</label>
-                }
-                <RemoveOptionButton questionId={id} optionId={index} />
-              </li>
-            )
-          })
-        }
-      </ul>
-      <AddOptionButton id={ id } />
-    </div>
+    <Row className='justify-content-center'>
+      <Col md={10}>
+        <Stack gap={2} className={`question-options-${type} question-options`}>
+          {
+            state.data.questions[id].data.questionOptions.map((option, index) => {
+              return(
+                <div className={`question-option-${type} question-option`} key={ index }>
+                  <input type={type} name={ option } id={ option } />
+                  {
+                    editState && editModeArray[index]
+                    ? 
+                    <input type='text' placeholder={ option }
+                    onChange={ (event) => handleOptionChange(index, event.target.value) } 
+                    onKeyDown={ (event) => event.key === "Enter" ? handleDeactivateEdit(index): null} 
+                    onBlur={ () => handleDeactivateEdit(index) } ></input>
+                    :
+                    <label htmlFor={ option } onClick={ () => handleActivateEdit(index) } >{ option }</label>
+                  }
+                  <RemoveOptionButton questionId={id} optionId={index} />
+                </div>
+              )
+            })
+          }
+          <AddOptionButton id={ id } />
+        </Stack>
+      </Col>
+    </Row>
   )
 }

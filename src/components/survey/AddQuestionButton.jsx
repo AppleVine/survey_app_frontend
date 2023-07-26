@@ -1,6 +1,8 @@
 import React from 'react'
 import {useSurveyDispatchContext} from '../../contexts/surveyContext';
 import {useEditContext} from '../../contexts/editContext';
+// CSS imports
+import Button from 'react-bootstrap/Button';
 
 export default function AddQuestionButton() {
   const editState = useEditContext();
@@ -13,7 +15,7 @@ export default function AddQuestionButton() {
   return (
     <div>
       {
-        editState ? <button onClick={ () => handleClick() }>Add Question</button> : null
+        editState ? <Button variant='secondary' onClick={ () => handleClick() }>Add Question</Button> : null
       }
     </div>
   )

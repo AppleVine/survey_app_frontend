@@ -2,6 +2,8 @@ import React from 'react'
 import {useSurveyContext, useSurveyDispatchContext} from '../../contexts/surveyContext';
 import { activateEditMode, deactivateEditMode } from './surveyFunctions';
 import { useEditContext } from '../../contexts/editContext';
+// CSS imports
+import Button from 'react-bootstrap/Button';
 
 export default function EditFieldButton({ parent }) {
   const state = useSurveyContext();
@@ -20,8 +22,8 @@ export default function EditFieldButton({ parent }) {
   }
 
   return (
-    <div>
-      { editState ? <button onClick={ () => handleClick() }>{ buttonText }</button>: null}
+    <div className='inline edit-field-button'>
+      { editState ? <Button variant="secondary" size="sm" onClick={ () => handleClick() } >{ buttonText }</Button> : null}
     </div>
   )
 }

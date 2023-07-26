@@ -5,6 +5,9 @@ import { updateSurvey } from '../../services/surveyServices';
 import { useParams } from 'react-router-dom';
 import { stripEditMode } from './surveyFunctions';
 
+// CSS imports
+import Button from 'react-bootstrap/Button';
+
 export default function SaveEditedSurveyButton() {
   const {surveyId} = useParams();
   const state = useSurveyContext();
@@ -22,7 +25,7 @@ export default function SaveEditedSurveyButton() {
 
   return (
     <div>
-      {editState ? <button onClick={() => handleSaveChanges()}>Save Changes</button> : null}
+      {editState ? <Button variant='secondary' onClick={() => handleSaveChanges()} >Save Changes</Button> : null}
     </div>
   );
 }

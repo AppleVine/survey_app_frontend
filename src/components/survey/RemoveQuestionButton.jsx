@@ -16,8 +16,7 @@ export default function RemoveQuestionButton({ questionId }) {
       }
 
   return (
-    <div onClick={() => handleClick()}>
-      X
+    <div className='remove-button position-absolute top-0 end-0' onClick={() => handleClick()}>
     </div>
   )
 }
