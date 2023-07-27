@@ -5,6 +5,9 @@ import SaveNewSurveyButton from '../components/survey/SaveNewSurveyButton';
 
 // Style import
 import './CreateEditSurvey.css';
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 
 export default function CreateSurvey() {
 
@@ -14,9 +17,13 @@ export default function CreateSurvey() {
   }, []);
 
   return (
-    <div>
-      <EditSurveyContainer />
-      <SaveNewSurveyButton />
-    </div>
+    <Container fluid>
+      <Row className='justify-content-center'>
+        <Col>
+          <EditSurveyContainer  />
+          <SaveNewSurveyButton />
+        </Col>
+      </Row>
+    </Container>
   )
 }

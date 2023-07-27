@@ -26,6 +26,7 @@ export default function ViewSurvey() {
       // Get survey data and dispatch it into the state
       const fetchSurvey = async () => {
         const surveyData = await getSurvey(surveyId);
+        console.log(surveyData);
         // Reformat question array
         let questionData = structuredClone(surveyData.survey.questions);
         let questionArray = [];

@@ -45,8 +45,12 @@ export default function EditSurvey() {
 
   return (
     <Container fluid>
-      <EditSurveyContainer  />
-      <SaveEditedSurveyButton />
+      <Row className='justify-content-center'>
+        <Col>
+          <EditSurveyContainer  />
+          <SaveEditedSurveyButton />
+        </Col>
+      </Row>
     </Container>
   )
 }

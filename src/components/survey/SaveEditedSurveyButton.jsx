@@ -24,8 +24,8 @@ export default function SaveEditedSurveyButton() {
   };
 
   return (
-    <div>
-      {editState ? <Button variant='secondary' onClick={() => handleSaveChanges()} >Save Changes</Button> : null}
+    <div className='save-changes-button d-flex justify-content-center'>
+      {editState ? <Button variant='primary' onClick={() => handleSaveChanges()} >Save Changes</Button> : null}
     </div>
   );
 }

@@ -21,6 +21,6 @@ export default function QuestionResponse({ id }) {
         case "longText":
             return <LongTextResponse id={ id } />
         default:
-            return <p>Select a question type.</p>
+            return <h3>Select a question type.</h3>
     }
 }

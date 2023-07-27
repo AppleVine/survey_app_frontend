@@ -18,7 +18,7 @@ export default function MakePublicToggle() {
   return (
       <ToggleButton variant='secondary' id="make-public-toggle" type='checkbox' checked={isChecked} value="1" 
       onChange={ () => {handleCheckboxChange()}}>
-        Make public?
+        {isChecked? "Make Private" : "Make Public"}
       </ToggleButton>
   )
 }

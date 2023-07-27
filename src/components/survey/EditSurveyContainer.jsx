@@ -75,14 +75,14 @@ export default function EditSurveyContainer() {
   return (
     <Row className='justify-content-center'>
       <Col md={10}>
-        <Stack gap={3}>
+        <Stack gap={3} className='survey-container'>
           <SurveyTitle />
           <SurveyDescription />
           <SurveyIntroText />
           <SurveyQuestionsContainer />
           <SurveyCompletionMessage />
-          <Row>
-            <Col>
+          <Row className='justify-content-center'>
+            <Col md={2}>
               <MakePublicToggle />
             </Col>
           </Row>
