@@ -12,7 +12,7 @@ li {
 
 label {
     margin-left: 0.5rem;
-    width: 95%;
+    width: 90%;
 }
 
 select {
@@ -20,7 +20,7 @@ select {
     background: white;
     border: none;
     border-radius: 1rem;
-    font-size: 20px;
+    font-size: 1.3rem;
     outline: none;
 }
 
@@ -45,10 +45,6 @@ textarea {
 
 #survey-title {
     font-size: 2.5rem;
-}
-
-.edit-input {
-    outline: 1px red dotted;
 }
 
 .btn-secondary {
@@ -103,4 +99,27 @@ textarea {
 
 .save-changes-button {
     margin: 1rem;
+}
+
+@media screen and (max-width: 767px) {
+    .survey-container {
+        margin-top: 0rem;
+        margin-bottom: 0rem;
+        padding: 2rem;
+        border: none;
+    }
+
+    select {
+        font-size: 1rem;
+    }
+
+    .question-details-button{
+        float: left;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    h3 {
+        max-width: 90%;
+    }
 }

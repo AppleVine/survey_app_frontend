@@ -82,7 +82,7 @@ export default function EditSurveyContainer() {
           <SurveyQuestionsContainer />
           <SurveyCompletionMessage />
           <Row className='justify-content-center'>
-            <Col md={2}>
+            <Col lg={2} md={4}>
               <MakePublicToggle />
             </Col>
           </Row>
