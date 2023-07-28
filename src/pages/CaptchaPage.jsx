@@ -1,15 +1,24 @@
 import ReCAPTCHA from "react-google-recaptcha";
 import React, { useRef } from 'react';
+import axios from "axios";
 
 
 const CaptchaPage = () => {
     const captchaRef = useRef(null)
-    const handleSubmit = (e) =>{
-        e.preventDefault();
-        const token = captchaRef.current.getValue();
-        captchaRef.current.reset();
-        console.log(token)
-    }
+    const handleSubmit = async (e) =>{
+      e.preventDefault();
+      const inputVal = await e.target[0].value;
+      const token = captchaRef.current.getValue();
+      captchaRef.current.reset();
+
+      console.log(token)
+
+      await axios.post("http://localhost:3000/reCAPTCHA", { inputVal, token })
+      .then(res =>  console.log(res))
+      .catch((error) => {
+      console.log(error);
+      })
+  }
 
 
     return (
