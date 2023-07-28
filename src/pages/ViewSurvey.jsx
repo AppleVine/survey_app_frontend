@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import {useSurveyDispatchContext} from '../contexts/surveyContext';
 import { getSurvey } from '../services/surveyServices';
 import { checkForUser } from '../services/authServices';
@@ -15,6 +15,8 @@ export default function ViewSurvey() {
     const dispatch = useSurveyDispatchContext();
     // Track whether or not there is a logged in user
     let isUser = false;
+    // Set up redirects
+    const navigate = useNavigate();
 
     useEffect(() => {
       // Check if there is a logged in user
@@ -26,15 +28,20 @@ export default function ViewSurvey() {
       // Get survey data and dispatch it into the state
       const fetchSurvey = async () => {
         const surveyData = await getSurvey(surveyId);
-        // Reformat question array
-        let questionData = structuredClone(surveyData.survey.questions);
-        let questionArray = [];
-        for (let question of questionData) {
-          question = {data: question};
-          questionArray.push(question);
+        // If 401 unauthorized then redirect to login
+        if (surveyData.response === 401) {
+          navigate('/login');
+        } else {
+          // Reformat question array
+          let questionData = structuredClone(surveyData.survey.questions);
+          let questionArray = [];
+          for (let question of questionData) {
+            question = {data: question};
+            questionArray.push(question);
+          }
+          surveyData.survey.questions = structuredClone(questionArray);
+          dispatch({type: "loadSurvey", data: surveyData.survey});
         }
-        surveyData.survey.questions = structuredClone(questionArray);
-        dispatch({type: "loadSurvey", data: surveyData.survey});
       }
   
       fetchSurvey()

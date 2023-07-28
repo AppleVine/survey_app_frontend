@@ -25,8 +25,12 @@ export async function getSurvey(surveyID) {
       method: "GET",
       headers: headerData
     });
-    const data = await response.json();
-    return data
+    if (response.ok) {
+      const data = await response.json();
+      return data
+    } else if (response.status === 401) {
+      return {"response": 401}
+    }
   } catch (error) {
     console.error(error);
     throw new Error('Failed to fetch survey');
