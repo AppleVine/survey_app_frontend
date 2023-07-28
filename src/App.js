@@ -5,12 +5,13 @@ import './App.css';
 import RegisterPage from './pages/TempRegister';
 import LoginPage from './pages/Login';
 import StaffPage from './pages/StaffPage';
-import SurveyPage from './pages/SurveyPage';
 import CreateSurvey from './pages/CreateSurvey';
 import ViewSurvey from './pages/ViewSurvey';
 import EditSurvey from './pages/EditSurvey';
 import SurveyResponses from './pages/SurveyResponses';
 import ViewSurveys from "./pages/ViewSurveys"
+import ReviewPage from './pages/TempReviewPage';
+import CaptchaPage from "./pages/CaptchaPage"
 
 function App() {
   return (
@@ -20,8 +21,11 @@ function App() {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/staff" element={<StaffPage />} />
+            <Route path="/leavereview" element={<ReviewPage />} />
+            <Route path="/responses/:surveyid" element={<SurveyResponses />} />
+            <Route path='/reCAPTCHA' element={<CaptchaPage />} />
+            <Route path="/surveys" element={<ViewSurveys />} />
             <Route path="/surveys" element={<Outlet />}>
-              <Route index element={<SurveyPage />} />
               <Route path='/surveys/create' element={<EditContextProvider><SurveyProvider><CreateSurvey /></SurveyProvider></EditContextProvider>} />
               <Route path='/surveys/:surveyId' element={ <EditContextProvider><SurveyProvider><ViewSurvey /></SurveyProvider></EditContextProvider> } />
               <Route path='/surveys/:surveyId/edit' element={<EditContextProvider><SurveyProvider><EditSurvey /></SurveyProvider></EditContextProvider>} />
