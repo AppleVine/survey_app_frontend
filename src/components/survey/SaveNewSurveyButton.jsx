@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useSurveyContext } from '../../contexts/surveyContext';
 import {useEditContext} from '../../contexts/editContext';
 import { createSurvey } from '../../services/surveyServices';
@@ -10,14 +11,29 @@ import Button from 'react-bootstrap/Button';
 export default function SaveNewSurveyButton() {
   const state = useSurveyContext();
   const editState = useEditContext();
+  // Prevent multiple form submissions
+  const [submitted, setSubmitted] = useState(false);
+  // Redirect
+  const navigate = useNavigate();
 
   const handleSaveChanges = async () => {
-    try {
-      // Strip editMode data before saving
-      const surveyData = stripEditMode(state);
-      await createSurvey(surveyData);
-    } catch (error) {
-      console.error("Error saving survey to the database:", error);
+    if (submitted === false) {
+      try {
+        // Strip editMode data before saving
+        const surveyData = stripEditMode(state);
+        await createSurvey(surveyData)
+        .then((response) => {
+          console.log(response);
+          setSubmitted(true);
+          return response
+        })
+        // Prevent multiple submissions
+        .then(setSubmitted(true))
+        // Redirect to view survey page
+        .then((response) => navigate(`/surveys/${response.id}`))
+      } catch (error) {
+        console.error("Error saving survey to the database:", error);
+      }
     }
   };
 

@@ -40,7 +40,6 @@ export async function createSurvey(data) {
       // Verify the token before making the API call
       await verifyToken(token);
     
-      console.log("Sending to db:", data);
       const response = await fetch(`${api}/surveys/create`, {
         method: "POST",
         headers: {
