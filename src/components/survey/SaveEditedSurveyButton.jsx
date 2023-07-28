@@ -20,12 +20,16 @@ export default function SaveEditedSurveyButton() {
 
   const handleSaveChanges = async () => {
     if (submitted === false) {
+      // Prevent multiple submissions
+      setSubmitted(true)
       try {
         // Strip editMode state before saving
         const surveyData = stripEditMode(state);
         await updateSurvey(surveyId, surveyData)
-        // Prevent multiple submissions
-        .then(setSubmitted(true))
+        .then(() => {
+          // Remove saved draft from storage
+          localStorage.removeItem("survey-draft");
+        })
         // Redirect to view survey page
         .then(navigate(`/surveys/${surveyId}`))
       } catch (error) {
