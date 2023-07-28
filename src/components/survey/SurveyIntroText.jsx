@@ -9,10 +9,10 @@ export default function SurveyIntroText() {
   return (
     <div>
       { state.editMode.introduction ? 
-        <textarea id='survey-intro-text' name='survey-intro-text' placeholder={state.data.introduction} 
+        <textarea className='inline' id='survey-intro-text' name='survey-intro-text' placeholder={state.data.introduction} 
         onChange={ (event) => saveField("introduction", event.target.value, dispatch) }></textarea>
         :
-        <p>{ state.data.introduction }</p> 
+        <p className='inline'>{ state.data.introduction }</p> 
       }
       <EditFieldButton state={ state } dispatch={ dispatch } parent={ "introduction" } />
     </div>

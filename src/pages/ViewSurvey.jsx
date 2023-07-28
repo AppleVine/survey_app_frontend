@@ -5,6 +5,9 @@ import { getSurvey } from '../services/surveyServices';
 import { checkForUser } from '../services/authServices';
 import ViewSurveyContainer from '../components/survey/ViewSurveyContainer';
 
+// CSS imports
+import Button from 'react-bootstrap/Button';
+
 export default function ViewSurvey() {
     // Get survey id from url
     let { surveyId } = useParams();
@@ -23,6 +26,7 @@ export default function ViewSurvey() {
       // Get survey data and dispatch it into the state
       const fetchSurvey = async () => {
         const surveyData = await getSurvey(surveyId);
+        console.log(surveyData);
         // Reformat question array
         let questionData = structuredClone(surveyData.survey.questions);
         let questionArray = [];
@@ -46,7 +50,7 @@ export default function ViewSurvey() {
         {
           // Display edit button for logged in users
           isUser ?
-          <Link to={`/surveys/${surveyId}/edit`}>Edit Survey</Link>
+          <Button variant='primary' href={`/surveys/${surveyId}/edit`} >Edit Survey</Button>
           :
           null
         }

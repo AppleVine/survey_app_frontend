@@ -31,12 +31,12 @@ export default function QuestionText({ id }) {
     }}
     onBlur={() => setEditMode(false)}>
       { editMode ?
-      <input type='text' placeholder={ state.data.questions[id].data.questionText } 
+      <input type='text' className='question-text-input' placeholder={ state.data.questions[id].data.questionText } 
       onChange={ (event) => setQuestionText(event.target.value) }
       onKeyDown={ (event) => event.key === "Enter" ? setEditMode(false): null }
       ></input> 
       : 
-      <span>{ state.data.questions[id].data.questionText }</span> }
+      <h3>{ state.data.questions[id].data.questionText }</h3> }
     </div>
   )
 }

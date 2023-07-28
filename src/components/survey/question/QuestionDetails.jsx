@@ -3,6 +3,9 @@ import { useSurveyContext, useSurveyDispatchContext } from '../../../contexts/su
 import { initialQuestion } from '../surveyReducer';
 import { useEditContext } from '../../../contexts/editContext';
 
+// CSS imports
+import Button from 'react-bootstrap/Button';
+
 export default function QuestionDetails({ id }) {
   const state = useSurveyContext();
   const dispatch = useSurveyDispatchContext();
@@ -41,7 +44,7 @@ export default function QuestionDetails({ id }) {
     }}
     onBlur={() => setEditMode(false)}>
       { editMode ? 
-      <input type='text' placeholder={ state.data.questions[id].data.questionDetails }
+      <input className='edit-input' type='text' placeholder={ state.data.questions[id].data.questionDetails }
       onChange={(event) => setQuestionDetails(event.target.value)}
       onKeyDown={ (event) => event.key === "Enter" ? setEditMode(false): null } 
       ></input> 
@@ -50,10 +53,12 @@ export default function QuestionDetails({ id }) {
         {
         state.data.questions[id].data.questionDetails
         ? 
-        <div>{state.data.questions[id].data.questionDetails}
-        <button onClick={() => setQuestionDetails(null)}>Remove Question Details</button></div>
+        <div>
+          {state.data.questions[id].data.questionDetails}
+          <Button className='question-details-button' variant='secondary' onClick={() => setQuestionDetails(null)} >Remove Question Details</Button>
+        </div>
         :
-        <button onClick={() => setEditMode(true)}>Add Question Details</button>
+        <Button className='question-details-button' variant='secondary' onClick={() => setEditMode(true)} >Add Question Details</Button>
         }
       </div> }
     </div>

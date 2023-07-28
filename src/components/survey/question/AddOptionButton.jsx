@@ -1,6 +1,11 @@
 import {useSurveyDispatchContext} from '../../../contexts/surveyContext';
 import {useEditContext} from '../../../contexts/editContext';
 
+// CSS imports
+import Button from 'react-bootstrap/Button';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+
 export default function AddOptionButton({ id }) {
   const editState = useEditContext();
   const dispatch = useSurveyDispatchContext();
@@ -14,8 +19,10 @@ export default function AddOptionButton({ id }) {
   }
 
   return (
-    <div>
-      <button onClick={ () => handleClick() }>Add Option</button>
-    </div>
+    <Row className='justify-content-center'>
+      <Col md={2}>
+        <Button className="add-option-button" variant='secondary' onClick={ () => handleClick() }></Button>
+      </Col>
+    </Row>
   )
 }

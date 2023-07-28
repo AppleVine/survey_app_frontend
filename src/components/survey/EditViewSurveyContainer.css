@@ -1,0 +1,125 @@
+/* Styles for survey components */
+
+h3 {
+    padding: 0.25rem 1rem;
+    background-color: white;
+    border-radius: 1rem;
+}
+
+li {
+    list-style: none;
+}
+
+label {
+    margin-left: 0.5rem;
+    width: 90%;
+}
+
+select {
+    margin-left: 0.5rem;
+    background: white;
+    border: none;
+    border-radius: 1rem;
+    font-size: 1.3rem;
+    outline: none;
+}
+
+input[type=text] {
+    width: 95%;
+    border: none;
+    outline: none;
+}
+
+textarea {
+    width: 100%;
+    border: none;
+    outline: none;
+}
+
+.survey-container {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    padding: 2rem;
+    border: 3px solid #5cab7d;
+}
+
+#survey-title {
+    font-size: 2.5rem;
+}
+
+.btn-secondary {
+    background-color: #5cab7d;
+    border-color: #5cab7d;
+}
+
+.question-card {
+    background-color: #D9D9D9;
+    border-radius: 1rem;
+    padding: 1rem;
+}
+
+.question-text-input {
+    font-size: 1.75rem;
+    padding-left: 0.5rem;
+    border-radius: 1rem;
+}
+
+.question-option {
+    position: relative;
+    background-color: white;
+    border-radius: 1rem;
+    padding: 0.3rem;
+}
+
+.remove-button {
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-top: 0.3rem;
+    margin-right: 0.3rem;
+    background-color: #5cab7d;
+    background-image: url('../../icons/material_symbols_x.png');
+    background-position: center;
+    background-size: cover;
+    border-radius: 50%;
+}
+
+.add-option-button, .add-question-button {
+    height: 2rem;
+    width: 5rem;
+    margin-bottom: 1rem;
+    background-image: url('../../icons/material_symbols_add.png');
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.question-details-button{
+    float: right;
+}
+
+.save-changes-button {
+    margin: 1rem;
+}
+
+@media screen and (max-width: 767px) {
+    .survey-container {
+        margin-top: 0rem;
+        margin-bottom: 0rem;
+        padding: 2rem;
+        border: none;
+    }
+
+    select {
+        font-size: 1rem;
+    }
+
+    .question-details-button{
+        float: left;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    h3 {
+        max-width: 90%;
+    }
+}

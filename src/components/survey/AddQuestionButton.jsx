@@ -1,6 +1,9 @@
 import React from 'react'
 import {useSurveyDispatchContext} from '../../contexts/surveyContext';
 import {useEditContext} from '../../contexts/editContext';
+// CSS imports
+import Button from 'react-bootstrap/Button';
+import Row from 'react-bootstrap/Row';
 
 export default function AddQuestionButton() {
   const editState = useEditContext();
@@ -11,10 +14,10 @@ export default function AddQuestionButton() {
   }
 
   return (
-    <div>
+    <Row className='justify-content-center'>
       {
-        editState ? <button onClick={ () => handleClick() }>Add Question</button> : null
+        editState ? <Button className='add-question-button' variant='secondary' onClick={ () => handleClick() }></Button> : null
       }
-    </div>
+    </Row>
   )
 }

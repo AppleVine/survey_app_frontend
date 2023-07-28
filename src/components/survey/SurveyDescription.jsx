@@ -7,12 +7,12 @@ export default function SurveyDescription() {
   const dispatch = useSurveyDispatchContext();
 
   return (
-    <div>
+    <div className='survey-field'>
       { state.editMode.description ? 
-        <textarea id='survey-description' name='survey-description' placeholder={state.data.description} 
+        <textarea className='inline' id='survey-description' name='survey-description' placeholder={state.data.description} 
         onChange={ (event) => saveField("description", event.target.value, dispatch) }></textarea>
         :
-        <p>{ state.data.description }</p> 
+        <p className='inline'>{ state.data.description }</p> 
       }
       <EditFieldButton state={ state } dispatch={ dispatch } parent={ "description" } />
     </div>

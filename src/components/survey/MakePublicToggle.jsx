@@ -2,6 +2,9 @@ import React, {useState} from 'react';
 import {useSurveyDispatchContext} from '../../contexts/surveyContext';
 import { saveField } from './surveyFunctions';
 
+// CSS imports
+import ToggleButton from 'react-bootstrap/ToggleButton';
+
 export default function MakePublicToggle() {
   const dispatch = useSurveyDispatchContext();
   const [isChecked, setIsChecked] = useState(true); 
@@ -13,11 +16,9 @@ export default function MakePublicToggle() {
   }
 
   return (
-    <div>
-      <label htmlFor="make-public-toggle">Make public?</label>
-      <input type="checkbox" name="make-public-toggle" id="make-public-toggle" 
-      onChange={ () => {handleCheckboxChange()} }
-      />
-    </div>
+      <ToggleButton variant='secondary' id="make-public-toggle" type='checkbox' checked={isChecked} value="1" 
+      onChange={ () => {handleCheckboxChange()}}>
+        {isChecked? "Make Private" : "Make Public"}
+      </ToggleButton>
   )
 }

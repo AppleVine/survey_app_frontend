@@ -10,11 +10,11 @@ export default function SurveyCompletionMessage() {
   return (
     <div>
       { state.editMode.completionMessage ? 
-        <textarea id='survey-completion-message' name='survey-completion-message' placeholder={ state.data.completionMessage } 
+        <textarea className='inline' id='survey-completion-message' name='survey-completion-message' placeholder={ state.data.completionMessage } 
         onChange={ (event) => saveField("completionMessage", event.target.value, dispatch) } 
         ></textarea>
         :
-        <p>{ state.data.completionMessage }</p> 
+        <p className='inline' >{ state.data.completionMessage }</p> 
       }
       <EditFieldButton state={ state } dispatch={ dispatch } parent={ "completionMessage" } />
     </div>
