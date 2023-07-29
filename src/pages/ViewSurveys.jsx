@@ -43,7 +43,7 @@ export default function ViewSurveys() {
             <div className="survey-info">
               <p>{survey.description}</p>
               <h6>Responses: {survey.responses.length}</h6>
-              <Button variant='info' href={`/surveys/${survey._id}/responses`}>View Responses</Button>
+              <Button variant='info' href={`/responses/${survey._id}`}>View Responses</Button>
             </div>
           </div>
         ))}
