@@ -5,7 +5,7 @@ export default function ShortText({id}) {
   const responseDispatch = useResponseDispatchContext();
 
   const handleResponseInput = (value) => {
-    responseDispatch({type: "update", data: {questionId: id, answer: value}})
+    responseDispatch({type: "updateText", data: {questionId: id, answer: value}})
   }
 
   return (

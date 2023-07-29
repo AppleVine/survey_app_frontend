@@ -13,8 +13,8 @@ import { useResponseContext, useResponseDispatchContext } from '../../../context
 export default function MultipleChoice({ id, type }) {
   const state = useSurveyContext();
   const dispatch = useSurveyDispatchContext();
-  const responseState = useResponseContext();
-  const responseDispatch = useResponseDispatchContext();
+  const responseState = useResponseContext() || null;
+  const responseDispatch = useResponseDispatchContext() || null;
   const [optionArray, setOptionArray] = useState([]);
   const [editModeArray, setEditModeArray] = useState(false);
   const editState = useEditContext();
@@ -70,7 +70,7 @@ export default function MultipleChoice({ id, type }) {
             state.data.questions[id].data.questionOptions.map((option, index) => {
               return(
                 <div className={`question-option-${type} question-option`} key={ index }>
-                  <input type={type} name={ option } id={ option } defaultChecked={responseState.answers[id][index]} 
+                  <input type={type} name={ option } id={ option } defaultChecked={false} 
                   onClick={() => handleSelectOption(id, index)} />
                   <label htmlFor={ option } >{ option }</label>
                 </div>
