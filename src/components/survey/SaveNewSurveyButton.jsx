@@ -26,7 +26,6 @@ export default function SaveNewSurveyButton() {
         const surveyData = stripEditMode(state);
         await createSurvey(surveyData)
         .then((response) => {
-          console.log(response);
           // Remove saved draft from storage
           localStorage.removeItem("survey-draft");
           // Redirect to view survey
