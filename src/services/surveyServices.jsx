@@ -1,7 +1,7 @@
 import { getCookie } from "./authServices";
 import { verifyToken } from "./authServices";
 
-const api = process.env.API || "http://localhost:3000"
+const api = process.env.REACT_APP_API || "http://localhost:3000"
 
 export async function getSurvey(surveyID) {
   try {
