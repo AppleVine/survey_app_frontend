@@ -33,7 +33,7 @@ export default function EditSurveyContainer() {
   const dispatch = useSurveyDispatchContext();
 
   // Create keys for storing data in local storage
-  const [surveyDraft, setSurveyDraft] = useLocalStorage("new-survey-draft", "");
+  const [surveyDraft, setSurveyDraft] = useLocalStorage("survey-draft", "");
 
   // Ensure restore from draft only happens once under strict mode
   const didDraftLoad = useRef(false);
