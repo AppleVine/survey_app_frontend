@@ -1,6 +1,6 @@
 import { setToken } from "./authServices";
 
-const api = 'http://localhost:3000/admin';
+const api = process.env.API || 'http://localhost:3000/admin';
 
 export async function createUser(data) {
   try {
