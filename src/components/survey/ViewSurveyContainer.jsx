@@ -7,7 +7,7 @@ import SurveyQuestionsContainer from './SurveyQuestionsContainer'
 import EditSurveyButton from './EditSurveyButton'
 
 // CSS imports
-import styles from './EditViewSurveyContainer.css';
+import './EditViewSurveyContainer.css';
 import Stack from 'react-bootstrap/Stack'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'

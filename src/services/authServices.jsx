@@ -2,7 +2,7 @@ import Cookies from 'js-cookie';
 
 const TOKEN_COOKIE_NAME = 'authToken';
 
-const api = process.env.REACT_APP_API || 'http://localhost:3000/admin';
+const api = process.env.REACT_APP_API;
 
 export function setToken(newToken) {
   Cookies.set(TOKEN_COOKIE_NAME, newToken, { expires: 1 });

@@ -1,6 +1,6 @@
 import { setToken } from "./authServices";
 
-const api = process.env.REACT_APP_API || 'http://localhost:3000/admin';
+const api = process.env.REACT_APP_API;
 
 export async function createUser(data) {
   try {

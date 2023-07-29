@@ -1,7 +1,7 @@
 
 import { getCookie, deleteCookie } from "./authServices";
 
-const API = process.env.REACT_APP_API || 'http://localhost:3000/admin';
+const API = process.env.REACT_APP_API;
 
 export async function getSurveyResponses(surveyID) {
   try {
