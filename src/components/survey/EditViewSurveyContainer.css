@@ -24,6 +24,10 @@ select {
     outline: none;
 }
 
+.highlight {
+    border: 0.25rem solid red !important;
+}
+
 .survey-container input[type=text] {
     width: 95%;
     border: none;

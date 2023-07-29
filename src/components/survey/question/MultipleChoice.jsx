@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { useSurveyContext, useSurveyDispatchContext } from '../../../contexts/surveyContext';
 import {useEditContext} from '../../../contexts/editContext';
 import AddOptionButton from './AddOptionButton';
 import RemoveOptionButton from './RemoveOptionButton';
+import { addAlert, removeAlert } from './questionFunctions';
 
 // CSS imports
 import Stack from 'react-bootstrap/Stack';
@@ -18,6 +19,8 @@ export default function MultipleChoice({ id, type }) {
   const [optionArray, setOptionArray] = useState([]);
   const [editModeArray, setEditModeArray] = useState(false);
   const editState = useEditContext();
+
+  const ref = useRef(null);
 
   const handleOptionChange = (index, value) => {
     let newOptionArray = [...optionArray];
@@ -66,12 +69,21 @@ export default function MultipleChoice({ id, type }) {
     // eslint-disable-next-line
   },[optionArray])
 
+  // Highlight unanswered questions
+  useEffect(() => {
+    if (responseState.alert && (responseState.answers[id] === null || responseState.answers[id] === "")) {
+      addAlert(ref);
+    } else {
+      removeAlert(ref);
+    }
+  }, [responseState, id])
+
   // In view survey mode
   if (!editState) {
     return(
       <Row className='justify-content-center'>
       <Col md={10}>
-        <Stack gap={2} className={`question-options-${type} question-options`}>
+        <Stack ref={ref} gap={2} className={`question-options-${type} question-options`}>
           {
             state.data.questions[id].data.questionOptions.map((option, index) => {
               return(
