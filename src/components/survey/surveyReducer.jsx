@@ -1,4 +1,4 @@
-const initialQuestion = {
+export const initialQuestion = {
     data: {
         questionText: "Insert question text here",
         questionDetails: "Insert question details here",
@@ -12,7 +12,7 @@ const initialQuestion = {
     }
 }
 
-const initialSurvey = {
+export const initialSurvey = {
     data: {
         _id: null,
         title: "Insert Survey Title Here",
@@ -30,7 +30,7 @@ const initialSurvey = {
     }
 }
 
-const surveyReducer = (previousState, instructions) => {
+export const surveyReducer = (previousState, instructions) => {
 
     // stateEditable will be used in all cases
     let stateEditable = null;
@@ -177,6 +177,6 @@ const surveyReducer = (previousState, instructions) => {
     }
 }
 
-module.exports = {
-    surveyReducer, initialSurvey, initialQuestion
-}
+// module.exports = {
+//     surveyReducer, initialSurvey, initialQuestion
+// }
