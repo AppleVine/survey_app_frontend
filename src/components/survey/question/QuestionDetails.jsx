@@ -31,9 +31,18 @@ export default function QuestionDetails({ id }) {
   },[questionDetails])
 
   // If viewing a survey and there are no details, don't display at all
-    if (!editState && !questionDetails) {
-      return(null)
-    }
+  if (!editState && !state.data.questions[id].data.questionDetails) {
+    console.log("No question details")
+    return(null)
+  }
+  // If viewing a survey, don't include editing buttons
+  else if (!editState) {
+    return(
+      <div>
+        {state.data.questions[id].data.questionDetails}
+      </div>
+    )
+  }
 
   return (
     <div onClick={() => {
