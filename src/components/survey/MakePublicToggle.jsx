@@ -1,24 +1,22 @@
-import React, {useState} from 'react';
-import {useSurveyDispatchContext} from '../../contexts/surveyContext';
+import React from 'react';
+import {useSurveyContext, useSurveyDispatchContext} from '../../contexts/surveyContext';
 import { saveField } from './surveyFunctions';
 
 // CSS imports
 import ToggleButton from 'react-bootstrap/ToggleButton';
 
 export default function MakePublicToggle() {
+  const state = useSurveyContext();
   const dispatch = useSurveyDispatchContext();
-  const [isChecked, setIsChecked] = useState(true); 
-  // This seems unintuitive, but setting the initial state to true results in correct behavior
 
   const handleCheckboxChange = () => {
-    setIsChecked(!isChecked);
-    saveField("makePublic", isChecked, dispatch);
+    saveField("makePublic", !state.data.makePublic, dispatch);
   }
 
   return (
-      <ToggleButton variant='secondary' id="make-public-toggle" type='checkbox' checked={isChecked} value="1" 
+      <ToggleButton variant='secondary' id="make-public-toggle" type='checkbox' checked={state.data.makePublic} value="1" 
       onChange={ () => {handleCheckboxChange()}}>
-        {isChecked? "Make Private" : "Make Public"}
+        {state.data.makePublic? "Make Private" : "Make Public"}
       </ToggleButton>
   )
 }
