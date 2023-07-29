@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Header from "../components/header";
 import { getSurveys } from "../services/surveyServices";
+import { checkLoginAndRedirect } from '../services/authServices';
 
 // CSS imports
 import Button from 'react-bootstrap/Button';
@@ -9,6 +10,11 @@ import "./ViewSurveys.css";
 
 export default function ViewSurveys() {
   const [surveys, setSurveys] = useState([]);
+
+  // Redirect to login page if not logged in
+  useEffect(() => {
+    checkLoginAndRedirect();
+  }, []);
 
   useEffect(() => {
     const fetchSurveys = async () => {
