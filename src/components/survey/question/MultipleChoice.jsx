@@ -38,8 +38,13 @@ export default function MultipleChoice({ id, type }) {
   }
 
   const handleSelectOption = (questionId, optionId) => {
-    let newState = !responseState.answers[questionId][optionId];
-    responseDispatch({type: "updateMulti", data:{questionId: questionId, optionId: optionId, selectState: newState}})
+    if (type === "radio") {
+      responseDispatch({type: "updateMultiRadio", data:{questionId: questionId, optionId: optionId}})
+    } else {
+      let newState = !responseState.answers[questionId][optionId];
+      responseDispatch({type: "updateMultiCheck", data:{questionId: questionId, optionId: optionId, selectState: newState}})
+    }
+
   }
 
   // Trigger rerender on state change
@@ -54,6 +59,7 @@ export default function MultipleChoice({ id, type }) {
   // Update global state when question edited
   useEffect(() => {
     // Check that question options are not empty or default data
+    // eslint-disable-next-line
     if (optionArray != [] && optionArray != ["Enter an option", "Enter an option", "Enter an option"]) {  // Must be loose equality!
       dispatch({type: "updateQuestion", data: {questionId: id, field: "questionOptions", value: optionArray}});
     }
@@ -70,8 +76,8 @@ export default function MultipleChoice({ id, type }) {
             state.data.questions[id].data.questionOptions.map((option, index) => {
               return(
                 <div className={`question-option-${type} question-option`} key={ index }>
-                  <input type={type} name={ option } id={ option } defaultChecked={false} 
-                  onClick={() => handleSelectOption(id, index)} />
+                  <input type={type} name={ `question${id}` } id={ option } defaultChecked={false} 
+                  onChange={() => handleSelectOption(id, index)} />
                   <label htmlFor={ option } >{ option }</label>
                 </div>
               )

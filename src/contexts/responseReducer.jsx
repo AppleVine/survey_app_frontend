@@ -7,6 +7,8 @@ export const responseReducer = (previousState, instructions) => {
 
     // stateEditable will be used in all cases
     let stateEditable = null;
+    // Question and option id
+    let questionId, optionId = null;
 
     switch (instructions.type) {
 
@@ -36,11 +38,22 @@ export const responseReducer = (previousState, instructions) => {
             stateEditable.answers[instructions.data.questionId] = instructions.data.answer;
             return stateEditable
 
-        case "updateMulti":
+        case "updateMultiRadio":
             // Copy state
             stateEditable = {...previousState}
             // Get questionId and optionId from instructions
-            const {questionId, optionId} = instructions.data;
+            questionId = instructions.data.questionId;
+            optionId = instructions.data.optionId;
+            // Update state of checked components
+            stateEditable.answers[questionId] = optionId;
+            return stateEditable;
+
+        case "updateMultiCheck":
+            // Copy state
+            stateEditable = {...previousState}
+            // Get questionId and optionId from instructions
+            questionId = instructions.data.questionId;
+            optionId = instructions.data.optionId;
             // Update state of checked components
             stateEditable.answers[questionId][optionId] = instructions.data.selectState;
             return stateEditable;

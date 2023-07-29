@@ -49,8 +49,7 @@ export default function ViewSurvey() {
           // Create option array for responses
           let noOfOptions = [];
           for (let i = 0; i < questionArray.length; i++) {
-            if (questionArray[i].data.questionType === "multipleChoiceRadio" 
-            || questionArray[i].data.questionType === "multipleChoiceCheckbox") {
+            if (questionArray[i].data.questionType === "multipleChoiceCheckbox") {
               noOfOptions[i] = questionArray[i].data.questionOptions.length;
             }
           }
