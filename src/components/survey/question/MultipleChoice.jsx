@@ -8,10 +8,13 @@ import RemoveOptionButton from './RemoveOptionButton';
 import Stack from 'react-bootstrap/Stack';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import { useResponseContext, useResponseDispatchContext } from '../../../contexts/responseContext';
 
 export default function MultipleChoice({ id, type }) {
   const state = useSurveyContext();
   const dispatch = useSurveyDispatchContext();
+  const responseState = useResponseContext();
+  const responseDispatch = useResponseDispatchContext();
   const [optionArray, setOptionArray] = useState([]);
   const [editModeArray, setEditModeArray] = useState(false);
   const editState = useEditContext();
@@ -34,6 +37,11 @@ export default function MultipleChoice({ id, type }) {
     setEditModeArray(newEditModeArray);
   }
 
+  const handleSelectOption = (questionId, optionId) => {
+    let newState = !responseState.answers[questionId][optionId];
+    responseDispatch({type: "updateMulti", data:{questionId: questionId, optionId: optionId, selectState: newState}})
+  }
+
   // Trigger rerender on state change
   useEffect(() => {},[state])
 
@@ -51,6 +59,29 @@ export default function MultipleChoice({ id, type }) {
     }
     // eslint-disable-next-line
   },[optionArray])
+
+  // In view survey mode
+  if (!editState) {
+    return(
+      <Row className='justify-content-center'>
+      <Col md={10}>
+        <Stack gap={2} className={`question-options-${type} question-options`}>
+          {
+            state.data.questions[id].data.questionOptions.map((option, index) => {
+              return(
+                <div className={`question-option-${type} question-option`} key={ index }>
+                  <input type={type} name={ option } id={ option } defaultChecked={responseState.answers[id][index]} 
+                  onClick={() => handleSelectOption(id, index)} />
+                  <label htmlFor={ option } >{ option }</label>
+                </div>
+              )
+            })
+          }
+        </Stack>
+      </Col>
+    </Row>
+    )
+  }
 
 
   return (
