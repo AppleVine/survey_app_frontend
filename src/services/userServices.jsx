@@ -4,7 +4,7 @@ const api = process.env.REACT_APP_API;
 
 export async function createUser(data) {
   try {
-    const response = await fetch(`${api}/register`, {
+    const response = await fetch(`${api}/admin/register`, {
       method: 'POST',
       headers: {
         'Content-type': 'application/json',
@@ -29,7 +29,7 @@ export async function createUser(data) {
 
 export async function loginUser(data) {
   try {
-    const response = await fetch(`${api}/login`, {
+    const response = await fetch(`${api}/admin/login`, {
       method: 'POST',
       headers: {
         'Content-type': 'application/json',
