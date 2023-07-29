@@ -5,6 +5,7 @@ import { getSurvey } from '../services/surveyServices';
 import { checkLoginAndRedirect } from '../services/authServices';
 import EditSurveyContainer from '../components/survey/EditSurveyContainer';
 import SaveEditedSurveyButton from '../components/survey/SaveEditedSurveyButton';
+import Header from '../components/header';
 
 // Style import
 import './CreateEditSurvey.css';
@@ -45,6 +46,7 @@ export default function EditSurvey() {
 
   return (
     <Container fluid>
+      <Header />
       <Row className='justify-content-center'>
         <Col>
           <EditSurveyContainer  />

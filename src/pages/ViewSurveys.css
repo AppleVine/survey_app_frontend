@@ -1,3 +1,21 @@
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.btn-info {
+  background-color: white;
+  border: none;
+}
+
+.btn-info:hover {
+  background-color: #fff8e1;
+}
+
+.survey-link {
+  width: 100%;
+}
+
 .surveys-container {
   display: flex;
   flex-wrap: wrap;
