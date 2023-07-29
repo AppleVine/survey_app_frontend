@@ -9,6 +9,8 @@ import SubmitResponseButton from '../components/survey/SubmitResponseButton';
 // CSS imports
 import Button from 'react-bootstrap/Button';
 import { useResponseContext, useResponseDispatchContext } from '../contexts/responseContext';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
 
 export default function ViewSurvey() {
     // Get survey id from url
@@ -64,7 +66,7 @@ export default function ViewSurvey() {
     },[])
 
   return (
-    <div>
+    <Col>
       <ViewSurveyContainer />
       <div>
         {
@@ -75,7 +77,9 @@ export default function ViewSurvey() {
           null
         }
       </div>
-      <SubmitResponseButton />
-    </div>
+      <Row className="justify-content-center" >
+        <SubmitResponseButton />
+      </Row>
+    </Col>
   )
 }

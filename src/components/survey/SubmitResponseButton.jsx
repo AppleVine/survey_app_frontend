@@ -3,7 +3,6 @@ import { Button } from 'react-bootstrap'
 import { useResponseContext } from '../../contexts/responseContext'
 import { useSurveyContext } from '../../contexts/surveyContext';
 import { submitSurveyResponse } from '../../services/responseServices';
-import { response } from 'express';
 
 export default function SubmitResponseButton() {
     const surveyState = useSurveyContext();
@@ -32,13 +31,11 @@ export default function SubmitResponseButton() {
                 }
             }
         // Submit response data
-        console.log('submitting...')
-        let reponse = await submitSurveyResponse(responseData);
-        console.log(response);
+        await submitSurveyResponse(responseData);
     }
 
 
   return (
-    <Button variant='primary' onSubmit={handleSubmitResponse}>Submit Response</Button>
+    <Button variant='primary' onClick={handleSubmitResponse}>Submit Response</Button>
   )
 }

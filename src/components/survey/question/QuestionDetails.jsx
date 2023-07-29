@@ -19,6 +19,7 @@ export default function QuestionDetails({ id }) {
   // Update global state when question edited
   useEffect(() => {
     // Check that question text is not empty string or default data
+    // eslint-disable-next-line
     if (questionDetails && questionDetails != initialQuestion.data.questionDetails) { // Must be loose equality!
       dispatch({type: "updateQuestion", data: {questionId: id, field: "questionDetails", value: questionDetails}});
     }

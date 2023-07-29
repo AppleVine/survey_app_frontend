@@ -1,5 +1,5 @@
 export const initialResponse = {
-    survey_id: null,
+    surveyId: null,
     answers: []
 }
 
@@ -16,7 +16,7 @@ export const responseReducer = (previousState, instructions) => {
             // Load survey id into state and generate an answer array of the correct length
             // Copy state
             stateEditable = {...previousState}
-            stateEditable.survey_id = instructions.data.surveyId;
+            stateEditable.surveyId = instructions.data.surveyId;
             for (let i = 0; i < instructions.data.noOfQuestions; i++) {
                 // If the question has options, set them all to false(unselected)
                 if (instructions.data.noOfOptions[i]) {
