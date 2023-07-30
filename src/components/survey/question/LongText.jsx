@@ -1,8 +1,10 @@
-import React, { useRef, useEffect } from 'react'
-import { useResponseContext, useResponseDispatchContext } from '../../../contexts/responseContext'
+import React, { useRef, useEffect } from 'react';
+import { useResponseContext, useResponseDispatchContext } from '../../../contexts/responseContext';
+import { useEditContext } from '../../../contexts/editContext';
 import { addAlert, removeAlert } from './questionFunctions';
 
 export default function LongText({id}) {
+  const editState = useEditContext();
   const responseState = useResponseContext() || null;
   const responseDispatch = useResponseDispatchContext() || null;
 
@@ -22,11 +24,17 @@ export default function LongText({id}) {
     responseDispatch({type: "updateText", data: {questionId: id, answer: value}})
   }
 
+  if (editState) {
+    return(
+      <textarea ref={ref} id={`long-text-${id}`} name={`long-text-${id}`} rows="4" cols="50" className=''
+      placeholder='---User response goes here---' >
+      </textarea> 
+    )
+  }
+
   return (
-    <div>
         <textarea ref={ref} id={`long-text-${id}`} name={`long-text-${id}`} rows="4" cols="50" className=''
         onChange={(event) => handleResponseInput(event.target.value)} >
         </textarea> 
-    </div>
   )
 }

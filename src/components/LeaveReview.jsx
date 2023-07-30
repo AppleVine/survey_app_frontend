@@ -10,7 +10,7 @@ export default function LeaveReview() {
   const reviewLink = surveyState.data.reviewLink;
 
     const handleButtonClick = () => {
-      window.location.replace = reviewLink;
+      window.location.replace(reviewLink);
     };
   
     return (
