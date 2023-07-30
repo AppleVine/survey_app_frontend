@@ -1,4 +1,4 @@
-/* Styles for survey components */
+Styles for survey components
 
 h3 {
     padding: 0.25rem 1rem;
@@ -24,7 +24,7 @@ select {
     outline: none;
 }
 
-input[type=text] {
+.survey-container input[type=text] {
     width: 95%;
     border: none;
     outline: none;

@@ -1,24 +1,60 @@
 .surveys-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-top: 20px;
-    color: white;
-    font-family: Georgia, 'Times New Roman', Times, serif;
-  }
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 20px;
+  color: white;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  padding: 0 10px;
+}
   
-  .survey-title {
-    background-color: #5cab7d;
-    width: 80%;
-    border-radius: 20px;
-    margin-top: 20px;
-    padding: 10px;
-    padding-left: 20px;
+.survey-title {
+  background-color: #5cab7d;
+  width: 80%;
+  border-radius: 20px;
+  margin-top: 20px;
+  padding: 10px;
+  padding-left: 20px;
+}
+  
+.title-id {
+  display: flex;
+  justify-content: space-between;
+}
 
+.survey-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+@media (max-width: 1000px) {
+  .surveys-container {
+    flex-direction: column;
+    align-items: center;
   }
-  
-  .title-id {
+
+  .survey-title {
+    text-align: center;
+    width: 90%;
+    margin-top: 10px;
+    padding-left: 10px;
+  }
+
+  .survey-info {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    align-items: flex-start;
   }
-  
+
+  .title-id {
+    display: block;
+    text-align: left;
+    margin-top: 0px;
+    margin-bottom: 20px;
+  }
+
+  .title-id h6 {
+    font-size: 12px;
+  }
+}

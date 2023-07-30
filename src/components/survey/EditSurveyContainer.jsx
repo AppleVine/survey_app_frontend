@@ -11,7 +11,7 @@ import SurveyCompletionMessage from './SurveyCompletionMessage'
 import { useParams } from 'react-router-dom'
 
 // CSS imports
-import './EditViewSurveyContainer.css'
+import './EditViewSurveyContainer.module.css'
 import Stack from 'react-bootstrap/Stack'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'

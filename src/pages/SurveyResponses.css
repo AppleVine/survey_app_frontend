@@ -22,5 +22,12 @@
   text-align: center;
 }
 
+@media (max-width: 700px) {
+  .response-container {
+    justify-content: center;
+  }
 
-  
+  .response-tile {
+    width: 90%;
+  }
+}
