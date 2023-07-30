@@ -50,7 +50,6 @@ export function checkLoginAndRedirect() {
   const token = getCookie('authToken');
   if (!token) {
     window.location.href = '/login';
-    console.log("TODO")
   } else {
     verifyToken(token)
       .then(() => {
@@ -59,7 +58,6 @@ export function checkLoginAndRedirect() {
       .catch((error) => {
         console.log('Token verification error:', error);
         window.location.href = '/login';
-        console.log("TODO")
       });
   }
 }

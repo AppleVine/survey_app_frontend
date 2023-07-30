@@ -2,8 +2,9 @@ import { BrowserRouter as Router, Route, Routes, Outlet, Navigate } from 'react-
 import { SurveyProvider } from './contexts/surveyContext';
 import { EditContextProvider } from './contexts/editContext';
 import './App.css';
-import RegisterPage from './pages/TempRegister';
+// import RegisterPage from './pages/TempRegister';
 import LoginPage from './pages/Login';
+import CreateUserAccount from './pages/CreateUserAccount';
 import StaffPage from './pages/StaffPage';
 import CreateSurvey from './pages/CreateSurvey';
 import ViewSurvey from './pages/ViewSurvey';
@@ -22,7 +23,7 @@ function App() {
           <Routes>
             <Route path='/' element={<Navigate replace to='/staff' />} />
             <Route path="/login" element={<LoginPage />} />
-            <Route path="/register" element={<RegisterPage />} />
+            <Route path="/newuser" element={<CreateUserAccount />} />
             <Route path="/staff" element={<StaffPage />} />
             <Route path="/leavereview" element={<ReviewPage />} />
             <Route path="/responses/:surveyID" element={<SurveyResponses />} />

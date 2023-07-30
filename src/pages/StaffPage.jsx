@@ -1,15 +1,16 @@
 import React, { useEffect } from 'react';
+import { checkLoginAndRedirect } from '../services/authServices';
+
+// CSS imports
 import Button from 'react-bootstrap/Button';
 import Header from '../components/header';
 import './StaffPage.css';
-import { getCookie } from '../services/authServices';
 
 export default function StaffPage() {
+
+  // Redirect to login page if not logged in
   useEffect(() => {
-    const token = getCookie('authToken');
-    if (!token) {
-      window.location.href = '/login';
-    }
+    checkLoginAndRedirect();
   }, []);
 
   return (
@@ -22,6 +23,8 @@ export default function StaffPage() {
         <Button variant='primary' href='/surveys'>View Surveys</Button>
 
         <Button variant='primary' href='/responses'>View Responses</Button>
+
+        <Button variant='primary' href='/newuser'>Create User</Button>
       </div>
     </div>
   );

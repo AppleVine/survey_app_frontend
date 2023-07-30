@@ -1,11 +1,11 @@
-.login {
+.login, .create-user {
   display: flex;
   flex-direction: column;
   align-items: center;
   height: 100vh;
 }
   
-.login form {
+.login form, .create-user form {
   display: flex;
   flex-direction: column;
   align-items: center;
