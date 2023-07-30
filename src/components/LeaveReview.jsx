@@ -10,6 +10,7 @@ export default function LeaveReview() {
   let reviewLink = surveyState.data.reviewLink;
 
     const handleButtonClick = () => {
+      // Check link is formatted correctly
       if (reviewLink.slice(0,3) !== "http") {
         reviewLink = "https://" + reviewLink;
       }
