@@ -1,7 +1,7 @@
 
 import { getCookie, deleteCookie } from "./authServices";
 
-const API = "http://localhost:3000";
+const API = process.env.API || 'http://localhost:3000/admin';
 
 export async function getSurveyResponses(surveyID) {
   try {
