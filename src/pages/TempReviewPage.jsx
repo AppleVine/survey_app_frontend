@@ -1,4 +1,4 @@
-import LeaveReview from "../components/leaveReview"
+import LeaveReview from "../components/LeaveReview"
 import "./TempReviewPage.css"
 
 export default function ReviewPage(){

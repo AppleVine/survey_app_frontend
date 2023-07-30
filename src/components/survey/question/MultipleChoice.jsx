@@ -71,14 +71,14 @@ export default function MultipleChoice({ id, type }) {
 
   // Highlight unanswered questions
   useEffect(() => {
-    if (responseState) {
+    if (responseState && !editState) {
       if (responseState.alert && (responseState.answers[id] === null || responseState.answers[id] === "")) {
         addAlert(ref);
       } else {
         removeAlert(ref);
       }
     }
-  }, [responseState, id])
+  }, [responseState, id, editState])
 
   // In view survey mode
   if (!editState) {
