@@ -74,6 +74,19 @@ textarea {
     border-radius: 1rem;
     padding: 0.3rem;
 }
+.question-details {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.question-details-edit {
+    width: auto;
+    flex-grow: 3;
+    background-color: white;
+    border-radius: 1rem;
+    padding: 0.3rem;
+}
 
 .remove-button {
     width: 1.5rem;
@@ -98,7 +111,7 @@ textarea {
 }
 
 .question-details-button{
-    float: right;
+    justify-self: flex-end;
 }
 
 .save-changes-button {

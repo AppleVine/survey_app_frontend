@@ -11,10 +11,12 @@ export default function ShortText({id}) {
   const ref = useRef(null);
 
   useEffect(() => {
-    if (responseState.alert && (responseState.answers[id] === null || responseState.answers[id] === "")) {
-      addAlert(ref);
-    } else {
-      removeAlert(ref);
+    if (responseState) {
+      if (responseState.alert && (responseState.answers[id] === null || responseState.answers[id] === "")) {
+        addAlert(ref);
+      } else {
+        removeAlert(ref);
+      }
     }
   }, [responseState, id])
 

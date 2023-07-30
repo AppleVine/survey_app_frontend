@@ -62,8 +62,8 @@ export default function QuestionDetails({ id }) {
         {
         state.data.questions[id].data.questionDetails
         ? 
-        <div>
-          {state.data.questions[id].data.questionDetails}
+        <div className='question-details'>
+          <div className='question-details-edit'>{state.data.questions[id].data.questionDetails}</div>
           <Button className='question-details-button' variant='secondary' onClick={() => setQuestionDetails(null)} >Remove Question Details</Button>
         </div>
         :
