@@ -26,10 +26,12 @@ export default function ViewSurveys() {
           <div key={survey._id} className="survey-title">
             <div className="title-id">
               <h2>{survey.title}</h2>
-              <h8>{survey._id}</h8>
+              <h6>{survey._id}</h6>
             </div>
-            <p>{survey.description}</p>
-            <h8>Number of Responses: {survey.responses.length}</h8>
+            <div className="survey-info">
+              <p>{survey.description}</p>
+              <h6>Number of Responses: {survey.responses.length}</h6>
+            </div>
           </div>
         ))}
       </div>

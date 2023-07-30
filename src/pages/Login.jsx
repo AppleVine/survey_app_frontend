@@ -41,12 +41,6 @@ export default function LoginPage() {
     }
   };
 
-  const handleBug = () => {
-    // const token = getCookie('authToken');
-    // console.log(token);
-  };
-  
-
   return (
     <div>
       <Header />
@@ -62,8 +56,6 @@ export default function LoginPage() {
           </div>
           <Button type="submit" variant="primary" onClick={handleSubmit}>Login</Button>
         </form>
-
-        <Button className="account" variant="primary" onClick={handleBug}>Account Creation // bug testing</Button>
 
         {error !== null && <p className="error-message">{error}</p>}
       </div>

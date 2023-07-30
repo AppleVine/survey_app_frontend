@@ -67,8 +67,6 @@ export default function RegisterPage() {
           <Button type="submit" variant="primary" onClick={handleSubmit}>Register</Button>
         </form>
 
-        <Button className="account" variant="primary">Account Creation</Button>
-
         {error !== null && <p className="error-message">{error}</p>}
 
       </div>

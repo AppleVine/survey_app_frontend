@@ -22,7 +22,7 @@ function App() {
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/staff" element={<StaffPage />} />
             <Route path="/leavereview" element={<ReviewPage />} />
-            <Route path="/responses/:surveyid" element={<SurveyResponses />} />
+            <Route path="/responses/:surveyID" element={<SurveyResponses />} />
             <Route path='/reCAPTCHA' element={<CaptchaPage />} />
             <Route path="/surveys" element={<ViewSurveys />} />
             <Route path="/surveys" element={<Outlet />}>
