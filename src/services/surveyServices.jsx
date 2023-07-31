@@ -1,6 +1,9 @@
 import { getCookie } from "./authServices";
 import { verifyToken } from "./authServices";
+<<<<<<< HEAD
 
+=======
+>>>>>>> 86d7aefa0dd789e5cd2b990865f8d612add5c998
 
 const api = process.env.REACT_APP_API;
 
