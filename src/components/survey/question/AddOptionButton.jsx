@@ -21,7 +21,7 @@ export default function AddOptionButton({ id }) {
   return (
     <Row className='justify-content-center'>
       <Col md={2}>
-        <Button className="add-option-button" variant='secondary' onClick={ () => handleClick() }></Button>
+        <Button className="add-option-button" aria-label="add-option" variant='secondary' onClick={ () => handleClick() }></Button>
       </Col>
     </Row>
   )
