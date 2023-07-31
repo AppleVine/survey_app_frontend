@@ -1,37 +1,21 @@
 import Header from "../components/header";
-import { Fragment, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { getAllResponses } from "../services/responseServices";
+import { formatDate, parseMultipleChoiceQuestion, parseTextQuestion, sortResponses } from "../components/responseFunctions";
+
+// CSS imports
 import "./SurveyResponses.css"
 import { Button } from "react-bootstrap";
 
 export default function SurveyResponses() {
   const [responses, setResponses] = useState([]);
 
-  const parseMultiChoice = (answer) => {
-    if (answer.optionId) {
-      return( 
-        <Fragment>
-          {`Option: ${answer.optionId} Answer: ${answer.text}`}
-        </Fragment>
-      )
-    } else {
-      return(
-        <Fragment>
-          {
-            answer.map((data) => {
-              return <div>{`Option: ${data.optionId} Answer: ${data.text}`}</div>
-            })
-          }
-        </Fragment>
-      )
-    }
-  }
-
   useEffect(() => {
     const fetchResponses = async () => {
       try {
         const allResponses = await getAllResponses();
-        setResponses(allResponses);
+        const sortedResponses = sortResponses(allResponses);
+        setResponses(sortedResponses);
       } catch (error) {
         console.error(error);
       }
@@ -48,13 +32,16 @@ export default function SurveyResponses() {
         {responses.map((response) => (
           <div key={response._id} className="response-tile">
             <ul>
+              <li>
+                <h6>{formatDate(response.dateSubmitted)}</h6>
+              </li>
               {response.answers.map((answer, index) => (
                 <li key={index}>
                   <h3>Question {index + 1}: </h3>
                   { typeof answer === 'string' ?
-                  answer
+                  parseTextQuestion(answer)
                   :
-                  parseMultiChoice(answer)
+                  parseMultipleChoiceQuestion(answer)
                   }
                 </li>
               ))}
