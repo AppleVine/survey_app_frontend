@@ -11,7 +11,7 @@ export default function SurveyQuestionsContainer() {
 
   return (
     <Stack gap={3}>
-        <form>
+        <form role='form'>
           { 
             // Loop through question array and generate a question container for each existing question
               state.data.questions.map( (question, index) => {

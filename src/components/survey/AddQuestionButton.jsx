@@ -16,7 +16,7 @@ export default function AddQuestionButton() {
   return (
     <Row className='justify-content-center'>
       {
-        editState ? <Button className='add-question-button' variant='secondary' onClick={ () => handleClick() }></Button> : null
+        editState ? <Button className='add-question-button' aria-label="add-question" variant='secondary' onClick={ () => handleClick() }></Button> : null
       }
     </Row>
   )
