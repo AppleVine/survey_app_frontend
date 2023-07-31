@@ -23,6 +23,7 @@ export default function SubmitResponseButton({ submitted, setSubmitted }) {
         if (response === null || response === "") {
           alert("Please answer all questions before submitting.");
           responseDispatch({ type: "alert" });
+          setClicked(false);
           return;
         }
       }
@@ -63,7 +64,7 @@ export default function SubmitResponseButton({ submitted, setSubmitted }) {
 
       try {
         // Send CAPTCHA data to the backend for validation
-        const response = await axios.post("http://localhost:3000/reCAPTCHA", { token });
+        const response = await axios.post(`${process.env.REACT_APP_API}/reCAPTCHA`, { token });
         // Submit response data if CAPTCHA is valid
         await submitSurveyResponse(responseData);
         // Set state of parent component to submitted
