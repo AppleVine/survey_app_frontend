@@ -2,6 +2,7 @@ import React, {useEffect} from 'react';
 import EditSurveyContainer from '../components/survey/EditSurveyContainer';
 import { checkLoginAndRedirect } from '../services/authServices';
 import SaveNewSurveyButton from '../components/survey/SaveNewSurveyButton';
+import Header from '../components/header';
 
 // Style import
 import './CreateEditSurvey.css';
@@ -18,6 +19,7 @@ export default function CreateSurvey() {
 
   return (
     <Container fluid>
+      <Header />
       <Row className='justify-content-center'>
         <Col>
           <EditSurveyContainer  />
