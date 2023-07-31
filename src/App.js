@@ -13,6 +13,7 @@ import ViewSurveys from "./pages/ViewSurveys"
 import ReviewPage from './pages/TempReviewPage';
 import ViewAllResponses from './pages/ViewAllResponses';
 import { ResponseProvider } from './contexts/responseContext';
+import ViewStaffSurveys from "./pages/ViewStaffSurveys"
 
 function App() {
   return (
@@ -26,12 +27,13 @@ function App() {
             <Route path="/leavereview" element={<ReviewPage />} />
             <Route path="/responses/:surveyID" element={<SurveyResponses />} />
             <Route path="/surveys" element={<ViewSurveys />} />
+            <Route path="/surveys/staff/:staffid" element={<ViewStaffSurveys />} />
+            <Route path ='/responses' element={<ViewAllResponses />} />
             <Route path="/surveys" element={<Outlet />}>
               <Route path='/surveys/create' element={<EditContextProvider><SurveyProvider><CreateSurvey /></SurveyProvider></EditContextProvider>} />
               <Route path='/surveys/:surveyId' element={ <EditContextProvider><SurveyProvider><ResponseProvider><ViewSurvey /></ResponseProvider></SurveyProvider></EditContextProvider> } />
               <Route path='/surveys/:surveyId/edit' element={<EditContextProvider><SurveyProvider><EditSurvey /></SurveyProvider></EditContextProvider>} />
             </Route>
-            <Route path ='/responses' element={<ViewAllResponses />} />
           </Routes>
         </Router>
     </div>

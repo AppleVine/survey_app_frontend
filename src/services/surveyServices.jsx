@@ -1,5 +1,7 @@
 import { getCookie } from "./authServices";
 import { verifyToken } from "./authServices";
+import axios from 'axios';
+
 
 const api = process.env.REACT_APP_API;
 
@@ -138,5 +140,32 @@ export async function getSurveys() {
   } catch (error) {
     console.error(error);
     throw new Error('Failed to fetch surveys');
+  }
+}
+
+// get staff-specific surveys
+export async function getStaffSurveys(staffId) {
+  try {
+    const token = getCookie('authToken');
+
+    const response = await fetch(`${api}/surveys/staff/${staffId}`, {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+      },
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      console.log('API Response:', data); // Log the API response data
+      return data; // Return the entire data object, which contains the surveys array
+    } else {
+      // If the response is not ok, throw an error with the error message
+      const errorData = await response.json();
+      console.error('API Error:', errorData); // Log the API error response data
+      throw new Error(errorData.message);
+    }
+  } catch (error) {
+    console.error(error);
+    throw new Error('Failed to fetch staff-specific surveys');
   }
 }
