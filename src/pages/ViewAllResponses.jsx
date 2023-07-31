@@ -1,12 +1,11 @@
 import Header from "../components/header";
 import { Fragment, useEffect, useState } from 'react';
-import { getSurvey, getAllResponses } from "../services/responseServices";
+import { getAllResponses } from "../services/responseServices";
 import "./SurveyResponses.css"
 import { Button } from "react-bootstrap";
 
 export default function SurveyResponses() {
   const [responses, setResponses] = useState([]);
-//   const [survey, setSurvey] = useState([]);
 
   const parseMultiChoice = (answer) => {
     if (answer.optionId) {
@@ -41,27 +40,9 @@ export default function SurveyResponses() {
     fetchResponses();
   }, []);
 
-//   useEffect(() => {
-//     const fetchSurvey = async () => {
-//       try {
-//         const theSurvey = await getSurvey(surveyID);
-//         setSurvey(theSurvey);
-//       } catch (error) {
-//         console.log(error);
-//       }
-//     };
-  
-//     fetchSurvey();
-//   }, [surveyID]);
-
   return (
     <div>
       <Header />
-
-      {/* <div className="container">
-        <h3>{survey.title}</h3>
-      </div> */}
-      
       
       <div className="response-container">
         {responses.map((response) => (
