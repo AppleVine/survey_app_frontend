@@ -18,7 +18,7 @@ export function deleteCookie(name) {
 
 export async function verifyToken(token) {
   try {
-    const response = await fetch(`${api}/verify-token`, {
+    const response = await fetch(`${api}/admin/verify-token`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
