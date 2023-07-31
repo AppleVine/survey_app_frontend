@@ -29,8 +29,6 @@ export default function StaffPage() {
 
         <Button variant='primary' href='/surveys'>View Surveys</Button>
 
-        <Button variant='primary' href='/responses'>View Responses</Button>
-
         <Button variant='primary' href={`/surveys/staff/${staffId}`}>My Surveys</Button>
       </div>
     </div>
