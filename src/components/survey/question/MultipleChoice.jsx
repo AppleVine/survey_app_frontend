@@ -8,10 +8,13 @@ import RemoveOptionButton from './RemoveOptionButton';
 import Stack from 'react-bootstrap/Stack';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import { useResponseContext, useResponseDispatchContext } from '../../../contexts/responseContext';
 
 export default function MultipleChoice({ id, type }) {
   const state = useSurveyContext();
   const dispatch = useSurveyDispatchContext();
+  const responseState = useResponseContext() || null;
+  const responseDispatch = useResponseDispatchContext() || null;
   const [optionArray, setOptionArray] = useState([]);
   const [editModeArray, setEditModeArray] = useState(false);
   const editState = useEditContext();
@@ -34,6 +37,16 @@ export default function MultipleChoice({ id, type }) {
     setEditModeArray(newEditModeArray);
   }
 
+  const handleSelectOption = (questionId, optionId) => {
+    if (type === "radio") {
+      responseDispatch({type: "updateMultiRadio", data:{questionId: questionId, optionId: optionId}})
+    } else {
+      let newState = !responseState.answers[questionId][optionId];
+      responseDispatch({type: "updateMultiCheck", data:{questionId: questionId, optionId: optionId, selectState: newState}})
+    }
+
+  }
+
   // Trigger rerender on state change
   useEffect(() => {},[state])
 
@@ -46,11 +59,35 @@ export default function MultipleChoice({ id, type }) {
   // Update global state when question edited
   useEffect(() => {
     // Check that question options are not empty or default data
+    // eslint-disable-next-line
     if (optionArray != [] && optionArray != ["Enter an option", "Enter an option", "Enter an option"]) {  // Must be loose equality!
       dispatch({type: "updateQuestion", data: {questionId: id, field: "questionOptions", value: optionArray}});
     }
     // eslint-disable-next-line
   },[optionArray])
+
+  // In view survey mode
+  if (!editState) {
+    return(
+      <Row className='justify-content-center'>
+      <Col md={10}>
+        <Stack gap={2} className={`question-options-${type} question-options`}>
+          {
+            state.data.questions[id].data.questionOptions.map((option, index) => {
+              return(
+                <div className={`question-option-${type} question-option`} key={ index }>
+                  <input type={type} name={ `question${id}` } id={ option } defaultChecked={false} 
+                  onChange={() => handleSelectOption(id, index)} />
+                  <label htmlFor={ option } >{ option }</label>
+                </div>
+              )
+            })
+          }
+        </Stack>
+      </Col>
+    </Row>
+    )
+  }
 
 
   return (

@@ -28,6 +28,29 @@ export async function getSurveyResponses(surveyID) {
   }
 }
 
+export async function submitSurveyResponse(surveyResponseData) {
+  try {
+    const response = await fetch(`${API}/responses/`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(surveyResponseData)
+    })
+
+    const json = await response.json();
+
+    if (response.ok) {
+      return json;
+    } else {
+      throw new Error(json.error);
+    }
+  } catch (error) {
+    console.log('Error saving to database:', error);
+    throw error;
+  }
+}
+
 export async function getSurvey(surveyID) {
   try {
     const token = getCookie('authToken');

@@ -45,6 +45,7 @@ export default function EditSurveyContainer() {
         didDraftLoad.current = true;
         if (surveyDraft) { // Check if saved draft exists
           const surveyData = JSON.parse(surveyDraft);
+          // eslint-disable-next-line
           if (surveyData.data._id == surveyId) {// Either these things need to match, or they both need to be undefined/null
             if (window.confirm("Restore saved draft?")) {
               dispatch({type: "loadDraft", data: surveyData})

@@ -36,17 +36,20 @@ export default function QuestionType({id}) {
   },[userInput])
 
   return (
-    <div>Question Type: 
+    <div> 
       { 
         editState ? 
-        <select name="questionType" id={`question-type-selector${id}`} 
-        onChange={(event) => setUserInput(event.target.value)} value={state.data.questions[id].data.questionType} >
-            <option value={""} disabled >Select a question type</option>
-            <option value="multipleChoiceRadio">Multiple Choice (Radio)</option>
-            <option value="multipleChoiceCheckbox">Multiple Choice (Checkbox)</option>
-            <option value="shortText">Short Text</option>
-            <option value="longText">Long Text</option>
-        </select>
+        <div>
+          Question Type:
+          <select name="questionType" id={`question-type-selector${id}`} 
+          onChange={(event) => setUserInput(event.target.value)} value={state.data.questions[id].data.questionType} >
+              <option value={""} disabled >Select a question type</option>
+              <option value="multipleChoiceRadio">Multiple Choice (Radio)</option>
+              <option value="multipleChoiceCheckbox">Multiple Choice (Checkbox)</option>
+              <option value="shortText">Short Text</option>
+              <option value="longText">Long Text</option>
+          </select>
+        </div>
         :
         null 
       }

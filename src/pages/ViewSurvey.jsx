@@ -4,15 +4,22 @@ import {useSurveyDispatchContext} from '../contexts/surveyContext';
 import { getSurvey } from '../services/surveyServices';
 import { checkForUser } from '../services/authServices';
 import ViewSurveyContainer from '../components/survey/ViewSurveyContainer';
+import SubmitResponseButton from '../components/survey/SubmitResponseButton';
 
 // CSS imports
 import Button from 'react-bootstrap/Button';
+import { useResponseContext, useResponseDispatchContext } from '../contexts/responseContext';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
 
 export default function ViewSurvey() {
     // Get survey id from url
     let { surveyId } = useParams();
     // Set up dispatch so we can load the survey data into state
     const dispatch = useSurveyDispatchContext();
+    // Set up response state and dispatch so we can store the responses
+    const responseState = useResponseContext();
+    const responseDispatch = useResponseDispatchContext();
     // Track whether or not there is a logged in user
     let isUser = false;
     // Set up redirects
@@ -41,6 +48,15 @@ export default function ViewSurvey() {
           }
           surveyData.survey.questions = structuredClone(questionArray);
           dispatch({type: "loadSurvey", data: surveyData.survey});
+          // Create option array for responses
+          let noOfOptions = [];
+          for (let i = 0; i < questionArray.length; i++) {
+            if (questionArray[i].data.questionType === "multipleChoiceCheckbox") {
+              noOfOptions[i] = questionArray[i].data.questionOptions.length;
+            }
+          }
+          responseDispatch({type:"load", data: {surveyId: surveyId, noOfQuestions: questionArray.length, 
+            noOfOptions: noOfOptions}})
         }
       }
   
@@ -50,7 +66,7 @@ export default function ViewSurvey() {
     },[])
 
   return (
-    <div>
+    <Col>
       <ViewSurveyContainer />
       <div>
         {
@@ -61,6 +77,9 @@ export default function ViewSurvey() {
           null
         }
       </div>
-    </div>
+      <Row className="justify-content-center" >
+        <SubmitResponseButton />
+      </Row>
+    </Col>
   )
 }

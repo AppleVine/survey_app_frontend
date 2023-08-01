@@ -17,7 +17,7 @@ export default function QuestionResponse({ id }) {
         case "multipleChoiceCheckbox":
             return <MultipleChoice id={ id } type={"checkbox"} />
         case "shortText":
-            return <ShortTextResponse />
+            return <ShortTextResponse id={ id } />
         case "longText":
             return <LongTextResponse id={ id } />
         default:
