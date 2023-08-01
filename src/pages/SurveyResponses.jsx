@@ -1,6 +1,6 @@
 import Header from "../components/header";
 import { useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { getSurvey, getSurveyResponses } from "../services/responseServices";
 import "./SurveyResponses.css"
 
@@ -8,6 +8,26 @@ export default function SurveyResponses() {
   const { surveyID } = useParams();
   const [responses, setResponses] = useState([]);
   const [survey, setSurvey] = useState([]);
+
+  const parseMultiChoice = (answer) => {
+    if (answer.optionId) {
+      return( 
+        <Fragment>
+          {`Option: ${answer.optionId} Answer: ${answer.text}`}
+        </Fragment>
+      )
+    } else {
+      return(
+        <Fragment>
+          {
+            answer.map((data) => {
+              return <div>{`Option: ${data.optionId} Answer: ${data.text}`}</div>
+            })
+          }
+        </Fragment>
+      )
+    }
+  }
 
   useEffect(() => {
     const fetchResponses = async () => {
@@ -53,7 +73,11 @@ export default function SurveyResponses() {
                   <strong>Question {index + 1}: </strong>
                   {question.questionText}
                   <br />
-                  {response.answers[index]}
+                  { typeof response.answers[index] === 'string' ?
+                  response.answers[index]
+                  :
+                  parseMultiChoice(response.answers[index])
+                  }
                 </li>
               ))}
             </ul>
