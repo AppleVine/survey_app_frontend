@@ -29,6 +29,7 @@ const stripEditMode = (state) => {
     for (let i = 0; i < surveyData.questions.length; i++) {
     surveyData.questions[i] = structuredClone(surveyData.questions[i].data);
     }
+    delete surveyData._id
     return surveyData
 }
 

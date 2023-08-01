@@ -38,35 +38,35 @@ export async function getSurvey(surveyID) {
 }
 
 export async function createSurvey(data) {
-    const token = getCookie('authToken');
-  
-    try {
-      // Verify the token before making the API call
-      await verifyToken(token);
-    
-      const response = await fetch(`${api}/surveys/create`, {
-        method: "POST",
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
-        },
-        body: JSON.stringify(data)
-      });
-  
-      const json = await response.json();
-      if (response.ok) {
-        return json;
-      } else {
-        throw new Error(json.error);
-      }
-    } catch (error) {
-      console.log('Error saving to database:', error);
-      throw error;
+  const token = getCookie('authToken');
+
+  try {
+    // Verify the token before making the API call
+    await verifyToken(token);
+
+    const response = await fetch(`${api}/surveys/create`, {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify(data)
+    });
+
+    const json = await response.json();
+    if (response.ok) {
+      // Return an object containing the ID and the saved survey document
+      return { id: json._id, survey: json };
+    } else {
+      throw new Error(json.error);
     }
+  } catch (error) {
+    console.log('Error saving to database:', error);
+    throw error;
   }
+}
   
-  
-  
+
 
 export async function updateSurvey(id, data) {
     const token = getCookie('authToken');
