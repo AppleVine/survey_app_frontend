@@ -13,7 +13,7 @@ import Stack from 'react-bootstrap/Stack';
 export default function QuestionContainer({ index }) {
 
   return (
-    <div className='position-relative'>
+    <div className='position-relative question-container'>
       <Row>
         <Col>
           <RemoveQuestionButton questionId={index} />

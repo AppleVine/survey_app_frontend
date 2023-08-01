@@ -1,6 +1,6 @@
 import ReCAPTCHA from "react-google-recaptcha";
 import React, { useRef } from 'react';
-import axios from "axios";
+const axios = require("axios");
 
 
 const CaptchaPage = () => {
