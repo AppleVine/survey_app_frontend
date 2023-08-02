@@ -78,7 +78,8 @@ export default function MultipleChoice({ id, type }) {
         removeAlert(ref);
       }
     }
-  }, [responseState, id, editState])
+  // eslint-disable-next-line
+  }, [responseState])
 
   // In view survey mode
   if (!editState) {
