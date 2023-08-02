@@ -33,6 +33,8 @@ export default function SurveyResponses() {
     const fetchResponses = async () => {
       try {
         const surveyResponses = await getSurveyResponses(surveyID);
+        // Sort the surveyResponses array based on dateSubmitted in descending order
+        surveyResponses.sort((a, b) => new Date(b.dateSubmitted) - new Date(a.dateSubmitted));
         setResponses(surveyResponses);
       } catch (error) {
         console.error(error);
@@ -55,6 +57,11 @@ export default function SurveyResponses() {
     fetchSurvey();
   }, [surveyID]);
 
+  const formatDate = (date) => {
+    const formattedDate = new Date(date).toLocaleDateString("en-GB");
+    return formattedDate;
+  };
+
   return (
     <div>
       <Header />
@@ -68,15 +75,17 @@ export default function SurveyResponses() {
         {responses.map((response) => (
           <div key={response._id} className="response-tile">
             <ul>
+              <li>
+                <h6>{formatDate(response.dateSubmitted)}</h6>
+              </li>
               {survey.questions && Array.isArray(survey.questions) && survey.questions.map((question, index) => (
                 <li key={index}>
                   <strong>Question {index + 1}: </strong>
                   {question.questionText}
                   <br />
-                  { typeof response.answers[index] === 'string' ?
-                  response.answers[index]
-                  :
-                  parseMultiChoice(response.answers[index])
+                  {typeof response.answers[index] === 'string'
+                    ? response.answers[index]
+                    : parseMultiChoice(response.answers[index])
                   }
                 </li>
               ))}
