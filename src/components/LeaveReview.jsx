@@ -7,10 +7,13 @@ import { useSurveyContext } from "../contexts/surveyContext";
 
 export default function LeaveReview() {
   const surveyState = useSurveyContext();
-  const reviewLink = surveyState.data.reviewLink;
+  let reviewLink = surveyState.data.reviewLink;
 
     const handleButtonClick = () => {
-      window.location.replace = reviewLink;
+      if (reviewLink.slice(0,3) !== "http") {
+        reviewLink = "https://" + reviewLink;
+      }
+      window.location.replace(reviewLink);
     };
   
     return (

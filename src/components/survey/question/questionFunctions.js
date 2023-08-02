@@ -20,7 +20,7 @@ export const updateOption = (questionId, optionId, value, dispatch) => {
 export const addAlert= (ref) => {
     const container = ref.current; // corresponding DOM node
     const className = "highlight"
-    if (container.classList && !container.classList.contains(className)) {
+    if (container && !container.classList.contains(className)) {
         container.classList.add(className);
       }
    } 
@@ -28,7 +28,7 @@ export const addAlert= (ref) => {
  export const removeAlert= (ref) => {
    const container = ref.current; // corresponding DOM node
    const className = "highlight"
-   if (container.classList && container.classList.contains(className)) {
+   if (container && container.classList.contains(className)) {
        container.classList.remove(className);
      }
    }
