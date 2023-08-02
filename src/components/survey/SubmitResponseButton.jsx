@@ -1,16 +1,27 @@
 import React from 'react'
 import { Button } from 'react-bootstrap'
-import { useResponseContext } from '../../contexts/responseContext'
+import { useResponseContext, useResponseDispatchContext } from '../../contexts/responseContext'
 import { useSurveyContext } from '../../contexts/surveyContext';
 import { submitSurveyResponse } from '../../services/responseServices';
 
 export default function SubmitResponseButton() {
     const surveyState = useSurveyContext();
     const responseState = useResponseContext();
+    const responseDispatch = useResponseDispatchContext();
 
     const handleSubmitResponse = async () => {
+        // Check that all questions are answered
+        for (let response of responseState.answers) {
+            if (response === null || response === "") {
+                alert("Please answer all questions before submitting.");
+                responseDispatch({type: "alert"});
+                return
+            }
+        }
         // Make a copy of current state
         const responseData = structuredClone(responseState);
+        // Remove 'alert'
+        delete responseData.alert;
         // Get multiple choice questions
         for (let i = 0; i < surveyState.data.questions.length; i++) {
             if (surveyState.data.questions[i].data.questionType === "multipleChoiceRadio") {

@@ -1,6 +1,7 @@
 export const initialResponse = {
     surveyId: null,
-    answers: []
+    answers: [],
+    alert: false
 }
 
 export const responseReducer = (previousState, instructions) => {
@@ -15,7 +16,7 @@ export const responseReducer = (previousState, instructions) => {
         case "load":
             // Load survey id into state and generate an answer array of the correct length
             // Copy state
-            stateEditable = {...previousState}
+            stateEditable = structuredClone(previousState);
             stateEditable.surveyId = instructions.data.surveyId;
             for (let i = 0; i < instructions.data.noOfQuestions; i++) {
                 // If the question has options, set them all to false(unselected)
@@ -33,14 +34,14 @@ export const responseReducer = (previousState, instructions) => {
             
         case "updateText":
             // Copy state
-            stateEditable = {...previousState}
+            stateEditable = structuredClone(previousState);
             // Assign answer data to answers array
             stateEditable.answers[instructions.data.questionId] = instructions.data.answer;
             return stateEditable
 
         case "updateMultiRadio":
             // Copy state
-            stateEditable = {...previousState}
+            stateEditable = structuredClone(previousState);
             // Get questionId and optionId from instructions
             questionId = instructions.data.questionId;
             optionId = instructions.data.optionId;
@@ -50,13 +51,19 @@ export const responseReducer = (previousState, instructions) => {
 
         case "updateMultiCheck":
             // Copy state
-            stateEditable = {...previousState}
+            stateEditable = structuredClone(previousState);
             // Get questionId and optionId from instructions
             questionId = instructions.data.questionId;
             optionId = instructions.data.optionId;
             // Update state of checked components
             stateEditable.answers[questionId][optionId] = instructions.data.selectState;
             return stateEditable;
+
+        case "alert":
+            // Copy state
+            stateEditable = structuredClone(previousState);
+            stateEditable.alert = true;
+            return stateEditable
 
         default:
             return previousState

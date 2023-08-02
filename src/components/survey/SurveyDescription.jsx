@@ -1,3 +1,4 @@
+import { useEditContext } from '../../contexts/editContext';
 import {useSurveyContext, useSurveyDispatchContext} from '../../contexts/surveyContext'
 import EditFieldButton from './EditFieldButton'
 import { saveField } from './surveyFunctions'
@@ -5,6 +6,12 @@ import { saveField } from './surveyFunctions'
 export default function SurveyDescription() {
   const state = useSurveyContext();
   const dispatch = useSurveyDispatchContext();
+  const editState = useEditContext();
+
+  // Descrition is for internal use only, do not show when viewing survey
+  if (!editState) {
+    return(null)
+  }
 
   return (
     <div className='survey-field'>
