@@ -2,32 +2,12 @@ import Header from "../components/header";
 import { useParams } from 'react-router-dom';
 import { Fragment, useEffect, useState } from 'react';
 import { getSurvey, getSurveyResponses } from "../services/responseServices";
-import "./SurveyResponses.css"
+import "./SurveyResponses.css";
 
 export default function SurveyResponses() {
   const { surveyID } = useParams();
   const [responses, setResponses] = useState([]);
   const [survey, setSurvey] = useState([]);
-
-  const parseMultiChoice = (answer) => {
-    if (answer.optionId) {
-      return( 
-        <Fragment>
-          {`Option: ${answer.optionId} Answer: ${answer.text}`}
-        </Fragment>
-      )
-    } else {
-      return(
-        <Fragment>
-          {
-            answer.map((data) => {
-              return <div>{`Option: ${data.optionId} Answer: ${data.text}`}</div>
-            })
-          }
-        </Fragment>
-      )
-    }
-  }
 
   useEffect(() => {
     const fetchResponses = async () => {
@@ -62,6 +42,32 @@ export default function SurveyResponses() {
     return formattedDate;
   };
 
+  const parseMultipleChoiceQuestion = (question, answer) => {
+    if (Array.isArray(answer)) {
+      const selectedOptions = answer.map((data) => data.text);
+      return <Fragment>{selectedOptions.join(", ")}</Fragment>;
+    } else {
+      return <Fragment>{answer.text}</Fragment>;
+    }
+  };
+
+  const parseTextQuestion = (answer) => {
+    return <Fragment>{answer}</Fragment>;
+  };
+
+  const parseResponse = (question, answer) => {
+    switch (question.questionType) {
+      case "multipleChoiceRadio":
+      case "multipleChoiceCheckbox":
+        return parseMultipleChoiceQuestion(question, answer);
+      case "shortText":
+      case "longText":
+        return parseTextQuestion(answer);
+      default:
+        return <Fragment>No answer provided</Fragment>;
+    }
+  };
+
   return (
     <div>
       <Header />
@@ -69,7 +75,6 @@ export default function SurveyResponses() {
       <div className="container">
         <h3>{survey.title}</h3>
       </div>
-      
       
       <div className="response-container">
         {responses.map((response) => (
@@ -83,10 +88,7 @@ export default function SurveyResponses() {
                   <strong>Question {index + 1}: </strong>
                   {question.questionText}
                   <br />
-                  {typeof response.answers[index] === 'string'
-                    ? response.answers[index]
-                    : parseMultiChoice(response.answers[index])
-                  }
+                  {parseResponse(question, response.answers[index])}
                 </li>
               ))}
             </ul>
