@@ -51,8 +51,8 @@ export default function ViewSurveys() {
               <h6>Responses: {survey.responses.length}</h6>
             </div>
             <div className="nav-button">
-              <Button variant='info' href={`/responses/${survey._id}`}>View Responses</Button>
               <Button variant='info' href={`/surveys/${survey._id}`}>View Survey</Button>
+              <Button variant='info' href={`/responses/${survey._id}`}>View Responses</Button>
             </div>
           </div>
         ))}
