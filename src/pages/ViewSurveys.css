@@ -1,15 +1,18 @@
+/* CSS for ViewSurveys page */
 a {
   text-decoration: none;
   color: inherit;
 }
 
 .btn-info {
-  background-color: white;
+  background-color: #4a90a8  ;
   border: none;
+  min-width: 140px;
+  color: white;
 }
 
 .btn-info:hover {
-  background-color: #fff8e1;
+  background-color: #ffff00;
 }
 
 .survey-link {
@@ -45,6 +48,12 @@ a {
   flex-direction: column;
   align-items: flex-start;
 }
+
+.nav-button {
+  display: flex;
+  gap: 4px; 
+}
+
 
 @media (max-width: 1000px) {
   .surveys-container {

@@ -7,7 +7,7 @@ import { stripEditMode } from './surveyFunctions';
 
 // CSS imports
 import Button from 'react-bootstrap/Button';
-import { set } from 'js-cookie';
+// import { set } from 'js-cookie';
 
 export default function SaveNewSurveyButton() {
   const state = useSurveyContext();
@@ -24,16 +24,14 @@ export default function SaveNewSurveyButton() {
       try {
         // Strip editMode data before saving
         const surveyData = stripEditMode(state);
-        await createSurvey(surveyData)
-        .then((response) => {
-          // Remove saved draft from storage
-          localStorage.removeItem("survey-draft");
-          // Redirect to view survey
-          navigate(`/surveys/${response.id}`)
-        })
+        const response = await createSurvey(surveyData); // Save the response in a variable
+        // Remove saved draft from storage
+        localStorage.removeItem("survey-draft");
+        // Redirect to view survey using the ID from the response
+        navigate(`/surveys/${response.id}`);
       } catch (error) {
         // Re-enable submission button
-        setSubmitted(false)
+        setSubmitted(false);
         console.error("Error saving survey to the database:", error);
       }
     }
