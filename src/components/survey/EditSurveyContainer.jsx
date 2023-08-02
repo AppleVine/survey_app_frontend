@@ -15,6 +15,7 @@ import './EditViewSurveyContainer.css'
 import Stack from 'react-bootstrap/Stack'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import SurveyReviewLink from './SurveyReviewLink'
 
 export default function EditSurveyContainer() {
   // If there is an id in the url, get it
@@ -82,6 +83,7 @@ export default function EditSurveyContainer() {
           <SurveyIntroText />
           <SurveyQuestionsContainer />
           <SurveyCompletionMessage />
+          <SurveyReviewLink />
           <Row className='justify-content-center'>
             <Col lg={2} md={4}>
               <MakePublicToggle />

@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import {useSurveyDispatchContext} from '../contexts/surveyContext';
 import { getSurvey } from '../services/surveyServices';
@@ -11,6 +11,7 @@ import Button from 'react-bootstrap/Button';
 import { useResponseContext, useResponseDispatchContext } from '../contexts/responseContext';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
+import LeaveReview from '../components/LeaveReview';
 
 export default function ViewSurvey() {
     // Get survey id from url
@@ -24,6 +25,8 @@ export default function ViewSurvey() {
     let isUser = false;
     // Set up redirects
     const navigate = useNavigate();
+    // Swap components out when response is submitted
+    const [submitted, setSubmitted] = useState(false);
 
     useEffect(() => {
       // Check if there is a logged in user
@@ -67,7 +70,7 @@ export default function ViewSurvey() {
 
   return (
     <Col>
-      <ViewSurveyContainer />
+      {submitted ? <LeaveReview />:<ViewSurveyContainer />}
       <div>
         {
           // Display edit button for logged in users
@@ -78,7 +81,7 @@ export default function ViewSurvey() {
         }
       </div>
       <Row className="justify-content-center" >
-        <SubmitResponseButton />
+        <SubmitResponseButton submitted={submitted} setSubmitted={setSubmitted} />
       </Row>
     </Col>
   )

@@ -19,6 +19,7 @@ export const initialSurvey = {
         description: "Insert survey description here.",
         introduction: "Insert survey intro here.",
         completionMessage: "Insert survey completion message here.",
+        reviewLink: "",
         makePublic: false,
         questions: [initialQuestion],
     },
@@ -26,7 +27,8 @@ export const initialSurvey = {
         title: false,
         description: false,
         introduction: false,
-        completionMessage: false
+        completionMessage: false,
+        reviewLink: false
     }
 }
 
