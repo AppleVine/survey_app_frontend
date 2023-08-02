@@ -21,7 +21,7 @@ export default function StaffPage() {
 
         <Button variant='primary' href='/surveys'>View Surveys</Button>
 
-        <Button variant='primary' href='/surveys'>View Responses</Button>
+        <Button variant='primary' href='/responses'>View Responses</Button>
       </div>
     </div>
   );

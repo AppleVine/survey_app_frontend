@@ -11,7 +11,8 @@ import EditSurvey from './pages/EditSurvey';
 import SurveyResponses from './pages/SurveyResponses';
 import ViewSurveys from "./pages/ViewSurveys"
 import ReviewPage from './pages/TempReviewPage';
-import CaptchaPage from "./pages/CaptchaPage"
+import CaptchaPage from "./pages/CaptchaPage";
+import ViewAllResponses from './pages/ViewAllResponses';
 import { ResponseProvider } from './contexts/responseContext';
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
               <Route path='/surveys/:surveyId' element={ <EditContextProvider><SurveyProvider><ResponseProvider><ViewSurvey /></ResponseProvider></SurveyProvider></EditContextProvider> } />
               <Route path='/surveys/:surveyId/edit' element={<EditContextProvider><SurveyProvider><EditSurvey /></SurveyProvider></EditContextProvider>} />
             </Route>
+            <Route path ='/responses' element={<ViewAllResponses />} />
           </Routes>
         </Router>
     </div>
