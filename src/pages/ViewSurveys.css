@@ -54,6 +54,13 @@ a {
   gap: 4px; 
 }
 
+.captcha-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
 
 @media (max-width: 1000px) {
   .surveys-container {
