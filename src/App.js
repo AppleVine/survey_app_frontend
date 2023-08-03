@@ -11,7 +11,6 @@ import EditSurvey from './pages/EditSurvey';
 import SurveyResponses from './pages/SurveyResponses';
 import ViewSurveys from "./pages/ViewSurveys"
 import ReviewPage from './pages/TempReviewPage';
-import CaptchaPage from "./pages/CaptchaPage";
 import ViewAllResponses from './pages/ViewAllResponses';
 import { ResponseProvider } from './contexts/responseContext';
 
@@ -26,7 +25,6 @@ function App() {
             <Route path="/staff" element={<StaffPage />} />
             <Route path="/leavereview" element={<ReviewPage />} />
             <Route path="/responses/:surveyID" element={<SurveyResponses />} />
-            <Route path='/reCAPTCHA' element={<CaptchaPage />} />
             <Route path="/surveys" element={<ViewSurveys />} />
             <Route path="/surveys" element={<Outlet />}>
               <Route path='/surveys/create' element={<EditContextProvider><SurveyProvider><CreateSurvey /></SurveyProvider></EditContextProvider>} />
