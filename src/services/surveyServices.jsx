@@ -1,7 +1,5 @@
 import { getCookie } from "./authServices";
 import { verifyToken } from "./authServices";
-import axios from 'axios';
-
 
 const api = process.env.REACT_APP_API;
 
