@@ -30,9 +30,14 @@ export default function SaveNewSurveyButton() {
         // Redirect to view survey using the ID from the response
         navigate(`/surveys/${response.id}`);
       } catch (error) {
-        // Re-enable submission button
-        setSubmitted(false);
-        console.error("Error saving survey to the database:", error);
+        if (error.status === 401) { // Check the status of the error response
+          // If the response is 401 Unauthorized, redirect to login page
+          window.location.href = '/login'; // Change this to the appropriate login URL
+        } else {
+          // Re-enable submission button
+          setSubmitted(false);
+          console.error("Error saving survey to the database:", error);
+        }
       }
     }
   };
