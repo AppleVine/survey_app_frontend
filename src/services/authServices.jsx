@@ -31,7 +31,7 @@ export async function verifyToken(token) {
       return;
     } else if (response.status === 404 || response.status === 401) {
       deleteCookie('authToken');
-      throw new Error('Token verification failed');
+      throw response; // Throw the original response with 401 status
     } else {
       throw new Error('Token verification error');
     }
