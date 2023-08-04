@@ -1,6 +1,6 @@
 import Header from "../components/header";
 import { Fragment, useEffect, useState } from 'react';
-import { getSurvey, getAllResponses } from "../services/responseServices";
+import { getAllResponses } from "../services/responseServices";
 import "./SurveyResponses.css"
 import { Button } from "react-bootstrap";
 
