@@ -29,7 +29,7 @@ export default function SurveyResponses() {
       <Header />
       
       <div className="response-container">
-        {responses.map((response) => (
+        {responses && responses.map((response) => (
           <div key={response._id} className="response-tile">
             <ul>
               <li>
