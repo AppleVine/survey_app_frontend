@@ -1,5 +1,21 @@
 # survey_app_frontend
 
+## Front end link:
+
+- https://survey-sorter-fe.onrender.com/login
+
+- Repo: https://github.com/AppleVine/survey_app_frontend
+
+note: You can use /register to make an account. 
+- Username: TestUser4
+- Password: TestUser4
+
+## Back end link:
+
+- https://survey-sorter.onrender.com/
+
+- Repo: https://github.com/plutoniumcat/survey-app-backend
+
 ## Description of website
 
 ### **Purpose:**
@@ -139,6 +155,29 @@ On the back-end, Node.js and Express.js will power the server-side development, 
 ----
 ## Wireframes (multiple screen sizes)
 
+- Desktop:
+![](./assets/wireframesDesktop.png)
+
+- Mobile:
+![](./assets/wireframesMobile.png)
+
+----
+## Google slides:
+
+- https://docs.google.com/presentation/d/1sU9t_2P_R2tnMGCDsezLftCw7KSZZ0gIRXyx8W2WtHw/edit?usp=sharing
+
+## Presentation link:
+
+- https://vimeo.com/851849933/252a4ea9fd
+
+----
+## Testing
+
+- https://docs.google.com/spreadsheets/d/1B2JZ5162L1d3MhqkaKtPPHvKB9q-daoTuDMoUXf5jpc/edit?usp=sharing
+
+- https://docs.google.com/spreadsheets/d/13tfmVWXNSZwO7MQO9Hi49CG1Mv4lI_9PHVohrtaX85Q/edit?usp=sharing
+
+- automatic testing scripts for both front end & back end. 
 
 ----
 ## Screenshots of trello board (and other communication)
@@ -152,3 +191,45 @@ On the back-end, Node.js and Express.js will power the server-side development, 
 ### 30/06/23
 
 ![30/06/23](./assets/trello30.06.23.png)
+
+### 03/07/23
+
+![](./assets/trello03.07.23.png)
+
+### 05/07/23
+
+![](./assets/trello 05.07.23.png)
+
+### 11/07/23
+
+![](./assets/trello11.07.23.png)
+
+### 20/07/23
+
+![](./assets/trello20.07.23.png)
+
+### 25/07/23
+
+![](./assets/trello25.07.23.png)
+
+### 28/07/23
+
+![](./assets/trello28.07.23.png)
+
+### 30/07/23
+
+![](./assets/trello30.07.23.png)
+
+### 02/08/23
+
+![](./assets/trello02.08.23.png)
+
+### 04/08/23
+
+![](./assets/trello04.08.23.png)
+
+### 06/08/23
+
+![](./assets/trello06.08.23.png)
+
+
