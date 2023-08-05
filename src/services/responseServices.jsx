@@ -7,7 +7,7 @@ export async function getAllResponses() {
   try {
     const token = getCookie('authToken');
 
-    const response = await fetch(`${API}/responses/`, {
+    const response = await fetch(`${API}/responses`, {
       headers: {
         'Authorization': `Bearer ${token}`,
       },
