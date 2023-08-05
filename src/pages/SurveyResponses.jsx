@@ -1,7 +1,8 @@
 import Header from "../components/header";
 import { useParams } from 'react-router-dom';
-import { Fragment, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { getSurvey, getSurveyResponses } from "../services/responseServices";
+import { formatDate, parseResponse, sortResponses } from "../components/responseFunctions";
 import "./SurveyResponses.css";
 
 export default function SurveyResponses() {
@@ -14,8 +15,8 @@ export default function SurveyResponses() {
       try {
         const surveyResponses = await getSurveyResponses(surveyID);
         // Sort the surveyResponses array based on dateSubmitted in descending order
-        surveyResponses.sort((a, b) => new Date(b.dateSubmitted) - new Date(a.dateSubmitted));
-        setResponses(surveyResponses);
+        const sortedResponses = sortResponses(surveyResponses);
+        setResponses(sortedResponses);
       } catch (error) {
         console.error(error);
       }
@@ -36,37 +37,6 @@ export default function SurveyResponses() {
   
     fetchSurvey();
   }, [surveyID]);
-
-  const formatDate = (date) => {
-    const formattedDate = new Date(date).toLocaleDateString("en-GB");
-    return formattedDate;
-  };
-
-  const parseMultipleChoiceQuestion = (question, answer) => {
-    if (Array.isArray(answer)) {
-      const selectedOptions = answer.map((data) => data.text);
-      return <Fragment>{selectedOptions.join(", ")}</Fragment>;
-    } else {
-      return <Fragment>{answer.text}</Fragment>;
-    }
-  };
-
-  const parseTextQuestion = (answer) => {
-    return <Fragment>{answer}</Fragment>;
-  };
-
-  const parseResponse = (question, answer) => {
-    switch (question.questionType) {
-      case "multipleChoiceRadio":
-      case "multipleChoiceCheckbox":
-        return parseMultipleChoiceQuestion(question, answer);
-      case "shortText":
-      case "longText":
-        return parseTextQuestion(answer);
-      default:
-        return <Fragment>No answer provided</Fragment>;
-    }
-  };
 
   return (
     <div>
